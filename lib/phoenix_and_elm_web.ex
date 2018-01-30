@@ -28,8 +28,9 @@ defmodule PhoenixAndElmWeb do
 
   def view do
     quote do
-      use Phoenix.View, root: "lib/phoenix_and_elm_web/templates",
-                        namespace: PhoenixAndElmWeb
+      use Phoenix.View,
+        root: "lib/phoenix_and_elm_web/templates",
+        namespace: PhoenixAndElmWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_flash: 2, view_module: 1]

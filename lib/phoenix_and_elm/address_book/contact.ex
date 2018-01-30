@@ -1,4 +1,6 @@
 defmodule PhoenixAndElm.AddressBook.Contact do
+  @moduledoc false
+
   use Ecto.Schema
   import Ecto.Changeset
   alias PhoenixAndElm.AddressBook.Contact
