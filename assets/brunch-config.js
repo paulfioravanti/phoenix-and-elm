@@ -47,6 +47,12 @@ exports.config = {
     elmBrunch: {
       elmFolder: "elm",
       mainModules: ["src/Main.elm"],
+      // NOTE: outputFolder is in vendor to ensure that elm.js gets
+      // compiled/imported before app.js.
+      // Originally wanted to have elm.js be in the js/ directory, but
+      // order concatenations in the config above don't seem to be working,
+      // and vendor files are guaranteed to be compiled before other ones
+      // http://brunch.io/docs/config#-files-
       outputFolder: "../vendor",
       outputFile: "elm.js",
       makeParameters: ["--warn"]
