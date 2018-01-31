@@ -55,7 +55,7 @@ exports.config = {
       // http://brunch.io/docs/config#-files-
       outputFolder: "../vendor",
       outputFile: "elm.js",
-      makeParameters: ["--warn"]
+      makeParameters: ["--warn", "--debug"]
     },
 
     babel: {
