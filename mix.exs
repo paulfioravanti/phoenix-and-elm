@@ -33,6 +33,8 @@ defmodule PhoenixAndElm.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:faker, "~> 0.9"},
+      {:scrivener_ecto, "~> 1.0"},
       {:mix_test_watch, "~> 0.3", only: :dev, runtime: false},
       {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
       {:phoenix, "~> 1.3.0"},

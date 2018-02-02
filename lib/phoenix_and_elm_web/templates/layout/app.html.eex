@@ -8,28 +8,23 @@
     <meta name="author" content="">
 
     <title>Hello PhoenixAndElm!</title>
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <link href="https://fonts.googleapis.com/css?family=Fjalla+One|Average+Sans" rel="stylesheet" type="text/css"}/>
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>"/>
+    <link id="favicon" rel="icon" type="image/png" href="<%= static_path(@conn, "/images/favicon.png") %>"/>
   </head>
 
   <body>
-    <div class="container">
-      <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
-          </ul>
-        </nav>
-        <span class="logo"></span>
-      </header>
-
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-
-      <main role="main">
-        <%= render @view_module, @view_template, assigns %>
-      </main>
-
-    </div> <!-- /container -->
+    <div id="main_wrapper">
+      <%= render @view_module, @view_template, assigns %>
+    </div>
+    <footer id="main_footer">
+      Crafted with ♥ by
+      <a href="http://codeloveandboards.com" target="_blank"> bigardone</a>
+      <br/>
+      Check out the
+      <a href="https://github.com/bigardone/phoenix-and-elm" target="_blank"> source code</a>
+    </footer>
+    <script src="https://use.fontawesome.com/2469a3fc21.js"></script>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

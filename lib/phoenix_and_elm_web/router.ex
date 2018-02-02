@@ -20,6 +20,12 @@ defmodule PhoenixAndElmWeb.Router do
     get "/", PageController, :index
   end
 
+  scope "/api", PhoenixAndElmWeb do
+    pipe_through :api
+
+    resources "/contacts", ContactController, only: [:index]
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", PhoenixAndElmWeb do
   #   pipe_through :api

@@ -5,7 +5,6 @@ defmodule PhoenixAndElm.AddressBook do
 
   import Ecto.Query, warn: false
   alias PhoenixAndElm.Repo
-
   alias PhoenixAndElm.AddressBook.Contact
 
   @doc """
@@ -18,7 +17,14 @@ defmodule PhoenixAndElm.AddressBook do
 
   """
   def list_contacts do
-    Repo.all(Contact)
+    Contact
+    |> Repo.all()
+  end
+
+  def paginate_contacts_by(params, constraint) do
+    Contact
+    |> order_by(^constraint)
+    |> Repo.paginate(params)
   end
 
   @doc """

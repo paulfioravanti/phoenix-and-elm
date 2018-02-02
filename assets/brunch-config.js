@@ -44,6 +44,11 @@ exports.config = {
 
   // Configure your plugins
   plugins: {
+    babel: {
+      // Do not use ES6 compiler in vendor code
+      ignore: [/vendor/]
+    },
+
     elmBrunch: {
       elmFolder: "elm",
       mainModules: ["src/Main.elm"],
@@ -55,12 +60,14 @@ exports.config = {
       // http://brunch.io/docs/config#-files-
       outputFolder: "../vendor",
       outputFile: "elm.js",
-      makeParameters: ["--warn", "--debug"]
+      makeParameters: [
+        "--warn",
+        "--debug"
+      ]
     },
 
-    babel: {
-      // Do not use ES6 compiler in vendor code
-      ignore: [/vendor/]
+    stylus: {
+      plugins: ["nib"]
     }
   },
 
