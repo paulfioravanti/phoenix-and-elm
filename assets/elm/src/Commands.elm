@@ -2,14 +2,14 @@ module Commands exposing (..)
 
 import Decoders exposing (contactListDecoder)
 import Http
-import Messages exposing (..)
+import Messages exposing (Msg(..))
 
 
-fetch : Cmd Msg
-fetch =
+fetch : Int -> Cmd Msg
+fetch page =
     let
         apiUrl =
-            "/api/contacts"
+            "/api/contacts?page=" ++ (toString page)
 
         request =
             Http.get apiUrl contactListDecoder

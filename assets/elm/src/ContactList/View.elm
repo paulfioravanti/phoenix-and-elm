@@ -3,6 +3,7 @@ module ContactList.View exposing (indexView)
 import Contact.View exposing (contactView)
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Html.Events exposing (..)
 import Messages exposing (..)
 import Model exposing (..)
 
@@ -10,9 +11,39 @@ import Model exposing (..)
 indexView : Model -> Html Msg
 indexView model =
     div [ id "home_index" ]
-        [ div []
+        [ paginationList
+            model.contactList.total_pages
+            model.contactList.page_number
+        , div []
             [ contactsList model ]
+        , paginationList
+            model.contactList.total_pages
+            model.contactList.page_number
         ]
+
+
+paginationList : Int -> Int -> Html Msg
+paginationList totalPages pageNumber =
+    totalPages
+        |> List.range 1
+        |> List.map (paginationLink pageNumber)
+        |> ul [ class "pagination" ]
+
+
+paginationLink : Int -> Int -> Html Msg
+paginationLink currentPage page =
+    let
+        classes =
+            classList [ ( "active", currentPage == page ) ]
+    in
+        li
+            []
+            [ a
+                [ classes
+                , onClick <| Paginate page
+                ]
+                []
+            ]
 
 
 contactsList : Model -> Html Msg
