@@ -1,1 +1,1 @@
-alias PhoenixAndElm.{AddressBook, Contact, Repo}
+alias PhoenixAndElm.{AddressBook, AddressBook.Contact, Repo}
