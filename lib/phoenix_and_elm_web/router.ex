@@ -13,21 +13,16 @@ defmodule PhoenixAndElmWeb.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/api", PhoenixAndElmWeb do
+    pipe_through :api
+
+    resources "/contacts", ContactController, only: [:index, :show]
+  end
+
   scope "/", PhoenixAndElmWeb do
     # Use the default browser stack
     pipe_through :browser
 
-    get "/", PageController, :index
+    get "/*path", PageController, :index
   end
-
-  scope "/api", PhoenixAndElmWeb do
-    pipe_through :api
-
-    resources "/contacts", ContactController, only: [:index]
-  end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", PhoenixAndElmWeb do
-  #   pipe_through :api
-  # end
 end

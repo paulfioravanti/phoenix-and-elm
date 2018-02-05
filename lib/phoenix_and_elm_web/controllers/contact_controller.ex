@@ -12,4 +12,8 @@ defmodule PhoenixAndElmWeb.ContactController do
 
     render(conn, "index.json", page: page)
   end
+
+  def show(conn, %{"id" => id}) do
+    render(conn, "show.json", contact: AddressBook.get_contact!(id))
+  end
 end

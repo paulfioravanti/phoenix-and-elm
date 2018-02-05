@@ -1,5 +1,7 @@
 module Model exposing (..)
 
+import Routing exposing (Route)
+
 
 type RemoteData e a
     = NotRequested
@@ -11,6 +13,8 @@ type RemoteData e a
 type alias Model =
     { contactList : RemoteData String ContactList
     , search : String
+    , route : Route
+    , contact : RemoteData String Contact
     }
 
 
@@ -36,17 +40,19 @@ type alias Contact =
     }
 
 
-initialModel : Model
-initialModel =
-    { contactList = NotRequested
-    , search = ""
-    }
-
-
 initialContactList : ContactList
 initialContactList =
     { entries = []
     , page_number = 1
     , total_entries = 0
     , total_pages = 0
+    }
+
+
+initialModel : Route -> Model
+initialModel route =
+    { contactList = NotRequested
+    , search = ""
+    , route = route
+    , contact = NotRequested
     }

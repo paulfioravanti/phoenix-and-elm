@@ -1,6 +1,7 @@
 module ContactList.View exposing (indexView)
 
 import Contact.View exposing (contactView)
+import Common.View exposing (warningMessage)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -152,17 +153,3 @@ resetButton model className =
             , onClick ResetSearch
             ]
             [ text "Reset search" ]
-
-
-warningMessage : String -> String -> Html Msg -> Html Msg
-warningMessage iconClasses message content =
-    div
-        [ class "warning" ]
-        [ span
-            [ class "fa-stack" ]
-            [ i [ class iconClasses ] [] ]
-        , h4
-            []
-            [ text message ]
-        , content
-        ]
