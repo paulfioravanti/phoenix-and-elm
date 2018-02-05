@@ -44,6 +44,12 @@ exports.config = {
 
   // Configure your plugins
   plugins: {
+    // NOTE: Plugin listings are order dependent! This stylus entry MUST
+    // come first or SOMEHOW Bootstrap CSS will inexplicably find its way into
+    // priv/static/css/app.css!
+    stylus: {
+      plugins: ["nib"]
+    },
     babel: {
       // Do not use ES6 compiler in vendor code
       ignore: [/vendor/]
@@ -64,10 +70,6 @@ exports.config = {
         "--warn",
         "--debug"
       ]
-    },
-
-    stylus: {
-      plugins: ["nib"]
     }
   },
 
