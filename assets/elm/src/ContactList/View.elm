@@ -4,102 +4,165 @@ import Contact.View exposing (contactView)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Messages exposing (Msg(..))
+import Html.Keyed exposing (..)
+import Messages exposing (..)
 import Model exposing (..)
 
 
 indexView : Model -> Html Msg
 indexView model =
-    div [ id "home_index" ]
-        [ searchSection model
-        , paginationList
-            model.contactList.total_pages
-            model.contactList.page_number
-        , div []
-            [ contactsList model ]
-        , paginationList
-            model.contactList.total_pages
-            model.contactList.page_number
+    div
+        [ id "home_index" ]
+        (viewContent model)
+
+
+viewContent : Model -> List (Html Msg)
+viewContent model =
+    case model.contactList of
+        NotRequested ->
+            [ text "" ]
+
+        Requesting ->
+            [ searchSection model
+            , warningMessage
+                "fa fa-spin fa-cog fa-2x fa-fw"
+                "Searching for contacts"
+                (text "")
+            ]
+
+        Failure error ->
+            [ warningMessage
+                "fa fa-meh-o fa-stack-2x"
+                error
+                (text "")
+            ]
+
+        Success page ->
+            [ searchSection model
+            , paginationList page
+            , div
+                []
+                [ contactsList model page ]
+            , paginationList page
+            ]
+
+
+searchSection : Model -> Html Msg
+searchSection model =
+    div
+        [ class "filter-wrapper" ]
+        [ div
+            [ class "overview-wrapper" ]
+            [ h3
+                []
+                [ text <| headerText model ]
+            ]
+        , div
+            [ class "form-wrapper" ]
+            [ Html.form
+                [ onSubmit HandleFormSubmit ]
+                [ resetButton model "reset"
+                , input
+                    [ type_ "search"
+                    , placeholder "Search contacts..."
+                    , value model.search
+                    , onInput HandleSearchInput
+                    ]
+                    []
+                ]
+            ]
         ]
 
 
-paginationList : Int -> Int -> Html Msg
-paginationList totalPages pageNumber =
-    totalPages
-        |> List.range 1
-        |> List.map (paginationLink pageNumber)
-        |> ul [ class "pagination" ]
+headerText : Model -> String
+headerText model =
+    case model.contactList of
+        Success page ->
+            let
+                totalEntries =
+                    page.total_entries
+
+                contactWord =
+                    if totalEntries == 1 then
+                        "contact"
+                    else
+                        "contacts"
+            in
+                if totalEntries == 0 then
+                    ""
+                else
+                    (toString totalEntries) ++ " " ++ contactWord ++ " found"
+
+        _ ->
+            ""
 
 
-paginationLink : Int -> Int -> Html Msg
+contactsList : Model -> ContactList -> Html Msg
+contactsList model page =
+    if page.total_entries > 0 then
+        page.entries
+            |> List.map contactView
+            |> Html.Keyed.node "div" [ class "cards-wrapper" ]
+    else
+        warningMessage
+            "fa fa-meh-o fa-stack-2x"
+            "No contacts found..."
+            (resetButton model "btn")
+
+
+paginationList : ContactList -> Html Msg
+paginationList page =
+    List.range 1 page.total_pages
+        |> List.map (paginationLink page.page_number)
+        |> Html.Keyed.ul [ class "pagination" ]
+
+
+paginationLink : Int -> Int -> ( String, Html Msg )
 paginationLink currentPage page =
     let
         classes =
             classList [ ( "active", currentPage == page ) ]
     in
-        li []
+        ( toString page
+        , li
+            []
             [ a
                 [ classes
                 , onClick <| Paginate page
                 ]
                 []
             ]
+        )
 
 
-contactsList : Model -> Html Msg
-contactsList model =
-    if model.contactList.total_entries > 0 then
-        model.contactList.entries
-            |> List.map contactView
-            |> div [ class "cards-wrapper" ]
-    else
-        let
-            classes =
-                classList
-                    [ ( "warning", True ) ]
-        in
-            div [ classes ]
-                [ span [ class "fa-stack" ]
-                    [ i [ class "fa fa-meh-o fa-stack-2x" ]
-                        []
-                    ]
-                , h4 []
-                    [ text "No contacts found..." ]
-                ]
-
-
-searchSection : Model -> Html Msg
-searchSection model =
+resetButton : Model -> String -> Html Msg
+resetButton model className =
     let
-        totalEntries =
-            model.contactList.total_entries
+        hide =
+            model.search == ""
 
-        contactWord =
-            if totalEntries == 1 then
-                "contact"
-            else
-                "contacts"
-
-        headerText =
-            if totalEntries == 0 then
-                ""
-            else
-                (toString totalEntries) ++ " " ++ contactWord ++ " found"
+        classes =
+            classList
+                [ ( className, True )
+                , ( "hidden", hide )
+                ]
     in
-        div [ class "filter-wrapper" ]
-            [ div [ class "overview-wrapper" ]
-                [ h3 []
-                    [ text headerText ]
-                ]
-            , div [ class "form-wrapper" ]
-                [ Html.form [ onSubmit HandleFormSubmit ]
-                    [ input
-                        [ type_ "search"
-                        , placeholder "Search contacts..."
-                        , value model.search
-                        , onInput HandleSearchInput
-                        ]
-                        []
-                    ]
-                ]
+        a
+            [ classes
+            , onClick ResetSearch
             ]
+            [ text "Reset search" ]
+
+
+warningMessage : String -> String -> Html Msg -> Html Msg
+warningMessage iconClasses message content =
+    div
+        [ class "warning" ]
+        [ span
+            [ class "fa-stack" ]
+            [ i [ class iconClasses ] [] ]
+        , h4
+            []
+            [ text message ]
+        , content
+        ]

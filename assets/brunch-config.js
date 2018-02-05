@@ -78,6 +78,9 @@ exports.config = {
   },
 
   npm: {
-    enabled: true
+    enabled: true,
+    styles: {
+      'normalize.css': ['normalize.css'],
+    }
   }
 };
