@@ -3,6 +3,7 @@ defmodule PhoenixAndElmWeb.UserSocket do
 
   ## Channels
   # channel "room:*", PhoenixAndElmWeb.RoomChannel
+  channel "contacts", PhoenixAndElmWeb.ContactChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket

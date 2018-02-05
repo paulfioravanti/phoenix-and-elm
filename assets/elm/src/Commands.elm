@@ -1,29 +1,63 @@
 module Commands exposing (..)
 
-import Decoders exposing (contactListDecoder, contactDecoder)
-import Http
+-- import Decoders exposing (contactListDecoder, contactDecoder)
+-- import Http
+
 import Messages exposing (Msg(..))
+import Phoenix exposing (..)
+import Phoenix.Push as Push
+import Json.Encode as JE
 
 
-fetch : Int -> String -> Cmd Msg
-fetch page search =
+-- API version
+-- fetch : Int -> String -> Cmd Msg
+-- fetch page search =
+--     let
+--         apiUrl =
+--             "/api/contacts?page=" ++ (toString page) ++ "&search=" ++ search
+--         request =
+--             Http.get apiUrl contactListDecoder
+--     in
+--         Http.send FetchResult request
+
+
+fetch : String -> Int -> String -> Cmd Msg
+fetch socketUrl page search =
     let
-        apiUrl =
-            "/api/contacts?page=" ++ (toString page) ++ "&search=" ++ search
+        payload =
+            JE.object
+                [ ( "page", JE.int page )
+                , ( "search", JE.string search )
+                ]
 
-        request =
-            Http.get apiUrl contactListDecoder
+        push =
+            Push.init "contacts" "contacts:fetch"
+                |> Push.withPayload payload
+                |> Push.onOk FetchSuccess
+                |> Push.onError FetchError
     in
-        Http.send FetchResult request
+        Phoenix.push socketUrl push
 
 
-fetchContact : Int -> Cmd Msg
-fetchContact id =
+
+-- API version
+-- fetchContact : Int -> Cmd Msg
+-- fetchContact id =
+--     let
+--         apiUrl =
+--             "/api/contacts/" ++ toString id
+--         request =
+--             Http.get apiUrl contactDecoder
+--     in
+--         Http.send FetchContactResult request
+
+
+fetchContact : String -> Int -> Cmd Msg
+fetchContact socketUrl id =
     let
-        apiUrl =
-            "/api/contacts/" ++ toString id
-
-        request =
-            Http.get apiUrl contactDecoder
+        push =
+            Push.init "contacts" ("contact:" ++ toString id)
+                |> Push.onOk FetchContactSuccess
+                |> Push.onError FetchContactError
     in
-        Http.send FetchContactResult request
+        Phoenix.push socketUrl push
