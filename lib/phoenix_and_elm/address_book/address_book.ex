@@ -21,10 +21,42 @@ defmodule PhoenixAndElm.AddressBook do
     |> Repo.all()
   end
 
-  def paginate_contacts_by(params, constraint) do
-    Contact
+  def paginate_contacts_by(query \\ Contact, params, constraint) do
+    query
     |> order_by(^constraint)
     |> Repo.paginate(params)
+  end
+
+  def search_contacts(""), do: Contact
+
+  def search_contacts(search_query) do
+    search_query = ts_query_format(search_query)
+
+    Contact
+    |> where(
+      fragment(
+        """
+        (to_tsvector(
+          'english',
+          coalesce(first_name, '') || ' ' ||
+          coalesce(last_name, '') || ' ' ||
+          coalesce(location, '') || ' ' ||
+          coalesce(headline, '') || ' ' ||
+          coalesce(email, '') || ' ' ||
+          coalesce(phone_number, '')
+        ) @@ to_tsquery('english', ?))
+        """,
+        ^search_query
+      )
+    )
+  end
+
+  defp ts_query_format(search_query) do
+    search_query
+    |> String.trim()
+    |> String.split(" ")
+    |> Enum.map(&"#{&1}:*")
+    |> Enum.join(" & ")
   end
 
   @doc """

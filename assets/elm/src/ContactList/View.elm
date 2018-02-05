@@ -4,14 +4,15 @@ import Contact.View exposing (contactView)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Messages exposing (..)
+import Messages exposing (Msg(..))
 import Model exposing (..)
 
 
 indexView : Model -> Html Msg
 indexView model =
     div [ id "home_index" ]
-        [ paginationList
+        [ searchSection model
+        , paginationList
             model.contactList.total_pages
             model.contactList.page_number
         , div []
@@ -36,8 +37,7 @@ paginationLink currentPage page =
         classes =
             classList [ ( "active", currentPage == page ) ]
     in
-        li
-            []
+        li []
             [ a
                 [ classes
                 , onClick <| Paginate page
@@ -66,3 +66,40 @@ contactsList model =
                 , h4 []
                     [ text "No contacts found..." ]
                 ]
+
+
+searchSection : Model -> Html Msg
+searchSection model =
+    let
+        totalEntries =
+            model.contactList.total_entries
+
+        contactWord =
+            if totalEntries == 1 then
+                "contact"
+            else
+                "contacts"
+
+        headerText =
+            if totalEntries == 0 then
+                ""
+            else
+                (toString totalEntries) ++ " " ++ contactWord ++ " found"
+    in
+        div [ class "filter-wrapper" ]
+            [ div [ class "overview-wrapper" ]
+                [ h3 []
+                    [ text headerText ]
+                ]
+            , div [ class "form-wrapper" ]
+                [ Html.form [ onSubmit HandleFormSubmit ]
+                    [ input
+                        [ type_ "search"
+                        , placeholder "Search contacts..."
+                        , value model.search
+                        , onInput HandleSearchInput
+                        ]
+                        []
+                    ]
+                ]
+            ]
