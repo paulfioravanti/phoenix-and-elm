@@ -5,6 +5,9 @@ This is a [Phoenix 1.3][] port over of the
 [Ricardo García Vega][] over a series of posts over at
 [his blog][codeloveandboards].
 
+This branch contains the application as close as I could get to the original
+codebase, just ported over to Phoenix 1.3.
+
 ## Installation
 
 ### Repository
