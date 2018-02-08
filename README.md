@@ -1,20 +1,92 @@
-# PhoenixAndElm
+# Phoenix And Elm: a real use case
 
-To start your Phoenix server:
+This is a [Phoenix 1.3][] port over of the
+[Phoenix 1.2/Elm Address Book application][], created by
+[Ricardo García Vega][] over a series of posts over at
+[his blog][codeloveandboards].
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
-  * Install Node.js dependencies with `cd assets && npm install`
-  * Start Phoenix endpoint with `mix phx.server`
+## Installation
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+### Repository
 
-Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
+```sh
+git clone git@github.com:paulfioravanti/phoenix_and_elm.git
+cd phoenix_and_elm
+mix deps.get
+mix do ecto.create, ecto.migrate
+mix run priv/repo/seeds.exs
+```
 
-## Learn more
+### Dependencies
 
-  * Official website: http://www.phoenixframework.org/
-  * Guides: http://phoenixframework.org/docs/overview
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+### Global
+
+```sh
+npm install --global elm
+```
+
+### npm
+
+To install npm dependencies in `package.json`:
+
+```sh
+cd assets
+npm install
+```
+
+### Elm
+
+To install Elm dependencies in `elm-package.json`:
+
+```sh
+cd elm
+elm-package install
+```
+
+## Run code
+
+From the project root directory:
+
+```sh
+mix phx.server
+```
+
+Open <http://localhost:4000> in a browser.
+
+## Changes from the original application
+
+- The introduction of [Contexts][] into Phoenix 1.3 required some re-structuring
+  of the application to get it working as expected. I made the decision to put
+  `Contact` behind an `AddressBook` context.
+- I used [Create Elm App][] to generate the Elm app under the assets directory,
+  so its structure is slightly different to what is in the original.
+
+## Notes
+
+### Using Create Elm App
+
+If you want to use [Create Elm App][] to have it generate an Elm app in your
+Phoenix 1.3 project's `assets/` directory, you can follow these steps:
+
+```sh
+npm install create-elm-app --global
+cd assets
+create-elm-app elm
+```
+
+## Social
+
+[![Contact][twitter-badge]][twitter-url]
+
+[![Stack Overflow][stackoverflow-badge]][stackoverflow-url]
+
+[codeloveandboards]: http://codeloveandboards.com/
+[Contexts]: https://hexdocs.pm/phoenix/contexts.html
+[Create Elm App]: https://github.com/halfzebra/create-elm-app
+[Phoenix 1.2/Elm Address Book application]: http://codeloveandboards.com/blog/2017/02/02/phoenix-and-elm-a-real-use-case-pt-1/
+[Phoenix 1.3]: http://phoenixframework.org/blog/phoenix-1-3-0-released
+[Ricardo García Vega]: https://twitter.com/bigardone
+[stackoverflow-badge]: http://stackoverflow.com/users/flair/567863.png
+[stackoverflow-url]: http://stackoverflow.com/users/567863/paul-fioravanti
+[twitter-badge]: https://img.shields.io/badge/contact-%40paulfioravanti-blue.svg
+[twitter-url]: https://twitter.com/paulfioravanti
