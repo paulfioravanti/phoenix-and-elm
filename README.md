@@ -5,6 +5,10 @@ This is a [Phoenix 1.3][] port over of the
 [Ricardo García Vega][] over a series of posts over at
 [his blog][codeloveandboards].
 
+See the [`original` branch][] for the as-close-to-the-original-as-I-could-get-it
+version of the codebase. The `master` branch will likely have personal tweaks
+to the codebase in it.
+
 ## Installation
 
 ### Repository
@@ -83,6 +87,7 @@ create-elm-app elm
 [codeloveandboards]: http://codeloveandboards.com/
 [Contexts]: https://hexdocs.pm/phoenix/contexts.html
 [Create Elm App]: https://github.com/halfzebra/create-elm-app
+[`original` branch]: https://github.com/paulfioravanti/phoenix-and-elm/tree/original
 [Phoenix 1.2/Elm Address Book application]: http://codeloveandboards.com/blog/2017/02/02/phoenix-and-elm-a-real-use-case-pt-1/
 [Phoenix 1.3]: http://phoenixframework.org/blog/phoenix-1-3-0-released
 [Ricardo García Vega]: https://twitter.com/bigardone
