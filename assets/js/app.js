@@ -20,6 +20,4 @@ import "phoenix_html"
 
 // import socket from "./socket"
 const elmDiv = document.getElementById("elm-main");
-// Elm.Main.embed(elmDiv);
-const socketUrl = window.socketUrl;
-Elm.Main.embed(elmDiv, { socketUrl });
+Elm.Main.embed(elmDiv);

@@ -1,7 +1,7 @@
 module ContactList.View exposing (indexView)
 
-import Contact.View exposing (contactView)
 import Common.View exposing (warningMessage)
+import Contact.View exposing (contactView)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)

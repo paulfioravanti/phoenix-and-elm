@@ -10,16 +10,11 @@ type RemoteData e a
     | Success a
 
 
-type alias Flags =
-    { socketUrl : String }
-
-
 type alias Model =
     { contactList : RemoteData String ContactList
     , search : String
     , route : Route
     , contact : RemoteData String Contact
-    , flags : Flags
     }
 
 
@@ -54,11 +49,10 @@ initialContactList =
     }
 
 
-initialModel : Flags -> Route -> Model
-initialModel flags route =
+initialModel : Route -> Model
+initialModel route =
     { contactList = NotRequested
     , search = ""
     , route = route
     , contact = NotRequested
-    , flags = flags
     }
