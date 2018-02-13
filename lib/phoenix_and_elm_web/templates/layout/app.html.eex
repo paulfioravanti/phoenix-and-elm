@@ -24,9 +24,6 @@
       Check out the
       <a href="https://github.com/bigardone/phoenix-and-elm" target="_blank"> source code</a>
     </footer>
-    <script>
-      window.socketUrl = '<%= PhoenixAndElmWeb.LayoutView.socket_url %>';
-    </script>
     <script src="https://use.fontawesome.com/2469a3fc21.js"></script>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
