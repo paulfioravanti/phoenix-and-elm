@@ -59,7 +59,7 @@ exports.config = {
 
     elmBrunch: {
       elmFolder: "elm",
-      mainModules: ["src/Main.elm", "vendor/Phoenix.elm"],
+      mainModules: ["src/Main.elm"],
       // NOTE: outputFolder is in vendor to ensure that elm.js gets
       // compiled/imported before app.js.
       // Originally wanted to have elm.js be in the js/ directory, but
