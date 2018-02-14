@@ -6,7 +6,7 @@ exports.config = {
   // See http://brunch.io/#documentation for docs.
   files: {
     javascripts: {
-      joinTo: "js/app.js",
+      joinTo: "js/app.js"
 
       // To use a separate vendor.js bundle, specify two files path
       // http://brunch.io/docs/config#-files-
@@ -16,11 +16,6 @@ exports.config = {
       // }
       //
       // To change the order of concatenation of files, explicitly mention here
-      order: {
-        before: [
-          "vendor/elm.js"
-        ]
-      }
     },
     stylesheets: {
       joinTo: "css/app.css"
