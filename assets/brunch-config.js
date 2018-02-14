@@ -35,7 +35,7 @@ exports.config = {
   // Phoenix paths configuration
   paths: {
     // Dependencies and current project directories to watch
-    watched: ["static", "css", "elm", "js", "vendor"],
+    watched: ["static", "css", "js", "vendor", "elm"],
     // Where to compile files to
     public: "../priv/static"
   },
@@ -52,7 +52,7 @@ exports.config = {
     },
 
     elmBrunch: {
-      elmFolder: "elm",
+      // elmFolder: "elm",
       mainModules: ["src/Main.elm"],
       // NOTE: outputFolder is in vendor to ensure that elm.js gets
       // compiled/imported before app.js.
@@ -60,7 +60,9 @@ exports.config = {
       // order concatenations in the config above don't seem to be working,
       // and vendor files are guaranteed to be compiled before other ones
       // http://brunch.io/docs/config#-files-
-      outputFolder: "../vendor",
+      // outputFolder: "../vendor",
+      outputFolder: "../js",
+      // outputFolder: "../../assets/js",
       outputFile: "elm.js",
       makeParameters: [
         "--debug",
