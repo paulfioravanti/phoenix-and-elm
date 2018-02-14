@@ -56,7 +56,7 @@ for index <- 1..100 do
     phone_number: Faker.Phone.EnUs.phone(),
     email: Faker.Internet.email(),
     picture:
-      "http://api.randomuser.me/portraits/#{picture_gender}/#{index}.jpg",
+      "https://api.randomuser.me/portraits/#{picture_gender}/#{index}.jpg",
     headline: Faker.Lorem.sentence(3)
   }
 
