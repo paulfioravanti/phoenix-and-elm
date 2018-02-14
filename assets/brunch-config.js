@@ -69,8 +69,8 @@ exports.config = {
       outputFolder: "../vendor",
       outputFile: "elm.js",
       makeParameters: [
-        "--debug"
-        // "--warn"
+        "--debug",
+        "--warn"
       ]
     }
   },
