@@ -17,7 +17,7 @@ config :phoenix_and_elm, PhoenixAndElmWeb.Endpoint,
   load_from_system_env: true,
   url: [
     scheme: "https",
-    host: "https://phoenix-1-3-and-elm.herokuapp.com",
+    host: "https://phoenix-1-3-and-elm-http.herokuapp.com",
     port: 443
   ],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
