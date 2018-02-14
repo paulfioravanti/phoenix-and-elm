@@ -7,21 +7,6 @@ exports.config = {
   files: {
     javascripts: {
       joinTo: "js/app.js"
-
-      // To use a separate vendor.js bundle, specify two files path
-      // http://brunch.io/docs/config#-files-
-      // joinTo: {
-      //   "js/app.js": /^js/,
-      //   "js/vendor.js": /^(?!js)/
-      // }
-      //
-      // To change the order of concatenation of files, explicitly mention here
-      // order: {
-      //   before: [
-      //     "vendor/js/jquery-2.1.1.js",
-      //     "vendor/js/bootstrap.min.js"
-      //   ]
-      // }
     },
     stylesheets: {
       joinTo: "css/app.css"
@@ -60,18 +45,11 @@ exports.config = {
     elmBrunch: {
       elmFolder: "elm",
       mainModules: ["src/Main.elm"],
-      // NOTE: outputFolder is in vendor to ensure that elm.js gets
-      // compiled/imported before app.js.
-      // Originally wanted to have elm.js be in the js/ directory, but
-      // order concatenations in the config above don't seem to be working,
-      // and vendor files are guaranteed to be compiled before other ones
-      // http://brunch.io/docs/config#-files-
-      // outputFolder: "../vendor",
       outputFolder: "../js",
       outputFile: "elm.js",
       makeParameters: [
-        "--debug"
-        // "--warn"
+        "--warn",
+        // "--debug"
       ]
     }
   },
