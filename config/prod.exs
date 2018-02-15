@@ -20,7 +20,6 @@ config :phoenix_and_elm, PhoenixAndElmWeb.Endpoint,
     host: "shielded-everglades-58659.herokuapp.com",
     port: 443
   ],
-  # check_origin: ["https://phoenix-1-3-and-elm-websockets.herokuapp.com"],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   cache_static_manifest: "priv/static/cache_manifest.json",
   secret_key_base: Map.fetch!(System.get_env(), "SECRET_KEY_BASE")
