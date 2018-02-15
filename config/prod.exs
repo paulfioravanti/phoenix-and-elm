@@ -17,7 +17,8 @@ config :phoenix_and_elm, PhoenixAndElmWeb.Endpoint,
   load_from_system_env: true,
   url: [
     scheme: "https",
-    host: "shielded-everglades-58659.herokuapp.com",
+    # host: "shielded-everglades-58659.herokuapp.com",
+    host: "phoenix-1-3-and-elm-http.herokuapp.com",
     port: 443
   ],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
