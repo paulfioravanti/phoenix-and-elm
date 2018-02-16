@@ -14,8 +14,8 @@ personal tweaks to the codebase in it.
 ### Repository
 
 ```sh
-git clone git@github.com:paulfioravanti/phoenix_and_elm.git
-cd phoenix_and_elm
+git clone git@github.com:paulfioravanti/phoenix-and-elm.git
+cd phoenix-and-elm
 mix do deps.get, ecto.create, ecto.migrate, run priv/repo/seeds.exs
 ```
 
