@@ -1,4 +1,6 @@
 defmodule PhoenixAndElmWeb.ContactChannel do
+  @moduledoc false
+
   use PhoenixAndElmWeb, :channel
   alias PhoenixAndElm.AddressBook
   require Logger
