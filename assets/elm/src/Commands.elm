@@ -9,7 +9,7 @@ fetch : Int -> String -> Cmd Msg
 fetch page search =
     let
         apiUrl =
-            "/api/contacts?page=" ++ (toString page) ++ "&search=" ++ search
+            "/api/v1/contacts?page=" ++ (toString page) ++ "&search=" ++ search
 
         request =
             Http.get apiUrl contactListDecoder
@@ -21,7 +21,7 @@ fetchContact : Int -> Cmd Msg
 fetchContact id =
     let
         apiUrl =
-            "/api/contacts/" ++ toString id
+            "/api/v1/contacts/" ++ toString id
 
         request =
             Http.get apiUrl contactDecoder

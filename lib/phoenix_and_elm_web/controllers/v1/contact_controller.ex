@@ -1,4 +1,4 @@
-defmodule PhoenixAndElmWeb.ContactController do
+defmodule PhoenixAndElmWeb.V1.ContactController do
   use PhoenixAndElmWeb, :controller
   alias PhoenixAndElm.AddressBook
 
@@ -10,10 +10,10 @@ defmodule PhoenixAndElmWeb.ContactController do
       |> AddressBook.search_contacts()
       |> AddressBook.paginate_contacts_by(params, :first_name)
 
-    render(conn, "index.json", page: page)
+    json(conn, page)
   end
 
   def show(conn, %{"id" => id}) do
-    render(conn, "show.json", contact: AddressBook.get_contact!(id))
+    json(conn, AddressBook.get_contact!(id))
   end
 end
