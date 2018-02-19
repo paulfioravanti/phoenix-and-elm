@@ -3,13 +3,24 @@ defmodule PhoenixAndElm.AddressBook.Contact do
 
   use Ecto.Schema
   import Ecto.Changeset
-  alias PhoenixAndElm.AddressBook.Contact
+  alias __MODULE__, as: Contact
 
   @derive {Poison.Encoder, except: [:__meta__, :inserted_at, :updated_at]}
 
   @genders [
     {0, :male},
     {1, :female}
+  ]
+  @required_params [
+    :first_name,
+    :last_name,
+    :gender,
+    :birth_date,
+    :location,
+    :phone_number,
+    :email,
+    :headline,
+    :picture
   ]
 
   schema "contacts" do
@@ -28,28 +39,8 @@ defmodule PhoenixAndElm.AddressBook.Contact do
   @doc false
   def changeset(%Contact{} = contact, attrs) do
     contact
-    |> cast(attrs, [
-      :first_name,
-      :last_name,
-      :gender,
-      :birth_date,
-      :location,
-      :phone_number,
-      :email,
-      :headline,
-      :picture
-    ])
-    |> validate_required([
-      :first_name,
-      :last_name,
-      :gender,
-      :birth_date,
-      :location,
-      :phone_number,
-      :email,
-      :headline,
-      :picture
-    ])
+    |> cast(attrs, @required_params)
+    |> validate_required(@required_params)
   end
 
   @doc """

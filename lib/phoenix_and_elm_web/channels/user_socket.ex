@@ -3,11 +3,9 @@ defmodule PhoenixAndElmWeb.UserSocket do
 
   ## Channels
   # channel "room:*", PhoenixAndElmWeb.RoomChannel
-  channel "contacts", PhoenixAndElmWeb.ContactChannel
 
   ## Transports
-  # NOTE: Timeout added for Heroku: https://hexdocs.pm/phoenix/heroku.html
-  transport :websocket, Phoenix.Transports.WebSocket, timeout: 45_000
+  transport :websocket, Phoenix.Transports.WebSocket
   # transport :longpoll, Phoenix.Transports.LongPoll
 
   # Socket params are passed from the client and can
