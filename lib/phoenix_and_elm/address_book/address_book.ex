@@ -32,16 +32,7 @@ defmodule PhoenixAndElm.AddressBook do
 
   def search_contacts(query) do
     query
-    |> ts_query_format()
     |> Query.search_contacts()
-  end
-
-  defp ts_query_format(search_query) do
-    search_query
-    |> String.trim()
-    |> String.split(" ")
-    |> Enum.map(&"#{&1}:*")
-    |> Enum.join(" & ")
   end
 
   @doc """
