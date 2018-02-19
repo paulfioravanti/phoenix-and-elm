@@ -3,15 +3,18 @@ defmodule PhoenixAndElm.AddressBook.Query do
   alias PhoenixAndElm.AddressBook.Contact
 
   @contact_search_tsvector """
-  (to_tsvector(
-    'english',
-    coalesce(first_name, '') || ' ' ||
-    coalesce(last_name, '') || ' ' ||
-    coalesce(location, '') || ' ' ||
-    coalesce(headline, '') || ' ' ||
-    coalesce(email, '') || ' ' ||
-    coalesce(phone_number, '')
-  ) @@ to_tsquery('english', ?))
+  (
+    to_tsvector(
+      'english',
+      coalesce(first_name, '') || ' ' ||
+      coalesce(last_name, '') || ' ' ||
+      coalesce(location, '') || ' ' ||
+      coalesce(headline, '') || ' ' ||
+      coalesce(email, '') || ' ' ||
+      coalesce(phone_number, '')
+    )
+    @@ to_tsquery('english', ?)
+  )
   """
 
   def search_contacts(query) do
