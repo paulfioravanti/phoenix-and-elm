@@ -11,9 +11,7 @@ warningMessage : String -> String -> Html Msg -> Html Msg
 warningMessage iconClasses message content =
     div [ class "warning" ]
         [ span [ class "fa-stack" ]
-            [ i [ class iconClasses ]
-                []
-            ]
+            [ i [ class iconClasses ] [] ]
         , h4 []
             [ text message ]
         , content

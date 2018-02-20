@@ -2,18 +2,38 @@ module ContactList.View exposing (indexView)
 
 import Common.View exposing (warningMessage)
 import Contact.View exposing (contactView)
-import Html exposing (..)
-import Html.Attributes exposing (..)
-import Html.Events exposing (..)
-import Html.Keyed exposing (..)
-import Messages exposing (..)
-import Model exposing (..)
+import Html exposing (Html, a, div, h3, input, li, text)
+import Html.Attributes
+    exposing
+        ( class
+        , classList
+        , id
+        , type_
+        , placeholder
+        , value
+        )
+import Html.Events exposing (onClick, onInput, onSubmit)
+import Html.Keyed
+import Messages
+    exposing
+        ( Msg
+            ( HandleFormSubmit
+            , HandleSearchInput
+            , Paginate
+            , ResetSearch
+            )
+        )
+import Model
+    exposing
+        ( ContactList
+        , Model
+        , RemoteData(NotRequested, Requesting, Failure, Success)
+        )
 
 
 indexView : Model -> Html Msg
 indexView model =
-    div
-        [ id "home_index" ]
+    div [ id "home_index" ]
         (viewContent model)
 
 
@@ -32,17 +52,12 @@ viewContent model =
             ]
 
         Failure error ->
-            [ warningMessage
-                "fa fa-meh-o fa-stack-2x"
-                error
-                (text "")
-            ]
+            [ warningMessage "fa fa-meh-o fa-stack-2x" error (text "") ]
 
         Success page ->
             [ searchSection model
             , paginationList page
-            , div
-                []
+            , div []
                 [ contactsList model page ]
             , paginationList page
             ]
@@ -52,16 +67,13 @@ searchSection : Model -> Html Msg
 searchSection model =
     div
         [ class "filter-wrapper" ]
-        [ div
-            [ class "overview-wrapper" ]
-            [ h3
-                []
-                [ text <| headerText model ]
+        [ div [ class "overview-wrapper" ]
+            [ h3 []
+                [ text (header model) ]
             ]
         , div
             [ class "form-wrapper" ]
-            [ Html.form
-                [ onSubmit HandleFormSubmit ]
+            [ Html.form [ onSubmit HandleFormSubmit ]
                 [ resetButton model "reset"
                 , input
                     [ type_ "search"
@@ -75,27 +87,29 @@ searchSection model =
         ]
 
 
-headerText : Model -> String
-headerText model =
+header : Model -> String
+header model =
     case model.contactList of
         Success page ->
-            let
-                totalEntries =
-                    page.total_entries
-
-                contactWord =
-                    if totalEntries == 1 then
-                        "contact"
-                    else
-                        "contacts"
-            in
-                if totalEntries == 0 then
-                    ""
-                else
-                    (toString totalEntries) ++ " " ++ contactWord ++ " found"
+            headerText page.total_entries
 
         _ ->
             ""
+
+
+headerText : Int -> String
+headerText totalEntries =
+    let
+        contactWord =
+            if totalEntries == 1 then
+                "contact"
+            else
+                "contacts"
+    in
+        if totalEntries == 0 then
+            ""
+        else
+            (toString totalEntries) ++ " " ++ contactWord ++ " found"
 
 
 contactsList : Model -> ContactList -> Html Msg
@@ -113,7 +127,8 @@ contactsList model page =
 
 paginationList : ContactList -> Html Msg
 paginationList page =
-    List.range 1 page.total_pages
+    page.total_pages
+        |> List.range 1
         |> List.map (paginationLink page.page_number)
         |> Html.Keyed.ul [ class "pagination" ]
 
@@ -125,31 +140,19 @@ paginationLink currentPage page =
             classList [ ( "active", currentPage == page ) ]
     in
         ( toString page
-        , li
-            []
-            [ a
-                [ classes
-                , onClick <| Paginate page
-                ]
-                []
-            ]
+        , li []
+            [ a [ classes, onClick (Paginate page) ] [] ]
         )
 
 
 resetButton : Model -> String -> Html Msg
 resetButton model className =
     let
-        hide =
+        hidden =
             model.search == ""
 
         classes =
-            classList
-                [ ( className, True )
-                , ( "hidden", hide )
-                ]
+            classList [ ( className, True ), ( "hidden", hidden ) ]
     in
-        a
-            [ classes
-            , onClick ResetSearch
-            ]
+        a [ classes, onClick ResetSearch ]
             [ text "Reset search" ]

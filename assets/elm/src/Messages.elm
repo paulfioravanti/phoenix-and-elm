@@ -1,4 +1,4 @@
-module Messages exposing (..)
+module Messages exposing (Msg(..))
 
 import Http
 import Model exposing (ContactList, Contact)
@@ -7,11 +7,11 @@ import Routing exposing (Route)
 
 
 type Msg
-    = FetchResult (Result Http.Error ContactList)
-    | Paginate Int
-    | HandleSearchInput String
+    = FetchContactResult (Result Http.Error Contact)
+    | FetchResult (Result Http.Error ContactList)
     | HandleFormSubmit
+    | HandleSearchInput String
+    | NavigateTo Route
+    | Paginate Int
     | ResetSearch
     | UrlChange Navigation.Location
-    | NavigateTo Route
-    | FetchContactResult (Result Http.Error Contact)
