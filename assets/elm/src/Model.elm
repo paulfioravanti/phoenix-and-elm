@@ -1,4 +1,11 @@
-module Model exposing (..)
+module Model
+    exposing
+        ( Contact
+        , ContactList
+        , Model
+        , RemoteData(..)
+        , initialModel
+        )
 
 import Routing exposing (Route)
 
@@ -37,15 +44,6 @@ type alias Contact =
     , email : String
     , headline : String
     , picture : String
-    }
-
-
-initialContactList : ContactList
-initialContactList =
-    { entries = []
-    , page_number = 1
-    , total_entries = 0
-    , total_pages = 0
     }
 
 
