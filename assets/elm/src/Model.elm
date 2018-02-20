@@ -11,9 +11,9 @@ import Routing exposing (Route)
 
 
 type RemoteData e a
-    = NotRequested
+    = Failure e
+    | NotRequested
     | Requesting
-    | Failure e
     | Success a
 
 

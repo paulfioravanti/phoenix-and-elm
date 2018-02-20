@@ -1,6 +1,6 @@
 module Routing
     exposing
-        ( Route(HomeIndexRoute, ShowContactRoute, NotFoundRoute)
+        ( Route(HomeIndexRoute, NotFoundRoute, ShowContactRoute)
         , parse
         , toPath
         )
@@ -11,8 +11,8 @@ import UrlParser exposing (Parser, (</>), int, map, oneOf, s)
 
 type Route
     = HomeIndexRoute
-    | ShowContactRoute Int
     | NotFoundRoute
+    | ShowContactRoute Int
 
 
 toPath : Route -> String

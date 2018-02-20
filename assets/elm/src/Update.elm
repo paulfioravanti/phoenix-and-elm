@@ -1,32 +1,64 @@
-module Update exposing (..)
+module Update exposing (urlUpdate, update)
 
 import Commands exposing (fetch, fetchContact)
-import Messages exposing (..)
-import Model exposing (..)
+import Messages
+    exposing
+        ( Msg
+            ( FetchContactResult
+            , FetchResult
+            , HandleFormSubmit
+            , HandleSearchInput
+            , NavigateTo
+            , Paginate
+            , ResetSearch
+            , UrlChange
+            )
+        )
+import Model
+    exposing
+        ( Model
+        , RemoteData(Failure, NotRequested, Requesting, Success)
+        )
 import Navigation
-import Routing exposing (Route(..), parse, toPath)
+import Routing
+    exposing
+        ( Route(HomeIndexRoute, NotFoundRoute, ShowContactRoute)
+        , parse
+        , toPath
+        )
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        FetchContactResult (Ok response) ->
+            ( { model | contact = Success response }, Cmd.none )
+
+        FetchContactResult (Err error) ->
+            ( { model | contact = Failure "Contact not found" }, Cmd.none )
+
         FetchResult (Ok response) ->
-            { model | contactList = Success response } ! []
+            ( { model | contactList = Success response }, Cmd.none )
 
         FetchResult (Err error) ->
-            { model | contactList = Failure "Something went wrong..." } ! []
-
-        Paginate pageNumber ->
-            model ! [ fetch pageNumber model.search ]
+            ( { model | contactList = Failure "Something went wrong..." }
+            , Cmd.none
+            )
 
         HandleSearchInput value ->
-            { model | search = value } ! []
+            ( { model | search = value }, Cmd.none )
 
         HandleFormSubmit ->
-            { model | contactList = Requesting } ! [ fetch 1 model.search ]
+            ( { model | contactList = Requesting }, fetch 1 model.search )
+
+        NavigateTo route ->
+            ( model, Navigation.newUrl (toPath route) )
+
+        Paginate pageNumber ->
+            ( model, fetch pageNumber model.search )
 
         ResetSearch ->
-            { model | search = "" } ! [ fetch 1 "" ]
+            ( { model | search = "" }, fetch 1 "" )
 
         UrlChange location ->
             let
@@ -35,15 +67,6 @@ update msg model =
             in
                 urlUpdate { model | route = currentRoute }
 
-        NavigateTo route ->
-            model ! [ Navigation.newUrl <| toPath route ]
-
-        FetchContactResult (Ok response) ->
-            { model | contact = Success response } ! []
-
-        FetchContactResult (Err error) ->
-            { model | contact = Failure "Contact not found" } ! []
-
 
 urlUpdate : Model -> ( Model, Cmd Msg )
 urlUpdate model =
@@ -51,13 +74,13 @@ urlUpdate model =
         HomeIndexRoute ->
             case model.contactList of
                 NotRequested ->
-                    model ! [ fetch 1 "" ]
+                    ( model, fetch 1 "" )
 
                 _ ->
-                    model ! []
+                    ( model, Cmd.none )
 
         ShowContactRoute id ->
-            { model | contact = Requesting } ! [ fetchContact id ]
+            ( { model | contact = Requesting }, fetchContact id )
 
         _ ->
-            model ! []
+            ( model, Cmd.none )
