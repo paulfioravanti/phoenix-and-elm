@@ -1,19 +1,18 @@
-module View exposing (..)
+module View exposing (view)
 
 import Common.View exposing (warningMessage, backToHomeLink)
 import Contact.View exposing (showContactView)
 import ContactList.View exposing (indexView)
-import Html exposing (..)
-import Html.Attributes exposing (..)
-import Messages exposing (..)
-import Model exposing (..)
-import Routing exposing (Route(..))
+import Html exposing (Html, div, h1, header, section, text)
+import Html.Attributes exposing (class)
+import Messages exposing (Msg)
+import Model exposing (Model)
+import Routing exposing (Route(HomeIndexRoute, NotFoundRoute, ShowContactRoute))
 
 
 view : Model -> Html Msg
 view model =
-    section
-        []
+    section []
         [ headerView
         , div []
             [ page model ]
@@ -22,10 +21,8 @@ view model =
 
 headerView : Html Msg
 headerView =
-    header
-        [ class "main-header" ]
-        [ h1
-            []
+    header [ class "main-header" ]
+        [ h1 []
             [ text "Phoenix and Elm: A real use case" ]
         ]
 
@@ -45,7 +42,4 @@ page model =
 
 notFoundView : Html Msg
 notFoundView =
-    warningMessage
-        "fa fa-meh-o fa-stack-2x"
-        "Page not found"
-        backToHomeLink
+    warningMessage "fa fa-meh-o fa-stack-2x" "Page not found" backToHomeLink
