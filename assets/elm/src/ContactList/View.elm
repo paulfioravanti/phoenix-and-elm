@@ -1,7 +1,6 @@
 module ContactList.View exposing (indexView)
 
-import Shared.View exposing (warningMessage)
-import Contact.View exposing (contactView)
+import Contact.View
 import Html exposing (Html, a, div, h3, input, li, text)
 import Html.Attributes
     exposing
@@ -16,12 +15,7 @@ import Html.Events exposing (onClick, onInput, onSubmit)
 import Html.Keyed
 import Messages
     exposing
-        ( Msg
-            ( HandleFormSubmit
-            , HandleSearchInput
-            , Paginate
-            , ResetSearch
-            )
+        ( Msg(HandleFormSubmit, HandleSearchInput, Paginate, ResetSearch)
         )
 import Model
     exposing
@@ -29,6 +23,7 @@ import Model
         , Model
         , RemoteData(NotRequested, Requesting, Failure, Success)
         )
+import Shared.View
 
 
 indexView : Model -> Html Msg
@@ -45,14 +40,18 @@ viewContent model =
 
         Requesting ->
             [ searchSection model
-            , warningMessage
+            , Shared.View.warningMessage
                 "fa fa-spin fa-cog fa-2x fa-fw"
                 "Searching for contacts"
                 (text "")
             ]
 
         Failure error ->
-            [ warningMessage "fa fa-meh-o fa-stack-2x" error (text "") ]
+            [ Shared.View.warningMessage
+                "fa fa-meh-o fa-stack-2x"
+                error
+                (text "")
+            ]
 
         Success page ->
             [ searchSection model
@@ -116,10 +115,10 @@ contactsList : Model -> ContactList -> Html Msg
 contactsList model page =
     if page.total_entries > 0 then
         page.entries
-            |> List.map contactView
+            |> List.map Contact.View.showView
             |> Html.Keyed.node "div" [ class "cards-wrapper" ]
     else
-        warningMessage
+        Shared.View.warningMessage
             "fa fa-meh-o fa-stack-2x"
             "No contacts found..."
             (resetButton model "btn")

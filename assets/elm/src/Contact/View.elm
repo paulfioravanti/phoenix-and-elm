@@ -1,6 +1,5 @@
-module Contact.View exposing (showContactView, contactView)
+module Contact.View exposing (render, showView)
 
-import Shared.View exposing (warningMessage, backToHomeLink)
 import Html exposing (Html, div, h3, h4, header, i, img, li, p, text, ul)
 import Html.Attributes exposing (class, classList, id, src)
 import Html.Events exposing (onClick)
@@ -12,13 +11,14 @@ import Model
         , RemoteData(NotRequested, Requesting, Failure, Success)
         )
 import Routing exposing (Route(ShowContactRoute))
+import Shared.View
 
 
-showContactView : Model -> Html Msg
-showContactView model =
+render : Model -> Html Msg
+render model =
     case model.contact of
         Success contact ->
-            contactDetailView contact
+            showDetailView contact
 
         Requesting ->
             Shared.View.warningMessage
@@ -30,14 +30,14 @@ showContactView model =
             Shared.View.warningMessage
                 "fa fa-meh-o fa-stack-2x"
                 error
-                backToHomeLink
+                Shared.View.backToHomeLink
 
         NotRequested ->
             text ""
 
 
-contactView : Contact -> ( String, Html Msg )
-contactView contact =
+showView : Contact -> ( String, Html Msg )
+showView contact =
     let
         classes =
             classList
@@ -49,15 +49,15 @@ contactView contact =
         ( toString contact.id
         , div [ classes, onClick (NavigateTo (ShowContactRoute contact.id)) ]
             [ div [ class "inner" ]
-                [ contactCardHeader contact
-                , contactCardBody contact
+                [ cardHeader contact
+                , cardBody contact
                 ]
             ]
         )
 
 
-contactDetailView : Contact -> Html Msg
-contactDetailView contact =
+showDetailView : Contact -> Html Msg
+showDetailView contact =
     let
         classes =
             classList
@@ -67,21 +67,21 @@ contactDetailView contact =
                 ]
 
         ( _, content ) =
-            contactView contact
+            showView contact
     in
         div [ id "contacts_show" ]
             [ header []
                 [ h3 []
                     [ text "Person detail" ]
                 ]
-            , backToHomeLink
+            , Shared.View.backToHomeLink
             , div [ classes ]
                 [ content ]
             ]
 
 
-contactCardHeader : Contact -> Html Msg
-contactCardHeader contact =
+cardHeader : Contact -> Html Msg
+cardHeader contact =
     let
         fullName =
             contact.first_name ++ " " ++ contact.last_name
@@ -106,8 +106,8 @@ contactCardHeader contact =
             ]
 
 
-contactCardBody : Contact -> Html Msg
-contactCardBody contact =
+cardBody : Contact -> Html Msg
+cardBody contact =
     div [ class "card-body" ]
         [ div [ class "headline" ]
             [ p []
