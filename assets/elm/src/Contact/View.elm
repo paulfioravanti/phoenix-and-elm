@@ -1,6 +1,6 @@
 module Contact.View exposing (showContactView, contactView)
 
-import Common.View exposing (warningMessage, backToHomeLink)
+import Shared.View exposing (warningMessage, backToHomeLink)
 import Html exposing (Html, div, h3, h4, header, i, img, li, p, text, ul)
 import Html.Attributes exposing (class, classList, id, src)
 import Html.Events exposing (onClick)
@@ -21,13 +21,16 @@ showContactView model =
             contactDetailView contact
 
         Requesting ->
-            warningMessage
+            Shared.View.warningMessage
                 "fa fa-spin fa-cog fa-2x fa-fw"
                 "Fetching contact"
                 (text "")
 
         Failure error ->
-            warningMessage "fa fa-meh-o fa-stack-2x" error backToHomeLink
+            Shared.View.warningMessage
+                "fa fa-meh-o fa-stack-2x"
+                error
+                backToHomeLink
 
         NotRequested ->
             text ""

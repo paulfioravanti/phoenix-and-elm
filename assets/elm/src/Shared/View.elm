@@ -1,4 +1,4 @@
-module Common.View exposing (warningMessage, backToHomeLink)
+module Shared.View exposing (warningMessage, backToHomeLink)
 
 import Html exposing (Html, a, div, h4, i, span, text)
 import Html.Attributes exposing (class)
