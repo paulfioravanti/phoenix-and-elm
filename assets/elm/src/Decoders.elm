@@ -5,12 +5,6 @@ import Json.Decode.Extra exposing ((|:))
 import Model exposing (Contact, ContactList)
 
 
-type alias ContactResponse =
-    { contact : Maybe Contact
-    , error : Maybe String
-    }
-
-
 contactListDecoder : JD.Decoder ContactList
 contactListDecoder =
     succeed
