@@ -1,4 +1,4 @@
-module View exposing (view)
+module View exposing (render)
 
 import Contact.View
 import ContactList.View
@@ -13,8 +13,8 @@ import Routing
 import Shared.View
 
 
-view : Model -> Html Msg
-view model =
+render : Model -> Html Msg
+render model =
     section []
         [ header [ class "main-header" ]
             [ h1 []

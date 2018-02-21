@@ -1,19 +1,19 @@
 module Main exposing (main)
 
 import Messages exposing (Msg(UrlChange))
-import Model exposing (Model, initialModel)
+import Model exposing (Model)
 import Navigation
 import Routing
-import Update exposing (update, urlUpdate)
-import View exposing (view)
+import Update
+import View
 
 
 main : Program Never Model Msg
 main =
     Navigation.program UrlChange
         { init = init
-        , view = view
-        , update = update
+        , view = View.render
+        , update = Update.interactions
         , subscriptions = (\_ -> Sub.none)
         }
 
@@ -25,6 +25,6 @@ init location =
             Routing.parse location
 
         model =
-            initialModel currentRoute
+            Model.initialModel currentRoute
     in
-        urlUpdate model
+        Update.urlUpdate model

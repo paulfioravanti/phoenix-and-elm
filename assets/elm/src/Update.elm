@@ -1,4 +1,4 @@
-module Update exposing (update, urlUpdate)
+module Update exposing (interactions, urlUpdate)
 
 import Commands exposing (fetch, fetchContact)
 import Messages
@@ -28,8 +28,8 @@ import Routing
         )
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
+interactions : Msg -> Model -> ( Model, Cmd Msg )
+interactions msg model =
     case msg of
         FetchContactResult (Ok response) ->
             ( { model | contact = Success response }, Cmd.none )
