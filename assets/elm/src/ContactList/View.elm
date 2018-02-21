@@ -15,7 +15,7 @@ import Html.Events exposing (onClick, onInput, onSubmit)
 import Html.Keyed
 import Messages
     exposing
-        ( Msg(HandleFormSubmit, HandleSearchInput, Paginate, ResetSearch)
+        ( Msg(HandleSearchInput, Paginate, ResetSearch, SearchContacts)
         )
 import Model
     exposing
@@ -70,7 +70,7 @@ searchSection model =
                 [ text (renderHeader model) ]
             ]
         , div [ class "form-wrapper" ]
-            [ Html.form [ onSubmit HandleFormSubmit ]
+            [ Html.form [ onSubmit SearchContacts ]
                 [ resetButton model "reset"
                 , input
                     [ type_ "search"

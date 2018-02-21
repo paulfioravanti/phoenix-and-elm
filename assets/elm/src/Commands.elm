@@ -1,15 +1,15 @@
-module Commands exposing (fetch, fetchContact)
+module Commands exposing (fetchContactList, fetchContact)
 
 import Decoders exposing (contactDecoder, contactListDecoder)
 import Http
 import Messages exposing (Msg(FetchContact, FetchContactList))
 
 
-fetch : Int -> String -> Cmd Msg
-fetch page search =
+fetchContactList : Int -> String -> Cmd Msg
+fetchContactList page search =
     let
         apiUrl =
-            contactsAPIUrl
+            contactsApiUrl
                 ++ "?page="
                 ++ (toString page)
                 ++ "&search="
@@ -25,7 +25,7 @@ fetchContact : Int -> Cmd Msg
 fetchContact id =
     let
         apiUrl =
-            contactsAPIUrl ++ "/" ++ toString id
+            contactsApiUrl ++ "/" ++ toString id
 
         request =
             Http.get apiUrl contactDecoder
@@ -33,6 +33,6 @@ fetchContact id =
         Http.send FetchContact request
 
 
-contactsAPIUrl : String
-contactsAPIUrl =
+contactsApiUrl : String
+contactsApiUrl =
     "/api/v1/contacts"

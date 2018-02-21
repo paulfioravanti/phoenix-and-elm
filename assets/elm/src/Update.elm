@@ -1,16 +1,16 @@
 module Update exposing (interactions, urlUpdate)
 
-import Commands exposing (fetch, fetchContact)
+import Commands
 import Messages
     exposing
         ( Msg
             ( FetchContact
             , FetchContactList
-            , HandleFormSubmit
             , HandleSearchInput
             , NavigateTo
             , Paginate
             , ResetSearch
+            , SearchContacts
             , UrlChange
             )
         )
@@ -48,17 +48,19 @@ interactions msg model =
         HandleSearchInput value ->
             ( { model | search = value }, Cmd.none )
 
-        HandleFormSubmit ->
-            ( { model | contactList = Requesting }, fetch 1 model.search )
-
         NavigateTo route ->
             ( model, Navigation.newUrl (toPath route) )
 
         Paginate pageNumber ->
-            ( model, fetch pageNumber model.search )
+            ( model, Commands.fetchContactList pageNumber model.search )
 
         ResetSearch ->
-            ( { model | search = "" }, fetch 1 "" )
+            ( { model | search = "" }, Commands.fetchContactList 1 "" )
+
+        SearchContacts ->
+            ( { model | contactList = Requesting }
+            , Commands.fetchContactList 1 model.search
+            )
 
         UrlChange location ->
             let
@@ -74,13 +76,13 @@ urlUpdate model =
         ListContactsRoute ->
             case model.contactList of
                 NotRequested ->
-                    ( model, fetch 1 "" )
+                    ( model, Commands.fetchContactList 1 "" )
 
                 _ ->
                     ( model, Cmd.none )
 
         ShowContactRoute id ->
-            ( { model | contact = Requesting }, fetchContact id )
+            ( { model | contact = Requesting }, Commands.fetchContact id )
 
         _ ->
             ( model, Cmd.none )

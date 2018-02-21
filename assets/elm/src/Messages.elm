@@ -9,9 +9,9 @@ import Routing exposing (Route)
 type Msg
     = FetchContact (Result Http.Error Contact)
     | FetchContactList (Result Http.Error ContactList)
-    | HandleFormSubmit
     | HandleSearchInput String
     | NavigateTo Route
     | Paginate Int
     | ResetSearch
+    | SearchContacts
     | UrlChange Navigation.Location
