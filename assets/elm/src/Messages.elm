@@ -7,8 +7,8 @@ import Routing exposing (Route)
 
 
 type Msg
-    = FetchContactResult (Result Http.Error Contact)
-    | FetchResult (Result Http.Error ContactList)
+    = FetchContact (Result Http.Error Contact)
+    | FetchContactList (Result Http.Error ContactList)
     | HandleFormSubmit
     | HandleSearchInput String
     | NavigateTo Route

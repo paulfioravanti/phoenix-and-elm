@@ -4,8 +4,8 @@ import Commands exposing (fetch, fetchContact)
 import Messages
     exposing
         ( Msg
-            ( FetchContactResult
-            , FetchResult
+            ( FetchContact
+            , FetchContactList
             , HandleFormSubmit
             , HandleSearchInput
             , NavigateTo
@@ -31,16 +31,16 @@ import Routing
 interactions : Msg -> Model -> ( Model, Cmd Msg )
 interactions msg model =
     case msg of
-        FetchContactResult (Ok response) ->
+        FetchContact (Ok response) ->
             ( { model | contact = Success response }, Cmd.none )
 
-        FetchContactResult (Err error) ->
+        FetchContact (Err error) ->
             ( { model | contact = Failure "Contact not found" }, Cmd.none )
 
-        FetchResult (Ok response) ->
+        FetchContactList (Ok response) ->
             ( { model | contactList = Success response }, Cmd.none )
 
-        FetchResult (Err error) ->
+        FetchContactList (Err error) ->
             ( { model | contactList = Failure "Something went wrong..." }
             , Cmd.none
             )
