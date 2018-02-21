@@ -8,7 +8,7 @@ import Messages exposing (Msg)
 import Model exposing (Model)
 import Routing
     exposing
-        ( Route(HomeIndexRoute, NotFoundRoute, ShowContactRoute)
+        ( Route(ListContactsRoute, NotFoundRoute, ShowContactRoute)
         )
 import Shared.View
 
@@ -33,7 +33,7 @@ headerView =
 page : Model -> Html Msg
 page model =
     case model.route of
-        HomeIndexRoute ->
+        ListContactsRoute ->
             ContactList.View.render model
 
         ShowContactRoute id ->

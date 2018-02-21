@@ -18,10 +18,10 @@ type RemoteData e a
 
 
 type alias Model =
-    { contactList : RemoteData String ContactList
-    , search : String
+    { contact : RemoteData String Contact
+    , contactList : RemoteData String ContactList
     , route : Route
-    , contact : RemoteData String Contact
+    , search : String
     }
 
 
@@ -49,8 +49,8 @@ type alias Contact =
 
 initialModel : Route -> Model
 initialModel route =
-    { contactList = NotRequested
-    , search = ""
+    { contact = NotRequested
+    , contactList = NotRequested
     , route = route
-    , contact = NotRequested
+    , search = ""
     }

@@ -22,7 +22,7 @@ import Model
 import Navigation
 import Routing
     exposing
-        ( Route(HomeIndexRoute, NotFoundRoute, ShowContactRoute)
+        ( Route(ListContactsRoute, NotFoundRoute, ShowContactRoute)
         , parse
         , toPath
         )
@@ -71,7 +71,7 @@ update msg model =
 urlUpdate : Model -> ( Model, Cmd Msg )
 urlUpdate model =
     case model.route of
-        HomeIndexRoute ->
+        ListContactsRoute ->
             case model.contactList of
                 NotRequested ->
                     ( model, fetch 1 "" )

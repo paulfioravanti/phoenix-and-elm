@@ -17,8 +17,8 @@ import Shared.View
 render : Model -> Html Msg
 render model =
     case model.contact of
-        Success contact ->
-            showDetailView contact
+        NotRequested ->
+            text ""
 
         Requesting ->
             Shared.View.warningMessage
@@ -32,8 +32,8 @@ render model =
                 error
                 Shared.View.backToHomeLink
 
-        NotRequested ->
-            text ""
+        Success contact ->
+            showDetailView contact
 
 
 showView : Contact -> ( String, Html Msg )

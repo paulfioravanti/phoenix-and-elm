@@ -1,6 +1,6 @@
 module Routing
     exposing
-        ( Route(HomeIndexRoute, NotFoundRoute, ShowContactRoute)
+        ( Route(ListContactsRoute, NotFoundRoute, ShowContactRoute)
         , parse
         , toPath
         )
@@ -10,7 +10,7 @@ import UrlParser exposing (Parser, (</>), int, map, oneOf, s)
 
 
 type Route
-    = HomeIndexRoute
+    = ListContactsRoute
     | NotFoundRoute
     | ShowContactRoute Int
 
@@ -18,7 +18,7 @@ type Route
 toPath : Route -> String
 toPath route =
     case route of
-        HomeIndexRoute ->
+        ListContactsRoute ->
             "/"
 
         ShowContactRoute id ->
@@ -41,6 +41,6 @@ parse location =
 matchers : Parser (Route -> a) a
 matchers =
     oneOf
-        [ map HomeIndexRoute (s "")
+        [ map ListContactsRoute (s "")
         , map ShowContactRoute (s "contacts" </> int)
         ]
