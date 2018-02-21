@@ -1,4 +1,4 @@
-module ContactList.View exposing (indexView)
+module ContactList.View exposing (render)
 
 import Contact.View
 import Html exposing (Html, a, div, h3, input, li, text)
@@ -26,14 +26,14 @@ import Model
 import Shared.View
 
 
-indexView : Model -> Html Msg
-indexView model =
+render : Model -> Html Msg
+render model =
     div [ id "home_index" ]
-        (viewContent model)
+        (renderContacts model)
 
 
-viewContent : Model -> List (Html Msg)
-viewContent model =
+renderContacts : Model -> List (Html Msg)
+renderContacts model =
     case model.contactList of
         NotRequested ->
             [ text "" ]
@@ -64,14 +64,12 @@ viewContent model =
 
 searchSection : Model -> Html Msg
 searchSection model =
-    div
-        [ class "filter-wrapper" ]
+    div [ class "filter-wrapper" ]
         [ div [ class "overview-wrapper" ]
             [ h3 []
-                [ text (header model) ]
+                [ text (renderHeader model) ]
             ]
-        , div
-            [ class "form-wrapper" ]
+        , div [ class "form-wrapper" ]
             [ Html.form [ onSubmit HandleFormSubmit ]
                 [ resetButton model "reset"
                 , input
@@ -86,8 +84,8 @@ searchSection model =
         ]
 
 
-header : Model -> String
-header model =
+renderHeader : Model -> String
+renderHeader model =
     case model.contactList of
         Success page ->
             headerText page.total_entries

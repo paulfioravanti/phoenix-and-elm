@@ -34,7 +34,7 @@ page : Model -> Html Msg
 page model =
     case model.route of
         HomeIndexRoute ->
-            ContactList.View.indexView model
+            ContactList.View.render model
 
         ShowContactRoute id ->
             Contact.View.render model
