@@ -10,7 +10,8 @@ import View
 
 main : Program Never Model Msg
 main =
-    Navigation.program UrlChange
+    Navigation.program
+        UrlChange
         { init = init
         , view = View.render
         , update = Update.interactions

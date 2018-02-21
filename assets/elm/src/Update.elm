@@ -6,11 +6,11 @@ import Messages
         ( Msg
             ( FetchContact
             , FetchContactList
-            , HandleSearchInput
             , NavigateTo
             , Paginate
             , ResetSearch
             , SearchContacts
+            , UpdateSearchQuery
             , UrlChange
             )
         )
@@ -45,9 +45,6 @@ interactions msg model =
             , Cmd.none
             )
 
-        HandleSearchInput value ->
-            ( { model | search = value }, Cmd.none )
-
         NavigateTo route ->
             ( model, Navigation.newUrl (toPath route) )
 
@@ -61,6 +58,9 @@ interactions msg model =
             ( { model | contactList = Requesting }
             , Commands.fetchContactList 1 model.search
             )
+
+        UpdateSearchQuery value ->
+            ( { model | search = value }, Cmd.none )
 
         UrlChange location ->
             let

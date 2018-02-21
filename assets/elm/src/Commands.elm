@@ -3,9 +3,10 @@ module Commands exposing (fetchContactList, fetchContact)
 import Decoders exposing (contactDecoder, contactListDecoder)
 import Http
 import Messages exposing (Msg(FetchContact, FetchContactList))
+import Model exposing (PageNumber, Query)
 
 
-fetchContactList : Int -> String -> Cmd Msg
+fetchContactList : PageNumber -> Query -> Cmd Msg
 fetchContactList page search =
     let
         apiUrl =

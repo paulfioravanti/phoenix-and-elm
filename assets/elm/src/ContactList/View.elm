@@ -15,12 +15,13 @@ import Html.Events exposing (onClick, onInput, onSubmit)
 import Html.Keyed
 import Messages
     exposing
-        ( Msg(HandleSearchInput, Paginate, ResetSearch, SearchContacts)
+        ( Msg(Paginate, ResetSearch, SearchContacts, UpdateSearchQuery)
         )
 import Model
     exposing
         ( ContactList
         , Model
+        , PageNumber
         , RemoteData(NotRequested, Requesting, Failure, Success)
         )
 import Shared.View
@@ -76,7 +77,7 @@ searchSection model =
                     [ type_ "search"
                     , placeholder "Search contacts..."
                     , value model.search
-                    , onInput HandleSearchInput
+                    , onInput UpdateSearchQuery
                     ]
                     []
                 ]
@@ -130,7 +131,7 @@ paginationList page =
         |> Html.Keyed.ul [ class "pagination" ]
 
 
-paginationLink : Int -> Int -> ( String, Html Msg )
+paginationLink : PageNumber -> PageNumber -> ( String, Html Msg )
 paginationLink currentPage page =
     let
         classes =
