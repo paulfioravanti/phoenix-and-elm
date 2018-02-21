@@ -14,7 +14,7 @@ main =
         UrlChange
         { init = init
         , view = View.render
-        , update = Update.interactions
+        , update = Update.update
         , subscriptions = (\_ -> Sub.none)
         }
 
