@@ -1,4 +1,4 @@
-module Update exposing (urlUpdate, update)
+module Update exposing (update, urlUpdate)
 
 import Commands exposing (fetch, fetchContact)
 import Messages
