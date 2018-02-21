@@ -29,20 +29,20 @@ type alias Model =
 
 type alias ContactList =
     { entries : List Contact
-    , page_number : PageNumber
-    , total_entries : Int
-    , total_pages : Int
+    , pageNumber : PageNumber
+    , totalEntries : Int
+    , totalPages : Int
     }
 
 
 type alias Contact =
     { id : Int
-    , first_name : String
-    , last_name : String
+    , firstName : String
+    , lastName : String
     , gender : Int
-    , birth_date : String
+    , birthDate : String
     , location : String
-    , phone_number : String
+    , phoneNumber : String
     , email : String
     , headline : String
     , picture : String

@@ -89,7 +89,7 @@ renderHeader : Model -> String
 renderHeader model =
     case model.contactList of
         Success page ->
-            headerText page.total_entries
+            headerText page.totalEntries
 
         _ ->
             ""
@@ -112,7 +112,7 @@ headerText totalEntries =
 
 contactsList : Model -> ContactList -> Html Msg
 contactsList model page =
-    if page.total_entries > 0 then
+    if page.totalEntries > 0 then
         page.entries
             |> List.map Contact.View.showView
             |> Html.Keyed.node "div" [ class "cards-wrapper" ]
@@ -125,9 +125,9 @@ contactsList model page =
 
 paginationList : ContactList -> Html Msg
 paginationList page =
-    page.total_pages
+    page.totalPages
         |> List.range 1
-        |> List.map (paginationLink page.page_number)
+        |> List.map (paginationLink page.pageNumber)
         |> Html.Keyed.ul [ class "pagination" ]
 
 

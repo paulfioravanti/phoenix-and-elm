@@ -84,7 +84,7 @@ cardHeader : Contact -> Html Msg
 cardHeader contact =
     let
         fullName =
-            contact.first_name ++ " " ++ contact.last_name
+            contact.firstName ++ " " ++ contact.lastName
     in
         header []
             [ div [ class "avatar-wrapper" ]
@@ -99,7 +99,7 @@ cardHeader contact =
                         ]
                     , li []
                         [ i [ class "fa fa-birthday-cake" ] []
-                        , text contact.birth_date
+                        , text contact.birthDate
                         ]
                     ]
                 ]
@@ -116,7 +116,7 @@ cardBody contact =
         , ul [ class "contact-info" ]
             [ li []
                 [ i [ class "fa fa-phone" ] []
-                , text contact.phone_number
+                , text contact.phoneNumber
                 ]
             , li []
                 [ i [ class "fa fa-envelope" ] []
