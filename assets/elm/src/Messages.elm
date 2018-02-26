@@ -1,6 +1,7 @@
 module Messages exposing (..)
 
 import Json.Encode
+import Model exposing (PageNumber, Query)
 import Navigation
 import Routing exposing (Route)
 
@@ -11,8 +12,8 @@ type Msg
     | FetchContactListSuccess Json.Encode.Value
     | FetchContactListError Json.Encode.Value
     | NavigateTo Route
-    | Paginate Int
+    | Paginate PageNumber
     | ResetSearch
     | SearchContacts
-    | UpdateSearchQuery String
+    | UpdateSearchQuery Query
     | UrlChange Navigation.Location

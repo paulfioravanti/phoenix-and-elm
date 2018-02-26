@@ -25,7 +25,7 @@ type alias Model =
 
 type alias ContactList =
     { entries : List Contact
-    , pageNumber : Int
+    , pageNumber : PageNumber
     , totalEntries : Int
     , totalPages : Int
     }
@@ -50,7 +50,7 @@ type alias Query =
 
 
 type alias PageNumber =
-    String
+    Int
 
 
 initialModel : Flags -> Route -> Model

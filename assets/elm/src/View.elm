@@ -1,7 +1,7 @@
 module View exposing (..)
 
 import Contact.View
-import ContactList.View exposing (indexView)
+import ContactList.View
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Messages exposing (..)
@@ -34,7 +34,7 @@ page : Model -> Html Msg
 page model =
     case model.route of
         ListContactsRoute ->
-            indexView model
+            ContactList.View.render model
 
         ShowContactRoute id ->
             Contact.View.render model

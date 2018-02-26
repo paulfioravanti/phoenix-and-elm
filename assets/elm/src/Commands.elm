@@ -10,11 +10,12 @@ import Messages
             , FetchContactError
             )
         )
+import Model exposing (PageNumber, Query)
 import Phoenix
 import Phoenix.Push as Push
 
 
-fetchContactList : String -> Int -> String -> Cmd Msg
+fetchContactList : String -> PageNumber -> Query -> Cmd Msg
 fetchContactList socketUrl page search =
     let
         payload =
