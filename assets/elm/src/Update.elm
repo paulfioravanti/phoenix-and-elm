@@ -38,25 +38,61 @@ update msg model =
         FetchContactListSuccess raw ->
             case JD.decodeValue Decoders.contactListDecoder raw of
                 Ok payload ->
-                    { model | contactList = Success payload } ! []
+                    ( { model | contactList = Success payload }, Cmd.none )
 
                 Err err ->
-                    { model | contactList = Failure "Error while decoding contact list" } ! []
+                    ( { model
+                        | contactList =
+                            Failure "Error while decoding contact list"
+                      }
+                    , Cmd.none
+                    )
 
         FetchContactListError raw ->
-            { model | contactList = Failure "Error while fetching contact list" } ! []
+            ( { model
+                | contactList = Failure "Error while fetching contact list"
+              }
+            , Cmd.none
+            )
+
+        FetchContactSuccess raw ->
+            case JD.decodeValue Decoders.contactDecoder raw of
+                Ok payload ->
+                    ( { model | contact = Success payload }, Cmd.none )
+
+                Err err ->
+                    ( { model
+                        | contact = Failure "Error while decoding contact"
+                      }
+                    , Cmd.none
+                    )
+
+        FetchContactError raw ->
+            ( { model | contact = Failure "Contact not found" }, Cmd.none )
+
+        NavigateTo route ->
+            ( model, Navigation.newUrl (toPath route) )
 
         Paginate pageNumber ->
-            model ! [ Commands.fetchContactList model.flags.socketUrl pageNumber model.search ]
-
-        UpdateSearchQuery value ->
-            { model | search = value } ! []
-
-        SearchContacts ->
-            { model | contactList = Requesting } ! [ Commands.fetchContactList model.flags.socketUrl 1 model.search ]
+            ( model
+            , Commands.fetchContactList
+                model.flags.socketUrl
+                pageNumber
+                model.search
+            )
 
         ResetSearch ->
-            { model | search = "" } ! [ Commands.fetchContactList model.flags.socketUrl 1 "" ]
+            ( { model | search = "" }
+            , Commands.fetchContactList model.flags.socketUrl 1 ""
+            )
+
+        SearchContacts ->
+            ( { model | contactList = Requesting }
+            , Commands.fetchContactList model.flags.socketUrl 1 model.search
+            )
+
+        UpdateSearchQuery value ->
+            ( { model | search = value }, Cmd.none )
 
         UrlChange location ->
             let
@@ -65,20 +101,6 @@ update msg model =
             in
                 urlUpdate { model | route = currentRoute }
 
-        NavigateTo route ->
-            model ! [ Navigation.newUrl <| toPath route ]
-
-        FetchContactSuccess raw ->
-            case JD.decodeValue Decoders.contactDecoder raw of
-                Ok payload ->
-                    { model | contact = Success payload } ! []
-
-                Err err ->
-                    { model | contact = Failure "Error while decoding contact" } ! []
-
-        FetchContactError raw ->
-            { model | contact = Failure "Contact not found" } ! []
-
 
 urlUpdate : Model -> ( Model, Cmd Msg )
 urlUpdate model =
@@ -86,13 +108,17 @@ urlUpdate model =
         ListContactsRoute ->
             case model.contactList of
                 NotRequested ->
-                    model ! [ Commands.fetchContactList model.flags.socketUrl 1 "" ]
+                    ( model
+                    , Commands.fetchContactList model.flags.socketUrl 1 ""
+                    )
 
                 _ ->
-                    model ! []
+                    ( model, Cmd.none )
 
         ShowContactRoute id ->
-            { model | contact = Requesting } ! [ Commands.fetchContact model.flags.socketUrl id ]
+            ( { model | contact = Requesting }
+            , Commands.fetchContact model.flags.socketUrl id
+            )
 
         _ ->
-            model ! []
+            ( model, Cmd.none )
