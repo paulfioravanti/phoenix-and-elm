@@ -1,12 +1,12 @@
 module Contact.View exposing (..)
 
-import Common.View exposing (warningMessage, backToHomeLink)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Messages exposing (..)
 import Model exposing (..)
 import Routing exposing (Route(..))
+import Shared.View exposing (warningMessage, backToHomeLink)
 
 
 contactView : Contact -> ( String, Html Msg )

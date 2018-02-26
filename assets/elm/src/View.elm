@@ -1,6 +1,5 @@
 module View exposing (..)
 
-import Common.View exposing (warningMessage, backToHomeLink)
 import Contact.View exposing (showContactView)
 import ContactList.View exposing (indexView)
 import Html exposing (..)
@@ -8,6 +7,7 @@ import Html.Attributes exposing (..)
 import Messages exposing (..)
 import Model exposing (..)
 import Routing exposing (Route(..))
+import Shared.View exposing (warningMessage, backToHomeLink)
 
 
 view : Model -> Html Msg
@@ -33,7 +33,7 @@ headerView =
 page : Model -> Html Msg
 page model =
     case model.route of
-        HomeIndexRoute ->
+        ListContactsRoute ->
             indexView model
 
         ShowContactRoute id ->

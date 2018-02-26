@@ -1,13 +1,13 @@
 module ContactList.View exposing (indexView)
 
 import Contact.View exposing (contactView)
-import Common.View exposing (warningMessage)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Keyed exposing (..)
 import Messages exposing (..)
 import Model exposing (..)
+import Shared.View exposing (warningMessage)
 
 
 indexView : Model -> Html Msg
