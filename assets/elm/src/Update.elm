@@ -1,8 +1,8 @@
 module Update exposing (update, urlUpdate)
 
 import Commands
-import Decoders
-import Json.Decode as JD
+import Contact.Update
+import ContactList.Update
 import Messages
     exposing
         ( Msg
@@ -21,7 +21,7 @@ import Messages
 import Model
     exposing
         ( Model
-        , RemoteData(Failure, NotRequested, Requesting, Success)
+        , RemoteData(NotRequested, Requesting)
         )
 import Navigation
 import Routing
@@ -35,40 +35,17 @@ import Routing
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        FetchContactListSuccess raw ->
-            case JD.decodeValue Decoders.contactListDecoder raw of
-                Ok payload ->
-                    ( { model | contactList = Success payload }, Cmd.none )
+        FetchContactListSuccess json ->
+            ContactList.Update.success model json
 
-                Err err ->
-                    ( { model
-                        | contactList =
-                            Failure "Error while decoding contact list"
-                      }
-                    , Cmd.none
-                    )
+        FetchContactListError json ->
+            ContactList.Update.error model
 
-        FetchContactListError raw ->
-            ( { model
-                | contactList = Failure "Error while fetching contact list"
-              }
-            , Cmd.none
-            )
+        FetchContactSuccess json ->
+            Contact.Update.success model json
 
-        FetchContactSuccess raw ->
-            case JD.decodeValue Decoders.contactDecoder raw of
-                Ok payload ->
-                    ( { model | contact = Success payload }, Cmd.none )
-
-                Err err ->
-                    ( { model
-                        | contact = Failure "Error while decoding contact"
-                      }
-                    , Cmd.none
-                    )
-
-        FetchContactError raw ->
-            ( { model | contact = Failure "Contact not found" }, Cmd.none )
+        FetchContactError json ->
+            Contact.Update.error model
 
         NavigateTo route ->
             ( model, Navigation.newUrl (toPath route) )
