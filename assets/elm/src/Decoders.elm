@@ -1,11 +1,11 @@
 module Decoders exposing (contactListDecoder, contactDecoder)
 
-import Json.Decode as JD exposing (field, int, list, string, succeed)
+import Json.Decode exposing (field, int, list, string, succeed)
 import Json.Decode.Extra exposing ((|:))
 import Model exposing (Contact, ContactList)
 
 
-contactListDecoder : JD.Decoder ContactList
+contactListDecoder : Json.Decode.Decoder ContactList
 contactListDecoder =
     succeed
         ContactList
@@ -15,7 +15,7 @@ contactListDecoder =
         |: (field "total_pages" int)
 
 
-contactDecoder : JD.Decoder Contact
+contactDecoder : Json.Decode.Decoder Contact
 contactDecoder =
     succeed
         Contact
