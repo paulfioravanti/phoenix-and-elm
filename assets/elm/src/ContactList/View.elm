@@ -1,6 +1,6 @@
 module ContactList.View exposing (indexView)
 
-import Contact.View exposing (contactView)
+import Contact.View
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -102,7 +102,7 @@ contactsList : Model -> ContactList -> Html Msg
 contactsList model page =
     if page.totalEntries > 0 then
         page.entries
-            |> List.map contactView
+            |> List.map Contact.View.showView
             |> Html.Keyed.node "div" [ class "cards-wrapper" ]
     else
         warningMessage

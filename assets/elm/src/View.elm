@@ -1,6 +1,6 @@
 module View exposing (..)
 
-import Contact.View exposing (showContactView)
+import Contact.View
 import ContactList.View exposing (indexView)
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -37,7 +37,7 @@ page model =
             indexView model
 
         ShowContactRoute id ->
-            showContactView model
+            Contact.View.render model
 
         NotFoundRoute ->
             notFoundView
