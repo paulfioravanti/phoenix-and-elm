@@ -1,6 +1,6 @@
 module Update exposing (..)
 
-import Commands exposing (fetch, fetchContact)
+import Commands exposing (fetchContactList, fetchContact)
 import Decoders exposing (..)
 import Json.Decode as JD
 import Messages exposing (..)
@@ -24,16 +24,16 @@ update msg model =
             { model | contactList = Failure "Error while fetching contact list" } ! []
 
         Paginate pageNumber ->
-            model ! [ fetch model.flags.socketUrl pageNumber model.search ]
+            model ! [ fetchContactList model.flags.socketUrl pageNumber model.search ]
 
         HandleSearchInput value ->
             { model | search = value } ! []
 
         HandleFormSubmit ->
-            { model | contactList = Requesting } ! [ fetch model.flags.socketUrl 1 model.search ]
+            { model | contactList = Requesting } ! [ fetchContactList model.flags.socketUrl 1 model.search ]
 
         ResetSearch ->
-            { model | search = "" } ! [ fetch model.flags.socketUrl 1 "" ]
+            { model | search = "" } ! [ fetchContactList model.flags.socketUrl 1 "" ]
 
         UrlChange location ->
             let
@@ -63,7 +63,7 @@ urlUpdate model =
         ListContactsRoute ->
             case model.contactList of
                 NotRequested ->
-                    model ! [ fetch model.flags.socketUrl 1 "" ]
+                    model ! [ fetchContactList model.flags.socketUrl 1 "" ]
 
                 _ ->
                     model ! []

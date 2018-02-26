@@ -1,18 +1,18 @@
-module Commands exposing (..)
+module Commands exposing (fetchContactList, fetchContact)
 
-import Messages exposing (Msg(..))
+import Json.Encode exposing (int, string)
+import Messages exposing (Msg(FetchSuccess, FetchError, FetchContactSuccess, FetchContactError))
 import Phoenix exposing (..)
 import Phoenix.Push as Push
-import Json.Encode as JE
 
 
-fetch : String -> Int -> String -> Cmd Msg
-fetch socketUrl page search =
+fetchContactList : String -> Int -> String -> Cmd Msg
+fetchContactList socketUrl page search =
     let
         payload =
-            JE.object
-                [ ( "page", JE.int page )
-                , ( "search", JE.string search )
+            Json.Encode.object
+                [ ( "page", int page )
+                , ( "search", string search )
                 ]
 
         push =
