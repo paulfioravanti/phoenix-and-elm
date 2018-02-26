@@ -23,6 +23,6 @@ defmodule PhoenixAndElmWeb.Router do
     # Use the default browser stack
     pipe_through :browser
 
-    get "/*path", PageController, :index
+    get "/*path", AddressBookController, :index
   end
 end

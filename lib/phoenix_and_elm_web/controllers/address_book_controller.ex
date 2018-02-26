@@ -1,4 +1,4 @@
-defmodule PhoenixAndElmWeb.PageController do
+defmodule PhoenixAndElmWeb.AddressBookController do
   use PhoenixAndElmWeb, :controller
 
   def index(conn, _params) do
