@@ -60,12 +60,18 @@ update msg model =
 
         ResetSearch ->
             ( { model | search = "" }
-            , Commands.fetchContactList model.flags.socketUrl 1 ""
+            , Commands.fetchContactList
+                model.flags.socketUrl
+                firstPage
+                blankSearch
             )
 
         SearchContacts ->
             ( { model | contactList = Requesting }
-            , Commands.fetchContactList model.flags.socketUrl 1 model.search
+            , Commands.fetchContactList
+                model.flags.socketUrl
+                firstPage
+                model.search
             )
 
         UpdateSearchQuery value ->
@@ -86,7 +92,10 @@ urlUpdate model =
             case model.contactList of
                 NotRequested ->
                     ( model
-                    , Commands.fetchContactList model.flags.socketUrl 1 ""
+                    , Commands.fetchContactList
+                        model.flags.socketUrl
+                        firstPage
+                        blankSearch
                     )
 
                 _ ->
@@ -99,3 +108,13 @@ urlUpdate model =
 
         _ ->
             ( model, Cmd.none )
+
+
+firstPage : Int
+firstPage =
+    1
+
+
+blankSearch : String
+blankSearch =
+    ""
