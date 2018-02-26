@@ -1,4 +1,6 @@
 defmodule PhoenixAndElmWeb.ContactChannel do
+  @moduledoc false
+
   use PhoenixAndElmWeb, :channel
   alias PhoenixAndElm.AddressBook
   require Logger
@@ -12,8 +14,6 @@ defmodule PhoenixAndElmWeb.ContactChannel do
   end
 
   def handle_in("contacts:fetch", params, socket) do
-    Logger.info("Handling contacts...")
-
     contacts =
       params
       |> Map.get("search", "")
@@ -23,11 +23,8 @@ defmodule PhoenixAndElmWeb.ContactChannel do
     {:reply, {:ok, contacts}, socket}
   end
 
-  def handle_in("contact:" <> contact_id, _, socket) do
-    Logger.info("Handling contact...")
-
-    contact = AddressBook.get_contact!(contact_id)
-
+  def handle_in("contact:" <> id, _payload, socket) do
+    contact = AddressBook.get_contact!(id)
     {:reply, {:ok, contact}, socket}
   rescue
     Ecto.NoResultsError ->
