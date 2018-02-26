@@ -1,19 +1,42 @@
-module Update exposing (..)
+module Update exposing (update, urlUpdate)
 
-import Commands exposing (fetchContactList, fetchContact)
-import Decoders exposing (..)
+import Commands
+import Decoders
 import Json.Decode as JD
-import Messages exposing (..)
-import Model exposing (..)
+import Messages
+    exposing
+        ( Msg
+            ( FetchContactSuccess
+            , FetchContactError
+            , FetchContactListSuccess
+            , FetchContactListError
+            , NavigateTo
+            , Paginate
+            , ResetSearch
+            , SearchContacts
+            , UpdateSearchQuery
+            , UrlChange
+            )
+        )
+import Model
+    exposing
+        ( Model
+        , RemoteData(Failure, NotRequested, Requesting, Success)
+        )
 import Navigation
-import Routing exposing (Route(..), parse, toPath)
+import Routing
+    exposing
+        ( Route(ListContactsRoute, NotFoundRoute, ShowContactRoute)
+        , parse
+        , toPath
+        )
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         FetchContactListSuccess raw ->
-            case JD.decodeValue contactListDecoder raw of
+            case JD.decodeValue Decoders.contactListDecoder raw of
                 Ok payload ->
                     { model | contactList = Success payload } ! []
 
@@ -24,16 +47,16 @@ update msg model =
             { model | contactList = Failure "Error while fetching contact list" } ! []
 
         Paginate pageNumber ->
-            model ! [ fetchContactList model.flags.socketUrl pageNumber model.search ]
+            model ! [ Commands.fetchContactList model.flags.socketUrl pageNumber model.search ]
 
         UpdateSearchQuery value ->
             { model | search = value } ! []
 
         SearchContacts ->
-            { model | contactList = Requesting } ! [ fetchContactList model.flags.socketUrl 1 model.search ]
+            { model | contactList = Requesting } ! [ Commands.fetchContactList model.flags.socketUrl 1 model.search ]
 
         ResetSearch ->
-            { model | search = "" } ! [ fetchContactList model.flags.socketUrl 1 "" ]
+            { model | search = "" } ! [ Commands.fetchContactList model.flags.socketUrl 1 "" ]
 
         UrlChange location ->
             let
@@ -46,7 +69,7 @@ update msg model =
             model ! [ Navigation.newUrl <| toPath route ]
 
         FetchContactSuccess raw ->
-            case JD.decodeValue contactDecoder raw of
+            case JD.decodeValue Decoders.contactDecoder raw of
                 Ok payload ->
                     { model | contact = Success payload } ! []
 
@@ -63,13 +86,13 @@ urlUpdate model =
         ListContactsRoute ->
             case model.contactList of
                 NotRequested ->
-                    model ! [ fetchContactList model.flags.socketUrl 1 "" ]
+                    model ! [ Commands.fetchContactList model.flags.socketUrl 1 "" ]
 
                 _ ->
                     model ! []
 
         ShowContactRoute id ->
-            { model | contact = Requesting } ! [ fetchContact model.flags.socketUrl id ]
+            { model | contact = Requesting } ! [ Commands.fetchContact model.flags.socketUrl id ]
 
         _ ->
             model ! []
