@@ -14,14 +14,13 @@ defmodule PhoenixAndElmWeb.ContactChannel do
   def handle_in("contacts:fetch", params, socket) do
     Logger.info("Handling contacts...")
 
-    search_query = Map.get(params, "search", "")
-
-    page =
-      search_query
+    contacts =
+      params
+      |> Map.get("search", "")
       |> AddressBook.search_contacts()
       |> AddressBook.paginate_contacts_by(params, :first_name)
 
-    {:reply, {:ok, page}, socket}
+    {:reply, {:ok, contacts}, socket}
   end
 
   def handle_in("contact:" <> contact_id, _, socket) do
@@ -29,13 +28,10 @@ defmodule PhoenixAndElmWeb.ContactChannel do
 
     contact = AddressBook.get_contact!(contact_id)
 
-    case contact do
-      nil ->
-        {:reply, {:error, %{error: "Contact no found"}}, socket}
-
-      _ ->
-        {:reply, {:ok, contact}, socket}
-    end
+    {:reply, {:ok, contact}, socket}
+  rescue
+    Ecto.NoResultsError ->
+      {:reply, {:error, %{error: "Contact not found"}}, socket}
   end
 
   # Channels can be used in a request/response fashion
