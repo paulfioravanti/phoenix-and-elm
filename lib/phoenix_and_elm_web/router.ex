@@ -15,8 +15,6 @@ defmodule PhoenixAndElmWeb.Router do
 
   scope "/api", PhoenixAndElmWeb do
     pipe_through :api
-
-    resources "/contacts", ContactController, only: [:index, :show]
   end
 
   scope "/", PhoenixAndElmWeb do
