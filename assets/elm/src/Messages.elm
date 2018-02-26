@@ -6,13 +6,13 @@ import Routing exposing (Route)
 
 
 type Msg
-    = FetchContactListSuccess Json.Encode.Value
-    | FetchContactListError Json.Encode.Value
-    | Paginate Int
-    | HandleSearchInput String
-    | HandleFormSubmit
-    | ResetSearch
-    | UrlChange Navigation.Location
-    | NavigateTo Route
-    | FetchContactSuccess Json.Encode.Value
+    = FetchContactSuccess Json.Encode.Value
     | FetchContactError Json.Encode.Value
+    | FetchContactListSuccess Json.Encode.Value
+    | FetchContactListError Json.Encode.Value
+    | NavigateTo Route
+    | Paginate Int
+    | ResetSearch
+    | SearchContacts
+    | UpdateSearchQuery String
+    | UrlChange Navigation.Location

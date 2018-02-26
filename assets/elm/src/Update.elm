@@ -26,10 +26,10 @@ update msg model =
         Paginate pageNumber ->
             model ! [ fetchContactList model.flags.socketUrl pageNumber model.search ]
 
-        HandleSearchInput value ->
+        UpdateSearchQuery value ->
             { model | search = value } ! []
 
-        HandleFormSubmit ->
+        SearchContacts ->
             { model | contactList = Requesting } ! [ fetchContactList model.flags.socketUrl 1 model.search ]
 
         ResetSearch ->

@@ -61,13 +61,13 @@ searchSection model =
         , div
             [ class "form-wrapper" ]
             [ Html.form
-                [ onSubmit HandleFormSubmit ]
+                [ onSubmit SearchContacts ]
                 [ resetButton model "reset"
                 , input
                     [ type_ "search"
                     , placeholder "Search contacts..."
                     , value model.search
-                    , onInput HandleSearchInput
+                    , onInput UpdateSearchQuery
                     ]
                     []
                 ]
