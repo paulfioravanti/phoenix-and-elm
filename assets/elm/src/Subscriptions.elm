@@ -1,6 +1,6 @@
-module Subscriptions exposing (..)
+module Subscriptions exposing (subscriptions)
 
-import Messages exposing (Msg(..))
+import Messages exposing (Msg)
 import Model exposing (Model)
 import Phoenix
 import Phoenix.Channel as Channel exposing (Channel)
@@ -9,7 +9,12 @@ import Phoenix.Socket as Socket exposing (Socket)
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Phoenix.connect (socket model.flags.socketUrl) [ contacts ]
+    let
+        socketUrl =
+            model.flags.socketUrl
+    in
+        [ contacts ]
+            |> Phoenix.connect (socket socketUrl)
 
 
 socket : String -> Socket Msg
@@ -19,5 +24,6 @@ socket socketUrl =
 
 contacts : Channel Msg
 contacts =
-    Channel.init "contacts"
+    "contacts"
+        |> Channel.init
         |> Channel.withDebug
