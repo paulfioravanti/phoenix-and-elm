@@ -8,9 +8,14 @@
     <meta name="author" content="">
 
     <title>Hello PhoenixAndElm!</title>
-    <link href="https://fonts.googleapis.com/css?family=Fjalla+One|Average+Sans" rel="stylesheet" type="text/css"}/>
+    <link href="https://fonts.googleapis.com/css?family=Fjalla+One|Average+Sans"
+          rel="stylesheet"
+          type="text/css"}/>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>"/>
-    <link id="favicon" rel="icon" type="image/png" href="<%= static_path(@conn, "/images/favicon.png") %>"/>
+    <link id="favicon"
+          rel="icon"
+          type="image/png"
+          href="<%= static_path(@conn, "/images/favicon.png") %>"/>
   </head>
 
   <body>
@@ -22,7 +27,9 @@
       <a href="http://codeloveandboards.com" target="_blank"> bigardone</a>
       <br/>
       Check out the
-      <a href="https://github.com/bigardone/phoenix-and-elm" target="_blank"> source code</a>
+      <a href="https://github.com/bigardone/phoenix-and-elm" target="_blank">
+        original source code
+      </a>
     </footer>
     <script>
       window.socketUrl = '<%= PhoenixAndElmWeb.LayoutView.socket_url %>';

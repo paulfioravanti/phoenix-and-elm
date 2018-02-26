@@ -6,6 +6,7 @@ defmodule PhoenixAndElm.AddressBook do
   import Ecto.Query, warn: false
   alias PhoenixAndElm.Repo
   alias PhoenixAndElm.AddressBook.Contact
+  alias PhoenixAndElm.AddressBook.Query
 
   @doc """
   Returns the list of contacts.
@@ -29,34 +30,9 @@ defmodule PhoenixAndElm.AddressBook do
 
   def search_contacts(""), do: Contact
 
-  def search_contacts(search_query) do
-    search_query = ts_query_format(search_query)
-
-    Contact
-    |> where(
-      fragment(
-        """
-        (to_tsvector(
-          'english',
-          coalesce(first_name, '') || ' ' ||
-          coalesce(last_name, '') || ' ' ||
-          coalesce(location, '') || ' ' ||
-          coalesce(headline, '') || ' ' ||
-          coalesce(email, '') || ' ' ||
-          coalesce(phone_number, '')
-        ) @@ to_tsquery('english', ?))
-        """,
-        ^search_query
-      )
-    )
-  end
-
-  defp ts_query_format(search_query) do
-    search_query
-    |> String.trim()
-    |> String.split(" ")
-    |> Enum.map(&"#{&1}:*")
-    |> Enum.join(" & ")
+  def search_contacts(query) do
+    query
+    |> Query.search_contacts()
   end
 
   @doc """
