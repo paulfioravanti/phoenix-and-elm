@@ -1,8 +1,16 @@
 module Commands exposing (fetchContactList, fetchContact)
 
 import Json.Encode exposing (int, string)
-import Messages exposing (Msg(FetchSuccess, FetchError, FetchContactSuccess, FetchContactError))
-import Phoenix exposing (..)
+import Messages
+    exposing
+        ( Msg
+            ( FetchContactListSuccess
+            , FetchContactListError
+            , FetchContactSuccess
+            , FetchContactError
+            )
+        )
+import Phoenix
 import Phoenix.Push as Push
 
 
@@ -14,22 +22,20 @@ fetchContactList socketUrl page search =
                 [ ( "page", int page )
                 , ( "search", string search )
                 ]
-
-        push =
-            Push.init "contacts" "contacts:fetch"
-                |> Push.withPayload payload
-                |> Push.onOk FetchSuccess
-                |> Push.onError FetchError
     in
-        Phoenix.push socketUrl push
+        "contacts:fetch"
+            |> Push.init "contacts"
+            |> Push.withPayload payload
+            |> Push.onOk FetchContactListSuccess
+            |> Push.onError FetchContactListError
+            |> Phoenix.push socketUrl
 
 
 fetchContact : String -> Int -> Cmd Msg
 fetchContact socketUrl id =
-    let
-        push =
-            Push.init "contacts" ("contact:" ++ toString id)
-                |> Push.onOk FetchContactSuccess
-                |> Push.onError FetchContactError
-    in
-        Phoenix.push socketUrl push
+    "contact:"
+        ++ toString id
+        |> Push.init "contacts"
+        |> Push.onOk FetchContactSuccess
+        |> Push.onError FetchContactError
+        |> Phoenix.push socketUrl

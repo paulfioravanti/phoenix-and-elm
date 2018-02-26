@@ -12,7 +12,7 @@ import Routing exposing (Route(..), parse, toPath)
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        FetchSuccess raw ->
+        FetchContactListSuccess raw ->
             case JD.decodeValue contactListDecoder raw of
                 Ok payload ->
                     { model | contactList = Success payload } ! []
@@ -20,7 +20,7 @@ update msg model =
                 Err err ->
                     { model | contactList = Failure "Error while decoding contact list" } ! []
 
-        FetchError raw ->
+        FetchContactListError raw ->
             { model | contactList = Failure "Error while fetching contact list" } ! []
 
         Paginate pageNumber ->

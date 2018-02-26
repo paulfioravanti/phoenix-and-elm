@@ -1,18 +1,18 @@
 module Messages exposing (..)
 
-import Json.Encode as JE
+import Json.Encode
 import Navigation
 import Routing exposing (Route)
 
 
 type Msg
-    = FetchSuccess JE.Value
-    | FetchError JE.Value
+    = FetchContactListSuccess Json.Encode.Value
+    | FetchContactListError Json.Encode.Value
     | Paginate Int
     | HandleSearchInput String
     | HandleFormSubmit
     | ResetSearch
     | UrlChange Navigation.Location
     | NavigateTo Route
-    | FetchContactSuccess JE.Value
-    | FetchContactError JE.Value
+    | FetchContactSuccess Json.Encode.Value
+    | FetchContactError Json.Encode.Value
