@@ -1,4 +1,14 @@
-module Model exposing (..)
+module Model
+    exposing
+        ( Contact
+        , ContactList
+        , Flags
+        , Model
+        , PageNumber
+        , Query
+        , RemoteData(..)
+        , initialModel
+        )
 
 import Routing exposing (Route)
 

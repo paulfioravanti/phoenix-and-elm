@@ -1,4 +1,4 @@
-module Messages exposing (..)
+module Messages exposing (Msg(..))
 
 import Json.Encode
 import Model exposing (PageNumber, Query)

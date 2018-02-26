@@ -1,13 +1,13 @@
-module Routing exposing (..)
+module Routing exposing (Route(..), parse, toPath)
 
 import Navigation
-import UrlParser exposing (..)
+import UrlParser exposing (Parser, (</>), int, map, oneOf, s)
 
 
 type Route
     = ListContactsRoute
-    | ShowContactRoute Int
     | NotFoundRoute
+    | ShowContactRoute Int
 
 
 toPath : Route -> String
@@ -23,14 +23,6 @@ toPath route =
             "/not-found"
 
 
-matchers : Parser (Route -> a) a
-matchers =
-    oneOf
-        [ map ListContactsRoute <| s ""
-        , map ShowContactRoute <| s "contacts" </> int
-        ]
-
-
 parse : Navigation.Location -> Route
 parse location =
     case UrlParser.parsePath matchers location of
@@ -39,3 +31,11 @@ parse location =
 
         Nothing ->
             NotFoundRoute
+
+
+matchers : Parser (Route -> a) a
+matchers =
+    oneOf
+        [ map ListContactsRoute (s "")
+        , map ShowContactRoute (s "contacts" </> int)
+        ]
