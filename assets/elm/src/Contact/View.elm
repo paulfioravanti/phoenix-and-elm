@@ -20,7 +20,7 @@ contactView model =
                 ]
 
         fullName =
-            model.first_name ++ " " ++ model.last_name
+            model.firstName ++ " " ++ model.lastName
     in
         ( toString model.id
         , div
@@ -58,7 +58,7 @@ contactView model =
                                 [ i
                                     [ class "fa fa-birthday-cake" ]
                                     []
-                                , text model.birth_date
+                                , text model.birthDate
                                 ]
                             ]
                         ]
@@ -75,7 +75,7 @@ contactView model =
                             [ i
                                 [ class "fa fa-phone" ]
                                 []
-                            , text model.phone_number
+                            , text model.phoneNumber
                             ]
                         , li
                             []

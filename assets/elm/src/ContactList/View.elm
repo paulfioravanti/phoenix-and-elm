@@ -81,7 +81,7 @@ headerText model =
         Success page ->
             let
                 totalEntries =
-                    page.total_entries
+                    page.totalEntries
 
                 contactWord =
                     if totalEntries == 1 then
@@ -100,7 +100,7 @@ headerText model =
 
 contactsList : Model -> ContactList -> Html Msg
 contactsList model page =
-    if page.total_entries > 0 then
+    if page.totalEntries > 0 then
         page.entries
             |> List.map contactView
             |> Html.Keyed.node "div" [ class "cards-wrapper" ]
@@ -113,8 +113,8 @@ contactsList model page =
 
 paginationList : ContactList -> Html Msg
 paginationList page =
-    List.range 1 page.total_pages
-        |> List.map (paginationLink page.page_number)
+    List.range 1 page.totalPages
+        |> List.map (paginationLink page.pageNumber)
         |> Html.Keyed.ul [ class "pagination" ]
 
 

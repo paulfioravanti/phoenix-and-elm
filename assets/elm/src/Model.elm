@@ -4,9 +4,9 @@ import Routing exposing (Route)
 
 
 type RemoteData e a
-    = NotRequested
+    = Failure e
+    | NotRequested
     | Requesting
-    | Failure e
     | Success a
 
 
@@ -15,50 +15,49 @@ type alias Flags =
 
 
 type alias Model =
-    { contactList : RemoteData String ContactList
-    , search : String
-    , route : Route
-    , contact : RemoteData String Contact
+    { contact : RemoteData String Contact
+    , contactList : RemoteData String ContactList
     , flags : Flags
+    , route : Route
+    , search : Query
     }
 
 
 type alias ContactList =
     { entries : List Contact
-    , page_number : Int
-    , total_entries : Int
-    , total_pages : Int
+    , pageNumber : Int
+    , totalEntries : Int
+    , totalPages : Int
     }
 
 
 type alias Contact =
     { id : Int
-    , first_name : String
-    , last_name : String
+    , firstName : String
+    , lastName : String
     , gender : Int
-    , birth_date : String
+    , birthDate : String
     , location : String
-    , phone_number : String
+    , phoneNumber : String
     , email : String
     , headline : String
     , picture : String
     }
 
 
-initialContactList : ContactList
-initialContactList =
-    { entries = []
-    , page_number = 1
-    , total_entries = 0
-    , total_pages = 0
-    }
+type alias Query =
+    String
+
+
+type alias PageNumber =
+    String
 
 
 initialModel : Flags -> Route -> Model
 initialModel flags route =
-    { contactList = NotRequested
-    , search = ""
-    , route = route
-    , contact = NotRequested
+    { contact = NotRequested
+    , contactList = NotRequested
     , flags = flags
+    , route = route
+    , search = ""
     }
