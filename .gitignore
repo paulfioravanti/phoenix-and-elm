@@ -29,3 +29,6 @@ npm-debug.log
 
 # Ignore all asdf files
 *tool-versions*
+
+# Ignore JS file compiled by Elm
+/assets/js/elm.js

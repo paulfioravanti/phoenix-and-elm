@@ -37,9 +37,11 @@ exports.config = {
       plugins: ["nib"]
     },
     babel: {
-      // Do not use ES6 compiler in vendor code
-      ignore: [/vendor/]
-      // ignore: [/web\/static\/vendor/]
+      // Do not use ES6 compiler in vendor or Elm-generated code
+      ignore: [
+        /vendor/,
+        "js/elm.js"
+      ]
     },
 
     elmBrunch: {
@@ -48,8 +50,8 @@ exports.config = {
       outputFolder: "../js",
       outputFile: "elm.js",
       makeParameters: [
-        "--warn"
-        // "--debug"
+        "--warn",
+        "--debug"
       ]
     }
   },
