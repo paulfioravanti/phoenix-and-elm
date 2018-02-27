@@ -1,7 +1,7 @@
-defmodule PhoenixAndElmWeb.Resolvers.Contact do
+defmodule PhoenixAndElm.AddressBook.ContactResolver do
   alias PhoenixAndElm.AddressBook
 
-  def list_contacts(_, %{search: query} = params, _) do
+  def search_contacts(_, %{search: query} = params, _) do
     contacts =
       query
       |> AddressBook.search_contacts()
@@ -10,7 +10,7 @@ defmodule PhoenixAndElmWeb.Resolvers.Contact do
     {:ok, contacts}
   end
 
-  def list_contacts(_, _, _) do
+  def search_contacts(_, _, _) do
     {:ok, AddressBook.list_contacts()}
   end
 end
