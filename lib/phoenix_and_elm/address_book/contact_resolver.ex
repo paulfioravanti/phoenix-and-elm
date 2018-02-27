@@ -13,4 +13,8 @@ defmodule PhoenixAndElm.AddressBook.ContactResolver do
   def search_contacts(_, _, _) do
     {:ok, AddressBook.list_contacts()}
   end
+
+  def get_contact(_, %{id: id}, _) do
+    {:ok, AddressBook.get_contact!(id)}
+  end
 end

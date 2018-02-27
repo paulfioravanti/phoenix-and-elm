@@ -13,5 +13,11 @@ defmodule PhoenixAndElmWeb.Schema do
       arg(:search, :string)
       resolve(&ContactResolver.search_contacts/3)
     end
+
+    field :contact, type: :contact do
+      @desc "The contact ID"
+      arg(:id, non_null(:id))
+      resolve(&ContactResolver.get_contact/3)
+    end
   end
 end
