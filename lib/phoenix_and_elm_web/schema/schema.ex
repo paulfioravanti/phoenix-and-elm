@@ -1,6 +1,6 @@
 defmodule PhoenixAndElmWeb.Schema do
   use Absinthe.Schema
-  alias PhoenixAndElm.AddressBook.ContactResolver
+  alias PhoenixAndElmWeb.ContactResolver
   import_types(PhoenixAndElmWeb.Schema.Types)
 
   query do
