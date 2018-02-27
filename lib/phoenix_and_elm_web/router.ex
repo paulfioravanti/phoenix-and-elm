@@ -21,6 +21,16 @@ defmodule PhoenixAndElmWeb.Router do
     end
   end
 
+  scope "/" do
+    pipe_through :api
+
+    forward "/graph", Absinthe.Plug, schema: PhoenixAndElmWeb.Schema
+
+    forward "/graphiql", Absinthe.Plug.GraphiQL,
+      schema: PhoenixAndElmWeb.Schema,
+      interface: :simple
+  end
+
   scope "/", PhoenixAndElmWeb do
     # Use the default browser stack
     pipe_through :browser
