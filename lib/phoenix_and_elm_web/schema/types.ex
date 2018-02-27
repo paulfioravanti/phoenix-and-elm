@@ -9,11 +9,11 @@ defmodule PhoenixAndElmWeb.Schema.Types do
     resolve_type(fn %Contact{}, _ -> :contact end)
   end
 
-  object :pagination do
-    field(:total_entries, :integer, description: "")
-    field(:total_pages, :integer, description: "")
-    field(:page_number, :integer, description: "")
-    field(:page_size, :integer, description: "")
+  object :paginated do
+    field(:total_entries, :integer)
+    field(:total_pages, :integer)
+    field(:page_number, :integer)
+    field(:page_size, :integer)
     field(:entries, list_of(:entries))
   end
 

@@ -5,7 +5,7 @@ defmodule PhoenixAndElmWeb.Schema do
 
   query do
     @desc "The list of contacts in the address book"
-    field :contacts, type: :pagination do
+    field :contacts, type: :paginated do
       arg(:page, :integer)
       arg(:page_size, :integer)
       arg(:search, :string)
