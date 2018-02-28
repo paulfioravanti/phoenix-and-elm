@@ -1,6 +1,7 @@
 module Update exposing (update, urlUpdate)
 
 import Commands
+import Contact.Commands
 import Messages
     exposing
         ( Msg
@@ -27,7 +28,6 @@ import Routing
         , parse
         , toPath
         )
-import Debug
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -43,11 +43,7 @@ update msg model =
             ( { model | contact = Failure "Contact not found" }, Cmd.none )
 
         FetchContactRequest (Err error) ->
-            let
-                _ =
-                    Debug.log "FetchContactRequestFailed" error
-            in
-                ( { model | contact = Failure "Contact not found" }, Cmd.none )
+            ( { model | contact = Failure "Contact not found" }, Cmd.none )
 
         FetchContactList (Ok response) ->
             ( { model | contactList = Success response }, Cmd.none )
@@ -94,8 +90,9 @@ urlUpdate model =
                     ( model, Cmd.none )
 
         ShowContactRoute id ->
-            -- ( { model | contact = Requesting }, Commands.fetchContact id )
-            ( { model | contact = Requesting }, Commands.sendContactQuery id )
+            ( { model | contact = Requesting }
+            , Contact.Commands.fetchContact id
+            )
 
         _ ->
             ( model, Cmd.none )

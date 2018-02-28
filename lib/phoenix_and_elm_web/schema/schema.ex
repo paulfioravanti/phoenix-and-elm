@@ -8,7 +8,6 @@ defmodule PhoenixAndElmWeb.Schema do
     field :contacts, type: :paginated do
       @desc "The page number for pagination"
       arg(:page, :integer)
-      # arg(:page_size, :integer)
       @desc "The query for searching contacts"
       arg(:search, :string)
       resolve(&ContactResolver.search_contacts/3)
@@ -16,7 +15,7 @@ defmodule PhoenixAndElmWeb.Schema do
 
     field :contact, type: :contact do
       @desc "The contact ID"
-      arg(:id, non_null(:integer))
+      arg(:id, non_null(:id))
       resolve(&ContactResolver.get_contact/3)
     end
   end
