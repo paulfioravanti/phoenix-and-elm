@@ -5,6 +5,7 @@ import Messages
     exposing
         ( Msg
             ( FetchContact
+            , FetchContactRequest
             , FetchContactList
             , NavigateTo
             , Paginate
@@ -26,6 +27,7 @@ import Routing
         , parse
         , toPath
         )
+import Debug
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -34,8 +36,18 @@ update msg model =
         FetchContact (Ok response) ->
             ( { model | contact = Success response }, Cmd.none )
 
+        FetchContactRequest (Ok response) ->
+            ( { model | contact = Success response }, Cmd.none )
+
         FetchContact (Err error) ->
             ( { model | contact = Failure "Contact not found" }, Cmd.none )
+
+        FetchContactRequest (Err error) ->
+            let
+                _ =
+                    Debug.log "FetchContactRequestFailed" error
+            in
+                ( { model | contact = Failure "Contact not found" }, Cmd.none )
 
         FetchContactList (Ok response) ->
             ( { model | contactList = Success response }, Cmd.none )
@@ -82,7 +94,8 @@ urlUpdate model =
                     ( model, Cmd.none )
 
         ShowContactRoute id ->
-            ( { model | contact = Requesting }, Commands.fetchContact id )
+            -- ( { model | contact = Requesting }, Commands.fetchContact id )
+            ( { model | contact = Requesting }, Commands.sendContactQuery id )
 
         _ ->
             ( model, Cmd.none )

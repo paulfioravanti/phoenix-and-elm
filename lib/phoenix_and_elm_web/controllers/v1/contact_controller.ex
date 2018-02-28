@@ -13,6 +13,7 @@ defmodule PhoenixAndElmWeb.V1.ContactController do
   end
 
   def show(conn, %{"id" => id}) do
-    json(conn, AddressBook.get_contact!(id))
+    contact = AddressBook.get_contact!(id)
+    json(conn, %{data: %{contact: contact}})
   end
 end

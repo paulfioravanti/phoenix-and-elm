@@ -16,7 +16,7 @@ defmodule PhoenixAndElmWeb.Schema do
 
     field :contact, type: :contact do
       @desc "The contact ID"
-      arg(:id, non_null(:id))
+      arg(:id, non_null(:integer))
       resolve(&ContactResolver.get_contact/3)
     end
   end

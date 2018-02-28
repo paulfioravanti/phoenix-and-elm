@@ -12,6 +12,7 @@ defmodule PhoenixAndElmWeb.ContactResolver do
   end
 
   def get_contact(_, %{id: id}, _) do
-    {:ok, AddressBook.get_contact!(id)}
+    contact = AddressBook.get_contact!(id)
+    {:ok, contact}
   end
 end

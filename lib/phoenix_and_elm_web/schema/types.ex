@@ -27,7 +27,7 @@ defmodule PhoenixAndElmWeb.Schema.Types do
   @desc "An address book contact"
   object :contact do
     @desc "Contact identifier"
-    field(:id, :id)
+    field(:id, :integer)
     @desc "Contact first name"
     field(:first_name, :string)
     @desc "Contact last name"
