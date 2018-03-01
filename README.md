@@ -78,8 +78,8 @@ create-elm-app elm
 
 ## REST version
 
-The [`rest` branch][] of this repository (also the base branch) contains code
-covering the first five sections of the tutorial. In other words, up to and
+The [`rest` branch][] of this repository (which also the base branch) contains
+code covering the first five sections of the tutorial. In other words, up to and
 including [Implementing Elm routing][], so the communication between back
 and front ends is done with REST requests via controllers.
 
