@@ -1,7 +1,7 @@
 module ContactList.Request exposing (fetchContactList)
 
 import Contact.Request
-import GraphQL.Request.Builder
+import GraphQL.Request.Builder as Builder
     exposing
         ( Document
         , NonNull
@@ -9,16 +9,11 @@ import GraphQL.Request.Builder
         , Request
         , Query
         , ValueSpec
-        , assume
-        , extract
         , field
-        , inlineFragment
         , int
         , list
         , object
         , onType
-        , queryDocument
-        , request
         , string
         , with
         )
@@ -72,28 +67,27 @@ fetchContactList page search =
             }
     in
         contactsField
-            |> extract
-            |> queryDocument
-            |> request params
+            |> Builder.extract
+            |> Builder.queryDocument
+            |> Builder.request params
 
 
 contactListSpec : ValueSpec NonNull ObjectType ContactList vars
 contactListSpec =
     let
-        listOfContacts =
-            list
-                (extract
-                    (assume
-                        (inlineFragment
-                            (Just (onType "Contact"))
-                            Contact.Request.contactSpec
-                        )
+        contact =
+            (Builder.extract
+                (Builder.assume
+                    (Builder.inlineFragment
+                        (Just (onType "Contact"))
+                        Contact.Request.contactSpec
                     )
                 )
+            )
     in
         ContactList
             |> object
-            |> with (field "entries" [] listOfContacts)
+            |> with (field "entries" [] (list contact))
             |> with (field "pageNumber" [] int)
             |> with (field "totalEntries" [] int)
             |> with (field "totalPages" [] int)

@@ -1,6 +1,6 @@
 module Contact.Request exposing (fetchContact, contactSpec)
 
-import GraphQL.Request.Builder
+import GraphQL.Request.Builder as Builder
     exposing
         ( Document
         , NonNull
@@ -8,12 +8,9 @@ import GraphQL.Request.Builder
         , Request
         , Query
         , ValueSpec
-        , extract
         , field
         , int
         , object
-        , queryDocument
-        , request
         , string
         , with
         )
@@ -53,9 +50,9 @@ fetchContact id =
             { contactID = id }
     in
         contactField
-            |> extract
-            |> queryDocument
-            |> request params
+            |> Builder.extract
+            |> Builder.queryDocument
+            |> Builder.request params
 
 
 contactSpec : ValueSpec NonNull ObjectType Contact vars

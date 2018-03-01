@@ -1,8 +1,8 @@
 module Contact.Messages exposing (ContactMsg(..))
 
-import GraphQL.Client.Http
+import GraphQL.Client.Http as Http
 import Model exposing (Contact)
 
 
 type ContactMsg
-    = FetchContact (Result GraphQL.Client.Http.Error Contact)
+    = FetchContact (Result Http.Error Contact)

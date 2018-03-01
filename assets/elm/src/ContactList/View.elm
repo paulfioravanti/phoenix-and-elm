@@ -5,7 +5,7 @@ import ContactList.Messages
     exposing
         ( ContactListMsg(Paginate, SearchContacts, ResetSearch)
         )
-import Html exposing (Html, a, div, h3, input, li, text)
+import Html exposing (Html, a, div, form, h3, input, li, text)
 import Html.Attributes
     exposing
         ( class
@@ -16,7 +16,7 @@ import Html.Attributes
         , value
         )
 import Html.Events exposing (onClick, onInput, onSubmit)
-import Html.Keyed
+import Html.Keyed as Keyed
 import Messages
     exposing
         ( Msg(ContactListMsg, UpdateSearchQuery)
@@ -74,7 +74,7 @@ searchSection model =
                 [ text (renderHeader model) ]
             ]
         , div [ class "form-wrapper" ]
-            [ Html.form [ onSubmit (ContactListMsg SearchContacts) ]
+            [ form [ onSubmit (ContactListMsg SearchContacts) ]
                 [ resetButton model "reset"
                 , input
                     [ type_ "search"
@@ -119,7 +119,7 @@ contactsList model page =
         page
             |> .entries
             |> List.map Contact.View.showView
-            |> Html.Keyed.node "div" [ class "cards-wrapper" ]
+            |> Keyed.node "div" [ class "cards-wrapper" ]
     else
         Shared.View.warningMessage
             "fa fa-meh-o fa-stack-2x"
@@ -133,7 +133,7 @@ paginationList page =
         |> .totalPages
         |> List.range 1
         |> List.map (paginationLink page.pageNumber)
-        |> Html.Keyed.ul [ class "pagination" ]
+        |> Keyed.ul [ class "pagination" ]
 
 
 paginationLink : Int -> Int -> ( String, Html Msg )
