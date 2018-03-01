@@ -1,4 +1,4 @@
-module Contact.Request exposing (fetchContact)
+module Contact.Request exposing (fetchContact, contactSpec)
 
 import GraphQL.Request.Builder
     exposing
@@ -8,9 +8,12 @@ import GraphQL.Request.Builder
         , Request
         , Query
         , ValueSpec
+        , extract
         , field
         , int
         , object
+        , queryDocument
+        , request
         , string
         , with
         )
@@ -19,6 +22,21 @@ import GraphQL.Request.Builder.Variable as Var
 import Model exposing (Contact)
 
 
+{-|
+   query($contactID: ID) {
+     contact(id: $contactID) {
+       firstName
+       lastName
+       gender
+       birthDate
+       location
+       phoneNumber
+       email
+       headline
+       picture
+     }
+   }
+-}
 fetchContact : Int -> Request Query Contact
 fetchContact id =
     let
@@ -35,9 +53,9 @@ fetchContact id =
             { contactID = id }
     in
         contactField
-            |> GraphQL.Request.Builder.extract
-            |> GraphQL.Request.Builder.queryDocument
-            |> GraphQL.Request.Builder.request params
+            |> extract
+            |> queryDocument
+            |> request params
 
 
 contactSpec : ValueSpec NonNull ObjectType Contact vars

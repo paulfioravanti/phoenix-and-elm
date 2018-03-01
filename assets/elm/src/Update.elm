@@ -2,12 +2,14 @@ module Update exposing (update, urlUpdate)
 
 import Commands
 import Contact.Commands
+import ContactList.Commands
 import Messages
     exposing
         ( Msg
             ( FetchContact
             , FetchContactRequest
             , FetchContactList
+            , FetchContactListRequest
             , NavigateTo
             , Paginate
             , ResetSearch
@@ -48,7 +50,15 @@ update msg model =
         FetchContactList (Ok response) ->
             ( { model | contactList = Success response }, Cmd.none )
 
+        FetchContactListRequest (Ok response) ->
+            ( { model | contactList = Success response }, Cmd.none )
+
         FetchContactList (Err error) ->
+            ( { model | contactList = Failure "Something went wrong..." }
+            , Cmd.none
+            )
+
+        FetchContactListRequest (Err error) ->
             ( { model | contactList = Failure "Something went wrong..." }
             , Cmd.none
             )
@@ -84,7 +94,8 @@ urlUpdate model =
         ListContactsRoute ->
             case model.contactList of
                 NotRequested ->
-                    ( model, Commands.fetchContactList 1 "" )
+                    -- ( model, Commands.fetchContactList 1 "" )
+                    ( model, ContactList.Commands.fetchContactList 1 "" )
 
                 _ ->
                     ( model, Cmd.none )
