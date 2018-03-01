@@ -3,7 +3,6 @@ module Model
         ( Contact
         , ContactList
         , Model
-        , PageNumber
         , RemoteData(..)
         , initialModel
         )
@@ -28,7 +27,7 @@ type alias Model =
 
 type alias ContactList =
     { entries : List Contact
-    , pageNumber : PageNumber
+    , pageNumber : Int
     , totalEntries : Int
     , totalPages : Int
     }
@@ -46,10 +45,6 @@ type alias Contact =
     , headline : String
     , picture : String
     }
-
-
-type alias PageNumber =
-    Int
 
 
 initialModel : Route -> Model
