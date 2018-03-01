@@ -96,6 +96,41 @@ front ends is done with Websockets requests via channels.
 Code from the `websockets` branch is deployed at
 <https://phoenix-and-elm-websockets.herokuapp.com/>.
 
+## GraphQL version
+
+The [`graphql` branch][] of this repository used the REST version of the app as
+a base, but added [GraphQL][]. So the communication between back and front ends
+is done with GraphQL requests via resolvers.
+
+Code from the `graphql` branch is deployed at
+<https://phoenix-and-elm-graphql.herokuapp.com/>.
+
+## Deployment Notes
+
+[Heroku][] is used to deploy each branch to it's own app. The git remotes look
+like this:
+
+```sh
+➜ [phoenix_and_elm (rest)]$ git remote -v
+heroku-graphql  https://git.heroku.com/phoenix-and-elm-graphql.git (fetch)
+heroku-graphql  https://git.heroku.com/phoenix-and-elm-graphql.git (push)
+heroku-rest     https://git.heroku.com/phoenix-and-elm-rest.git (fetch)
+heroku-rest     https://git.heroku.com/phoenix-and-elm-rest.git (push)
+heroku-websockets https://git.heroku.com/phoenix-and-elm-websockets.git (fetch)
+heroku-websockets https://git.heroku.com/phoenix-and-elm-websockets.git (push)
+origin  git@github.com:paulfioravanti/phoenix-and-elm.git (fetch)
+origin  git@github.com:paulfioravanti/phoenix-and-elm.git (push)
+```
+
+So, deploying each version of the app out to Heroku meant deploying its branch
+out as the master branch:
+
+```sh
+git push heroku-rest rest:master
+git push heroku-websockets websockets:master
+git push heroku-graphql graphql:master
+```
+
 ## Social
 
 [![Contact][twitter-badge]][twitter-url]
@@ -105,6 +140,9 @@ Code from the `websockets` branch is deployed at
 [codeloveandboards]: http://codeloveandboards.com/
 [Contexts]: https://hexdocs.pm/phoenix/contexts.html
 [Create Elm App]: https://github.com/halfzebra/create-elm-app
+[GraphQL]: http://graphql.org/
+[`graphql` branch]: https://github.com/paulfioravanti/phoenix-and-elm/tree/graphql
+[Heroku]: https://www.heroku.com/
 [Implementing Elm routing]: http://codeloveandboards.com/blog/2017/03/07/phoenix-and-elm-a-real-use-case-pt-5/
 [`original` branch]: https://github.com/paulfioravanti/phoenix-and-elm/tree/original
 [original app codebase]: https://github.com/bigardone/phoenix-and-elm
