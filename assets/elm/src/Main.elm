@@ -13,7 +13,7 @@ main =
     Navigation.program
         UrlChange
         { init = init
-        , view = View.render
+        , view = View.view
         , update = Update.update
         , subscriptions = (\_ -> Sub.none)
         }

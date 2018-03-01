@@ -1,4 +1,4 @@
-module Contact.View exposing (render, showView)
+module Contact.View exposing (view, showView)
 
 import Html exposing (Html, div, h3, h4, header, i, img, li, p, text, ul)
 import Html.Attributes exposing (class, classList, id, src)
@@ -14,8 +14,8 @@ import Routing exposing (Route(ShowContactRoute))
 import Shared.View
 
 
-render : Model -> Html Msg
-render model =
+view : Model -> Html Msg
+view model =
     case model.contact of
         NotRequested ->
             text ""

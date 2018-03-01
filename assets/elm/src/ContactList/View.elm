@@ -1,4 +1,4 @@
-module ContactList.View exposing (render)
+module ContactList.View exposing (view)
 
 import Contact.View
 import ContactList.Messages
@@ -30,8 +30,8 @@ import Model
 import Shared.View
 
 
-render : Model -> Html Msg
-render model =
+view : Model -> Html Msg
+view model =
     div [ id "home_index" ]
         (renderContacts model)
 
@@ -116,7 +116,8 @@ headerText totalEntries =
 contactsList : Model -> ContactList -> Html Msg
 contactsList model page =
     if page.totalEntries > 0 then
-        page.entries
+        page
+            |> .entries
             |> List.map Contact.View.showView
             |> Html.Keyed.node "div" [ class "cards-wrapper" ]
     else
@@ -128,7 +129,8 @@ contactsList model page =
 
 paginationList : ContactList -> Html Msg
 paginationList page =
-    page.totalPages
+    page
+        |> .totalPages
         |> List.range 1
         |> List.map (paginationLink page.pageNumber)
         |> Html.Keyed.ul [ class "pagination" ]
