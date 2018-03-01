@@ -1,15 +1,12 @@
 module Update exposing (update, urlUpdate)
 
-import Commands
 import Contact.Commands
 import ContactList.Commands
 import Messages
     exposing
         ( Msg
             ( FetchContact
-            , FetchContactRequest
             , FetchContactList
-            , FetchContactListRequest
             , NavigateTo
             , Paginate
             , ResetSearch
@@ -38,27 +35,13 @@ update msg model =
         FetchContact (Ok response) ->
             ( { model | contact = Success response }, Cmd.none )
 
-        FetchContactRequest (Ok response) ->
-            ( { model | contact = Success response }, Cmd.none )
-
         FetchContact (Err error) ->
-            ( { model | contact = Failure "Contact not found" }, Cmd.none )
-
-        FetchContactRequest (Err error) ->
             ( { model | contact = Failure "Contact not found" }, Cmd.none )
 
         FetchContactList (Ok response) ->
             ( { model | contactList = Success response }, Cmd.none )
 
-        FetchContactListRequest (Ok response) ->
-            ( { model | contactList = Success response }, Cmd.none )
-
         FetchContactList (Err error) ->
-            ( { model | contactList = Failure "Something went wrong..." }
-            , Cmd.none
-            )
-
-        FetchContactListRequest (Err error) ->
             ( { model | contactList = Failure "Something went wrong..." }
             , Cmd.none
             )
@@ -67,14 +50,18 @@ update msg model =
             ( model, Navigation.newUrl (toPath route) )
 
         Paginate pageNumber ->
-            ( model, Commands.fetchContactList pageNumber model.search )
+            ( model
+            , ContactList.Commands.fetchContactList pageNumber model.search
+            )
 
         ResetSearch ->
-            ( { model | search = "" }, Commands.fetchContactList 1 "" )
+            ( { model | search = "" }
+            , ContactList.Commands.fetchContactList 1 ""
+            )
 
         SearchContacts ->
             ( { model | contactList = Requesting }
-            , Commands.fetchContactList 1 model.search
+            , ContactList.Commands.fetchContactList 1 model.search
             )
 
         UpdateSearchQuery value ->
@@ -94,7 +81,6 @@ urlUpdate model =
         ListContactsRoute ->
             case model.contactList of
                 NotRequested ->
-                    -- ( model, Commands.fetchContactList 1 "" )
                     ( model, ContactList.Commands.fetchContactList 1 "" )
 
                 _ ->
