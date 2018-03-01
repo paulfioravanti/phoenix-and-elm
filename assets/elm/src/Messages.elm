@@ -2,7 +2,6 @@ module Messages exposing (Msg(..))
 
 import Contact.Messages exposing (ContactMsg)
 import ContactList.Messages exposing (ContactListMsg)
-import Model exposing (ContactList, Contact)
 import Navigation
 import Routing exposing (Route)
 
