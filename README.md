@@ -6,8 +6,8 @@ This is a [Phoenix 1.3][] port over of the
 [his blog][codeloveandboards] ([original app codebase][]).
 
 See the [`original` branch][] for the as-close-to-the-original-as-I-could-get-it
-version of the codebase. The `master` and `websockets` branches will likely have
-personal tweaks to the codebase in it.
+version of the codebase. Other branch will likely have personal tweaks to the
+codebase in it.
 
 ## Installation
 
@@ -76,20 +76,22 @@ cd assets
 create-elm-app elm
 ```
 
-## HTTP version
+## REST version
 
-The `master` branch of this repository contains code covering the first five
-sections of the tutorial. In other words, up to and including
-[Implementing Elm routing][].
+The [`rest` branch][] of this repository (which also the base branch) contains
+code covering the first five sections of the tutorial. In other words, up to and
+including [Implementing Elm routing][], so the communication between back
+and front ends is done with REST requests via controllers.
 
-Code from the `master` branch is deployed at
-<https://phoenix-and-elm-http.herokuapp.com/>.
+Code from the `rest` branch is deployed at
+<https://phoenix-and-elm-rest.herokuapp.com/>.
 
 ## Websockets version
 
-The `websockets` branch of this repository contains code covering all sections
-of the tutorial. In other words, up to and including
-[Phoenix and Elm WebSockets support][].
+The [`websockets` branch][] of this repository contains code covering all
+sections of the tutorial. In other words, up to and including
+[Phoenix and Elm WebSockets support][], so the communication between back and
+front ends is done with Websockets requests via channels.
 
 Code from the `websockets` branch is deployed at
 <https://phoenix-and-elm-websockets.herokuapp.com/>.
@@ -110,7 +112,9 @@ Code from the `websockets` branch is deployed at
 [Phoenix 1.3]: http://phoenixframework.org/blog/phoenix-1-3-0-released
 [Phoenix and Elm WebSockets support]: http://codeloveandboards.com/blog/2017/03/19/phoenix-and-elm-a-real-use-case-pt-6/
 [Ricardo García Vega]: https://twitter.com/bigardone
+[`rest` branch]: https://github.com/paulfioravanti/phoenix-and-elm/tree/rest
 [stackoverflow-badge]: http://stackoverflow.com/users/flair/567863.png
 [stackoverflow-url]: http://stackoverflow.com/users/567863/paul-fioravanti
 [twitter-badge]: https://img.shields.io/badge/contact-%40paulfioravanti-blue.svg
 [twitter-url]: https://twitter.com/paulfioravanti
+[`websockets` branch]: https://github.com/paulfioravanti/phoenix-and-elm/tree/websockets
