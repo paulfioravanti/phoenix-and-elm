@@ -6,8 +6,8 @@ This is a [Phoenix 1.3][] port over of the
 [his blog][codeloveandboards] ([original app codebase][]).
 
 See the [`original` branch][] for the as-close-to-the-original-as-I-could-get-it
-version of the codebase. The `master` and `websockets` branch will likely have
-personal tweaks to the codebase in it.
+version of the codebase. Other branches will likely have personal tweaks to the
+codebase in it.
 
 ## Installation
 
@@ -76,23 +76,60 @@ cd assets
 create-elm-app elm
 ```
 
-## HTTP version
+## REST version
 
-The `master` branch of this repository contains code covering the first five
-sections of the tutorial. In other words, up to and including
-[Implementing Elm routing][].
+The [`rest` branch][] of this repository (which also the base branch) contains
+code covering the first five sections of the tutorial. In other words, up to and
+including [Implementing Elm routing][], so the communication between back
+and front ends is done with REST requests via controllers.
 
-Code from the `master` branch is deployed at
-<https://phoenix-and-elm-http.herokuapp.com/>.
+Code from the `rest` branch is deployed at
+<https://phoenix-and-elm-rest.herokuapp.com/>.
 
 ## Websockets version
 
-The `websockets` branch of this repository contains code covering all sections
-of the tutorial. In other words, up to and including
-[Phoenix and Elm WebSockets support][].
+The [`websockets` branch][] of this repository contains code covering all
+sections of the tutorial. In other words, up to and including
+[Phoenix and Elm WebSockets support][], so the communication between back and
+front ends is done with Websockets requests via channels.
 
 Code from the `websockets` branch is deployed at
 <https://phoenix-and-elm-websockets.herokuapp.com/>.
+
+## GraphQL version
+
+The [`graphql` branch][] of this repository used the REST version of the app as
+a base, but added [GraphQL][]. So the communication between back and front ends
+is done with GraphQL requests via resolvers.
+
+Code from the `graphql` branch is deployed at
+<https://phoenix-and-elm-graphql.herokuapp.com/>.
+
+## Deployment Notes
+
+[Heroku][] is used to deploy each branch to it's own app. The git remotes look
+like this:
+
+```sh
+➜ [phoenix_and_elm (rest)]$ git remote -v
+heroku-graphql  https://git.heroku.com/phoenix-and-elm-graphql.git (fetch)
+heroku-graphql  https://git.heroku.com/phoenix-and-elm-graphql.git (push)
+heroku-rest     https://git.heroku.com/phoenix-and-elm-rest.git (fetch)
+heroku-rest     https://git.heroku.com/phoenix-and-elm-rest.git (push)
+heroku-websockets https://git.heroku.com/phoenix-and-elm-websockets.git (fetch)
+heroku-websockets https://git.heroku.com/phoenix-and-elm-websockets.git (push)
+origin  git@github.com:paulfioravanti/phoenix-and-elm.git (fetch)
+origin  git@github.com:paulfioravanti/phoenix-and-elm.git (push)
+```
+
+So, deploying each version of the app out to Heroku meant deploying its branch
+out as the master branch:
+
+```sh
+git push heroku-rest rest:master
+git push heroku-websockets websockets:master
+git push heroku-graphql graphql:master
+```
 
 ## Social
 
@@ -103,6 +140,9 @@ Code from the `websockets` branch is deployed at
 [codeloveandboards]: http://codeloveandboards.com/
 [Contexts]: https://hexdocs.pm/phoenix/contexts.html
 [Create Elm App]: https://github.com/halfzebra/create-elm-app
+[GraphQL]: http://graphql.org/
+[`graphql` branch]: https://github.com/paulfioravanti/phoenix-and-elm/tree/graphql
+[Heroku]: https://www.heroku.com/
 [Implementing Elm routing]: http://codeloveandboards.com/blog/2017/03/07/phoenix-and-elm-a-real-use-case-pt-5/
 [`original` branch]: https://github.com/paulfioravanti/phoenix-and-elm/tree/original
 [original app codebase]: https://github.com/bigardone/phoenix-and-elm
@@ -110,7 +150,9 @@ Code from the `websockets` branch is deployed at
 [Phoenix 1.3]: http://phoenixframework.org/blog/phoenix-1-3-0-released
 [Phoenix and Elm WebSockets support]: http://codeloveandboards.com/blog/2017/03/19/phoenix-and-elm-a-real-use-case-pt-6/
 [Ricardo García Vega]: https://twitter.com/bigardone
+[`rest` branch]: https://github.com/paulfioravanti/phoenix-and-elm/tree/rest
 [stackoverflow-badge]: http://stackoverflow.com/users/flair/567863.png
 [stackoverflow-url]: http://stackoverflow.com/users/567863/paul-fioravanti
 [twitter-badge]: https://img.shields.io/badge/contact-%40paulfioravanti-blue.svg
 [twitter-url]: https://twitter.com/paulfioravanti
+[`websockets` branch]: https://github.com/paulfioravanti/phoenix-and-elm/tree/websockets
