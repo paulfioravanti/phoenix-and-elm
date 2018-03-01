@@ -1,12 +1,12 @@
 module Model
     exposing
-        ( Contact
-        , ContactList
+        ( ContactList
         , Model
         , RemoteData(..)
         , initialModel
         )
 
+import Contact.Model exposing (Contact)
 import Routing exposing (Route)
 
 
@@ -30,20 +30,6 @@ type alias ContactList =
     , pageNumber : Int
     , totalEntries : Int
     , totalPages : Int
-    }
-
-
-type alias Contact =
-    { id : Int
-    , firstName : String
-    , lastName : String
-    , gender : Int
-    , birthDate : String
-    , location : String
-    , phoneNumber : String
-    , email : String
-    , headline : String
-    , picture : String
     }
 
 

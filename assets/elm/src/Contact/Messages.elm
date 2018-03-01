@@ -1,7 +1,7 @@
 module Contact.Messages exposing (ContactMsg(..))
 
+import Contact.Model exposing (Contact)
 import GraphQL.Client.Http as Http
-import Model exposing (Contact)
 
 
 type ContactMsg

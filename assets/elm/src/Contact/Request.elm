@@ -1,5 +1,6 @@
 module Contact.Request exposing (fetchContact, contactSpec)
 
+import Contact.Model exposing (Contact)
 import GraphQL.Request.Builder as Builder
     exposing
         ( Document
@@ -16,7 +17,6 @@ import GraphQL.Request.Builder as Builder
         )
 import GraphQL.Request.Builder.Arg as Arg
 import GraphQL.Request.Builder.Variable as Var
-import Model exposing (Contact)
 
 
 {-|

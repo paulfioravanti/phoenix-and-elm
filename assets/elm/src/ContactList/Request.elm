@@ -19,7 +19,7 @@ import GraphQL.Request.Builder as Builder
         )
 import GraphQL.Request.Builder.Arg as Arg
 import GraphQL.Request.Builder.Variable as Var
-import Model exposing (Contact, ContactList)
+import Model exposing (ContactList)
 
 
 {-|
