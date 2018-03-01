@@ -12,7 +12,6 @@ import Messages
             , NavigateTo
             , Paginate
             , ResetSearch
-            , SearchContacts
             , UpdateSearchQuery
             , UrlChange
             )
@@ -51,11 +50,6 @@ update msg model =
         ResetSearch ->
             ( { model | search = "" }
             , ContactList.Commands.fetchContactList 1 ""
-            )
-
-        SearchContacts ->
-            ( { model | contactList = Requesting }
-            , ContactList.Commands.fetchContactList 1 model.search
             )
 
         UpdateSearchQuery value ->

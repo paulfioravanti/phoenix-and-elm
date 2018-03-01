@@ -1,6 +1,7 @@
 module ContactList.View exposing (render)
 
 import Contact.View
+import ContactList.Messages exposing (ContactListMsg(SearchContacts))
 import Html exposing (Html, a, div, h3, input, li, text)
 import Html.Attributes
     exposing
@@ -15,7 +16,7 @@ import Html.Events exposing (onClick, onInput, onSubmit)
 import Html.Keyed
 import Messages
     exposing
-        ( Msg(Paginate, ResetSearch, SearchContacts, UpdateSearchQuery)
+        ( Msg(ContactListMsg, Paginate, ResetSearch, UpdateSearchQuery)
         )
 import Model
     exposing
@@ -70,7 +71,7 @@ searchSection model =
                 [ text (renderHeader model) ]
             ]
         , div [ class "form-wrapper" ]
-            [ Html.form [ onSubmit SearchContacts ]
+            [ Html.form [ onSubmit (ContactListMsg SearchContacts) ]
                 [ resetButton model "reset"
                 , input
                     [ type_ "search"

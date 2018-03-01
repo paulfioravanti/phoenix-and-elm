@@ -14,6 +14,5 @@ type Msg
     | NavigateTo Route
     | Paginate Int
     | ResetSearch
-    | SearchContacts
     | UpdateSearchQuery String
     | UrlChange Navigation.Location
