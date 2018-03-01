@@ -25,8 +25,6 @@ import Navigation
 import Routing
     exposing
         ( Route(ListContactsRoute, NotFoundRoute, ShowContactRoute)
-        , parse
-        , toPath
         )
 
 
@@ -40,7 +38,7 @@ update msg model =
             ContactList.Update.update msg model
 
         NavigateTo route ->
-            ( model, Navigation.newUrl (toPath route) )
+            ( model, Navigation.newUrl (Routing.toPath route) )
 
         Paginate pageNumber ->
             ( model
@@ -58,7 +56,7 @@ update msg model =
         UrlChange location ->
             let
                 currentRoute =
-                    parse location
+                    Routing.parse location
             in
                 urlUpdate { model | route = currentRoute }
 
