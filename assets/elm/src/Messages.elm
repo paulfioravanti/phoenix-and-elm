@@ -1,6 +1,7 @@
 module Messages exposing (Msg(..))
 
 import Contact.Messages exposing (ContactMsg)
+import ContactList.Messages exposing (ContactListMsg)
 import GraphQL.Client.Http
 import Model exposing (ContactList, Contact)
 import Navigation
@@ -9,7 +10,7 @@ import Routing exposing (Route)
 
 type Msg
     = ContactMsg ContactMsg
-    | FetchContactList (Result GraphQL.Client.Http.Error ContactList)
+    | ContactListMsg ContactListMsg
     | NavigateTo Route
     | Paginate Int
     | ResetSearch

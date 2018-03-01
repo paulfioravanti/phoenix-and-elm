@@ -3,11 +3,12 @@ module Update exposing (update, urlUpdate)
 import Contact.Commands
 import Contact.Update
 import ContactList.Commands
+import ContactList.Update
 import Messages
     exposing
         ( Msg
             ( ContactMsg
-            , FetchContactList
+            , ContactListMsg
             , NavigateTo
             , Paginate
             , ResetSearch
@@ -36,13 +37,8 @@ update msg model =
         ContactMsg msg ->
             Contact.Update.update msg model
 
-        FetchContactList (Ok response) ->
-            ( { model | contactList = Success response }, Cmd.none )
-
-        FetchContactList (Err error) ->
-            ( { model | contactList = Failure "Something went wrong..." }
-            , Cmd.none
-            )
+        ContactListMsg msg ->
+            ContactList.Update.update msg model
 
         NavigateTo route ->
             ( model, Navigation.newUrl (toPath route) )

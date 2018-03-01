@@ -1,4 +1,4 @@
-module Contact.Update exposing (..)
+module Contact.Update exposing (update)
 
 import Contact.Messages exposing (ContactMsg(FetchContact))
 import Messages exposing (Msg)
