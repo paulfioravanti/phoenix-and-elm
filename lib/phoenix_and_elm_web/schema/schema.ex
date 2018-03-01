@@ -6,10 +6,10 @@ defmodule PhoenixAndElmWeb.Schema do
   query do
     @desc "The list of contacts in the address book"
     field :contacts, type: :paginated do
-      @desc "The page number for pagination"
-      arg(:page, :integer)
       @desc "The query for searching contacts"
       arg(:search, :string)
+      @desc "The page number for pagination"
+      arg(:page, :integer)
       resolve(&ContactResolver.search_contacts/3)
     end
 
