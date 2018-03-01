@@ -6,4 +6,6 @@ import Model exposing (ContactList)
 
 type ContactListMsg
     = FetchContactList (Result GraphQL.Client.Http.Error ContactList)
+    | Paginate Int
+    | ResetSearch
     | SearchContacts

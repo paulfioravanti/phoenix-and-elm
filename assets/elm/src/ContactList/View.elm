@@ -1,7 +1,10 @@
 module ContactList.View exposing (render)
 
 import Contact.View
-import ContactList.Messages exposing (ContactListMsg(SearchContacts))
+import ContactList.Messages
+    exposing
+        ( ContactListMsg(Paginate, SearchContacts, ResetSearch)
+        )
 import Html exposing (Html, a, div, h3, input, li, text)
 import Html.Attributes
     exposing
@@ -16,7 +19,7 @@ import Html.Events exposing (onClick, onInput, onSubmit)
 import Html.Keyed
 import Messages
     exposing
-        ( Msg(ContactListMsg, Paginate, ResetSearch, UpdateSearchQuery)
+        ( Msg(ContactListMsg, UpdateSearchQuery)
         )
 import Model
     exposing
@@ -139,7 +142,7 @@ paginationLink currentPage page =
     in
         ( toString page
         , li []
-            [ a [ classes, onClick (Paginate page) ] [] ]
+            [ a [ classes, onClick (ContactListMsg (Paginate page)) ] [] ]
         )
 
 
@@ -152,5 +155,5 @@ resetButton model className =
         classes =
             classList [ ( className, True ), ( "hidden", hidden ) ]
     in
-        a [ classes, onClick ResetSearch ]
+        a [ classes, onClick (ContactListMsg ResetSearch) ]
             [ text "Reset search" ]

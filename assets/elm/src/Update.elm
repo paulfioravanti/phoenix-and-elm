@@ -10,17 +10,11 @@ import Messages
             ( ContactMsg
             , ContactListMsg
             , NavigateTo
-            , Paginate
-            , ResetSearch
             , UpdateSearchQuery
             , UrlChange
             )
         )
-import Model
-    exposing
-        ( Model
-        , RemoteData(Failure, NotRequested, Requesting, Success)
-        )
+import Model exposing (Model, RemoteData(NotRequested, Requesting))
 import Navigation
 import Routing
     exposing
@@ -39,16 +33,6 @@ update msg model =
 
         NavigateTo route ->
             ( model, Navigation.newUrl (Routing.toPath route) )
-
-        Paginate pageNumber ->
-            ( model
-            , ContactList.Commands.fetchContactList pageNumber model.search
-            )
-
-        ResetSearch ->
-            ( { model | search = "" }
-            , ContactList.Commands.fetchContactList 1 ""
-            )
 
         UpdateSearchQuery value ->
             ( { model | search = value }, Cmd.none )
