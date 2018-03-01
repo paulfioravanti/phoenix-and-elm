@@ -1,7 +1,7 @@
 module ContactList.Messages exposing (ContactListMsg(..))
 
+import ContactList.Model exposing (ContactList)
 import GraphQL.Client.Http as Http
-import Model exposing (ContactList)
 
 
 type ContactListMsg

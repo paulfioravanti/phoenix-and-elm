@@ -1,6 +1,7 @@
 module ContactList.Request exposing (fetchContactList)
 
 import Contact.Request
+import ContactList.Model exposing (ContactList)
 import GraphQL.Request.Builder as Builder
     exposing
         ( Document
@@ -19,7 +20,6 @@ import GraphQL.Request.Builder as Builder
         )
 import GraphQL.Request.Builder.Arg as Arg
 import GraphQL.Request.Builder.Variable as Var
-import Model exposing (ContactList)
 
 
 {-|
