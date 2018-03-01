@@ -1,11 +1,12 @@
 module Update exposing (update, urlUpdate)
 
 import Contact.Commands
+import Contact.Update
 import ContactList.Commands
 import Messages
     exposing
         ( Msg
-            ( FetchContact
+            ( ContactMsg
             , FetchContactList
             , NavigateTo
             , Paginate
@@ -32,11 +33,8 @@ import Routing
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        FetchContact (Ok response) ->
-            ( { model | contact = Success response }, Cmd.none )
-
-        FetchContact (Err error) ->
-            ( { model | contact = Failure "Contact not found" }, Cmd.none )
+        ContactMsg msg ->
+            Contact.Update.update msg model
 
         FetchContactList (Ok response) ->
             ( { model | contactList = Success response }, Cmd.none )
