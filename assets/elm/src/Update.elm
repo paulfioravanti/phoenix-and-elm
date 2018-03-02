@@ -1,8 +1,8 @@
 module Update exposing (update, urlUpdate)
 
-import Commands
 import Contact.Commands
 import Contact.Update
+import ContactList.Commands
 import ContactList.Update
 import Messages
     exposing
@@ -49,7 +49,7 @@ update msg model =
 
         Paginate pageNumber ->
             ( model
-            , Commands.fetchContactList
+            , ContactList.Commands.fetchContactList
                 model.flags.socketUrl
                 pageNumber
                 model.search
@@ -57,7 +57,7 @@ update msg model =
 
         ResetSearch ->
             ( { model | search = "" }
-            , Commands.fetchContactList
+            , ContactList.Commands.fetchContactList
                 model.flags.socketUrl
                 firstPage
                 blankSearch
@@ -65,7 +65,7 @@ update msg model =
 
         SearchContacts ->
             ( { model | contactList = Requesting }
-            , Commands.fetchContactList
+            , ContactList.Commands.fetchContactList
                 model.flags.socketUrl
                 firstPage
                 model.search
@@ -89,7 +89,7 @@ urlUpdate model =
             case model.contactList of
                 NotRequested ->
                     ( model
-                    , Commands.fetchContactList
+                    , ContactList.Commands.fetchContactList
                         model.flags.socketUrl
                         firstPage
                         blankSearch

@@ -1,4 +1,4 @@
-module Commands exposing (fetchContactList)
+module ContactList.Commands exposing (fetchContactList)
 
 import Json.Encode exposing (int, string)
 import Messages
