@@ -2,7 +2,6 @@ module Model
     exposing
         ( ContactList
         , Model
-        , Query
         , RemoteData(..)
         , initialModel
         )
@@ -22,7 +21,7 @@ type alias Model =
     { contact : RemoteData String Contact
     , contactList : RemoteData String ContactList
     , route : Route
-    , search : Query
+    , search : String
     }
 
 
@@ -32,10 +31,6 @@ type alias ContactList =
     , totalEntries : Int
     , totalPages : Int
     }
-
-
-type alias Query =
-    String
 
 
 initialModel : Route -> Model

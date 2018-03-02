@@ -2,7 +2,7 @@ module Messages exposing (Msg(..))
 
 import Contact.Model exposing (Contact)
 import Http
-import Model exposing (ContactList, Query)
+import Model exposing (ContactList)
 import Navigation
 import Routing exposing (Route)
 
@@ -14,5 +14,5 @@ type Msg
     | Paginate Int
     | ResetSearch
     | SearchContacts
-    | UpdateSearchQuery Query
+    | UpdateSearchQuery String
     | UrlChange Navigation.Location
