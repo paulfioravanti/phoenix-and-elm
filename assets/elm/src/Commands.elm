@@ -1,6 +1,7 @@
 module Commands exposing (fetchContactList, fetchContact)
 
-import Decoders exposing (contactDecoder, contactListDecoder)
+import Contact.Decoder
+import ContactList.Decoder
 import Http
 import Messages exposing (Msg(FetchContact, FetchContactList))
 
@@ -16,7 +17,8 @@ fetchContactList page search =
                 ++ search
 
         request =
-            Http.get apiUrl contactListDecoder
+            ContactList.Decoder.decoder
+                |> Http.get apiUrl
     in
         Http.send FetchContactList request
 
@@ -28,7 +30,8 @@ fetchContact id =
             contactsApiUrl ++ "/" ++ toString id
 
         request =
-            Http.get apiUrl contactDecoder
+            Contact.Decoder.decoder
+                |> Http.get apiUrl
     in
         Http.send FetchContact request
 
