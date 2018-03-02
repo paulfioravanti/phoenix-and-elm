@@ -1,33 +1,24 @@
 module Update exposing (update, urlUpdate)
 
-import Commands
 import Contact.Commands
 import Contact.Update
 import ContactList.Commands
+import ContactList.Update
 import Messages
     exposing
         ( Msg
             ( ContactMsg
-            , FetchContactList
+            , ContactListMsg
             , NavigateTo
-            , Paginate
-            , ResetSearch
-            , SearchContacts
             , UpdateSearchQuery
             , UrlChange
             )
         )
-import Model
-    exposing
-        ( Model
-        , RemoteData(Failure, NotRequested, Requesting, Success)
-        )
+import Model exposing (Model, RemoteData(NotRequested, Requesting))
 import Navigation
 import Routing
     exposing
         ( Route(ListContactsRoute, NotFoundRoute, ShowContactRoute)
-        , parse
-        , toPath
         )
 
 
@@ -37,31 +28,11 @@ update msg model =
         ContactMsg msg ->
             Contact.Update.update msg model
 
-        FetchContactList (Ok response) ->
-            ( { model | contactList = Success response }, Cmd.none )
-
-        FetchContactList (Err error) ->
-            ( { model | contactList = Failure "Something went wrong..." }
-            , Cmd.none
-            )
+        ContactListMsg msg ->
+            ContactList.Update.update msg model
 
         NavigateTo route ->
-            ( model, Navigation.newUrl (toPath route) )
-
-        Paginate pageNumber ->
-            ( model
-            , ContactList.Commands.fetchContactList pageNumber model.search
-            )
-
-        ResetSearch ->
-            ( { model | search = "" }
-            , ContactList.Commands.fetchContactList 1 ""
-            )
-
-        SearchContacts ->
-            ( { model | contactList = Requesting }
-            , ContactList.Commands.fetchContactList 1 model.search
-            )
+            ( model, Navigation.newUrl (Routing.toPath route) )
 
         UpdateSearchQuery value ->
             ( { model | search = value }, Cmd.none )
@@ -69,7 +40,7 @@ update msg model =
         UrlChange location ->
             let
                 currentRoute =
-                    parse location
+                    Routing.parse location
             in
                 urlUpdate { model | route = currentRoute }
 

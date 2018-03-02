@@ -1,4 +1,4 @@
-module View exposing (render)
+module View exposing (view)
 
 import Contact.View
 import ContactList.View
@@ -13,8 +13,8 @@ import Routing
 import Shared.View
 
 
-render : Model -> Html Msg
-render model =
+view : Model -> Html Msg
+view model =
     section []
         [ header [ class "main-header" ]
             [ h1 []
@@ -29,10 +29,10 @@ page : Model -> Html Msg
 page model =
     case model.route of
         ListContactsRoute ->
-            ContactList.View.render model
+            ContactList.View.view model
 
         ShowContactRoute id ->
-            Contact.View.render model
+            Contact.View.view model
 
         NotFoundRoute ->
             Shared.View.warningMessage

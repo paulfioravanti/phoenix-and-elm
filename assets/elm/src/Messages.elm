@@ -1,18 +1,14 @@
 module Messages exposing (Msg(..))
 
 import Contact.Messages exposing (ContactMsg)
-import ContactList.Model exposing (ContactList)
-import Http
+import ContactList.Messages exposing (ContactListMsg)
 import Navigation
 import Routing exposing (Route)
 
 
 type Msg
     = ContactMsg ContactMsg
-    | FetchContactList (Result Http.Error ContactList)
+    | ContactListMsg ContactListMsg
     | NavigateTo Route
-    | Paginate Int
-    | ResetSearch
-    | SearchContacts
     | UpdateSearchQuery String
     | UrlChange Navigation.Location

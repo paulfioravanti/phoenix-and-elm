@@ -1,9 +1,10 @@
 module ContactList.Commands exposing (fetchContactList)
 
+import ContactList.Messages exposing (ContactListMsg(FetchContactList))
 import Commands exposing (contactsApiUrl)
 import ContactList.Decoder
 import Http
-import Messages exposing (Msg(FetchContactList))
+import Messages exposing (Msg(ContactListMsg))
 
 
 fetchContactList : Int -> String -> Cmd Msg
@@ -19,3 +20,4 @@ fetchContactList page search =
         ContactList.Decoder.decoder
             |> Http.get apiUrl
             |> Http.send FetchContactList
+            |> Cmd.map ContactListMsg

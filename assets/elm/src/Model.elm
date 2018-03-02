@@ -1,9 +1,4 @@
-module Model
-    exposing
-        ( Model
-        , RemoteData(..)
-        , initialModel
-        )
+module Model exposing (Model, RemoteData(..), initialModel)
 
 import Contact.Model exposing (Contact)
 import ContactList.Model exposing (ContactList)
