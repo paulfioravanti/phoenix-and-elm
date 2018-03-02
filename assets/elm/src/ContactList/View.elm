@@ -1,6 +1,7 @@
 module ContactList.View exposing (render)
 
 import Contact.View
+import ContactList.Model exposing (ContactList)
 import Html exposing (Html, a, div, h3, input, li, text)
 import Html.Attributes
     exposing
@@ -19,8 +20,7 @@ import Messages
         )
 import Model
     exposing
-        ( ContactList
-        , Model
+        ( Model
         , RemoteData(NotRequested, Requesting, Failure, Success)
         )
 import Shared.View

@@ -1,9 +1,9 @@
 module Decoders exposing (contactDecoder, contactListDecoder)
 
 import Contact.Model exposing (Contact)
+import ContactList.Model exposing (ContactList)
 import Json.Decode as JD exposing (field, int, list, string, succeed)
 import Json.Decode.Extra exposing ((|:))
-import Model exposing (ContactList)
 
 
 contactListDecoder : JD.Decoder ContactList
