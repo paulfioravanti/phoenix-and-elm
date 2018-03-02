@@ -2,6 +2,7 @@ module Update exposing (update, urlUpdate)
 
 import Commands
 import Contact.Commands
+import ContactList.Commands
 import Messages
     exposing
         ( Msg
@@ -50,14 +51,18 @@ update msg model =
             ( model, Navigation.newUrl (toPath route) )
 
         Paginate pageNumber ->
-            ( model, Commands.fetchContactList pageNumber model.search )
+            ( model
+            , ContactList.Commands.fetchContactList pageNumber model.search
+            )
 
         ResetSearch ->
-            ( { model | search = "" }, Commands.fetchContactList 1 "" )
+            ( { model | search = "" }
+            , ContactList.Commands.fetchContactList 1 ""
+            )
 
         SearchContacts ->
             ( { model | contactList = Requesting }
-            , Commands.fetchContactList 1 model.search
+            , ContactList.Commands.fetchContactList 1 model.search
             )
 
         UpdateSearchQuery value ->
@@ -77,7 +82,7 @@ urlUpdate model =
         ListContactsRoute ->
             case model.contactList of
                 NotRequested ->
-                    ( model, Commands.fetchContactList 1 "" )
+                    ( model, ContactList.Commands.fetchContactList 1 "" )
 
                 _ ->
                     ( model, Cmd.none )

@@ -11,10 +11,7 @@ fetchContact id =
     let
         apiUrl =
             contactsApiUrl ++ "/" ++ toString id
-
-        request =
-            Contact.Decoder.decoder
-                |> Http.get apiUrl
     in
-        request
+        Contact.Decoder.decoder
+            |> Http.get apiUrl
             |> Http.send FetchContact
