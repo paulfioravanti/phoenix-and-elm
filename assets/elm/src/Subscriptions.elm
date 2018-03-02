@@ -10,18 +10,14 @@ import Phoenix.Socket as Socket
 subscriptions : Model -> Sub Msg
 subscriptions model =
     let
-        socketUrl =
-            model.flags.socketUrl
-
         socket =
-            Socket.init socketUrl
+            model.flags.socketUrl
+                |> Socket.init
+
+        contactsChannel =
+            "contacts"
+                |> Channel.init
+                |> Channel.withDebug
     in
-        [ contacts ]
+        [ contactsChannel ]
             |> Phoenix.connect socket
-
-
-contacts : Channel Msg
-contacts =
-    "contacts"
-        |> Channel.init
-        |> Channel.withDebug

@@ -1,14 +1,9 @@
-module Commands exposing (fetchContactList, fetchContact)
+module Commands exposing (fetchContactList)
 
 import Json.Encode exposing (int, string)
 import Messages
     exposing
-        ( Msg
-            ( FetchContactListSuccess
-            , FetchContactListError
-            , FetchContactSuccess
-            , FetchContactError
-            )
+        ( Msg(FetchContactListSuccess, FetchContactListError)
         )
 import Model exposing (PageNumber, Query)
 import Phoenix
@@ -30,13 +25,3 @@ fetchContactList socketUrl page search =
             |> Push.onOk FetchContactListSuccess
             |> Push.onError FetchContactListError
             |> Phoenix.push socketUrl
-
-
-fetchContact : String -> Int -> Cmd Msg
-fetchContact socketUrl id =
-    "contact:"
-        ++ toString id
-        |> Push.init "contacts"
-        |> Push.onOk FetchContactSuccess
-        |> Push.onError FetchContactError
-        |> Phoenix.push socketUrl

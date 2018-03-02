@@ -22,11 +22,7 @@ main =
 
 init : Flags -> Navigation.Location -> ( Model, Cmd Msg )
 init flags location =
-    let
-        currentRoute =
-            Routing.parse location
-
-        model =
-            Model.initialModel flags currentRoute
-    in
-        Update.urlUpdate model
+    location
+        |> Routing.parse
+        |> Model.initialModel flags
+        |> Update.urlUpdate
