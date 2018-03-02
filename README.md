@@ -111,7 +111,7 @@ Code from the `graphql` branch is deployed at
 like this:
 
 ```sh
-➜ [phoenix_and_elm (rest)]$ git remote -v
+$ git remote -v
 heroku-graphql  https://git.heroku.com/phoenix-and-elm-graphql.git (fetch)
 heroku-graphql  https://git.heroku.com/phoenix-and-elm-graphql.git (push)
 heroku-rest     https://git.heroku.com/phoenix-and-elm-rest.git (fetch)
