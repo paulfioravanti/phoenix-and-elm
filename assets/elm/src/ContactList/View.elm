@@ -1,6 +1,10 @@
 module ContactList.View exposing (view)
 
 import Contact.View
+import ContactList.Messages
+    exposing
+        ( ContactListMsg(Paginate, ResetSearch, SearchContacts)
+        )
 import ContactList.Model exposing (ContactList)
 import Html exposing (Html, a, div, h3, input, li, text)
 import Html.Attributes
@@ -13,11 +17,8 @@ import Html.Attributes
         , value
         )
 import Html.Events exposing (onClick, onInput, onSubmit)
-import Html.Keyed
-import Messages
-    exposing
-        ( Msg(Paginate, ResetSearch, SearchContacts, UpdateSearchQuery)
-        )
+import Html.Keyed as Keyed
+import Messages exposing (Msg(ContactListMsg, UpdateSearchQuery))
 import Model
     exposing
         ( Model
@@ -70,7 +71,7 @@ searchSection model =
                 [ text (renderHeader model) ]
             ]
         , div [ class "form-wrapper" ]
-            [ Html.form [ onSubmit SearchContacts ]
+            [ Html.form [ onSubmit (ContactListMsg SearchContacts) ]
                 [ resetButton model "reset"
                 , input
                     [ type_ "search"
@@ -112,9 +113,10 @@ headerText totalEntries =
 contactsList : Model -> ContactList -> Html Msg
 contactsList model page =
     if page.totalEntries > 0 then
-        page.entries
+        page
+            |> .entries
             |> List.map Contact.View.showView
-            |> Html.Keyed.node "div" [ class "cards-wrapper" ]
+            |> Keyed.node "div" [ class "cards-wrapper" ]
     else
         Shared.View.warningMessage
             "fa fa-meh-o fa-stack-2x"
@@ -124,10 +126,11 @@ contactsList model page =
 
 paginationList : ContactList -> Html Msg
 paginationList page =
-    page.totalPages
+    page
+        |> .totalPages
         |> List.range 1
         |> List.map (paginationLink page.pageNumber)
-        |> Html.Keyed.ul [ class "pagination" ]
+        |> Keyed.ul [ class "pagination" ]
 
 
 paginationLink : Int -> Int -> ( String, Html Msg )
@@ -138,7 +141,7 @@ paginationLink currentPage page =
     in
         ( toString page
         , li []
-            [ a [ classes, onClick (Paginate page) ] [] ]
+            [ a [ classes, onClick (ContactListMsg (Paginate page)) ] [] ]
         )
 
 
@@ -151,5 +154,5 @@ resetButton model className =
         classes =
             classList [ ( className, True ), ( "hidden", hidden ) ]
     in
-        a [ classes, onClick ResetSearch ]
+        a [ classes, onClick (ContactListMsg ResetSearch) ]
             [ text "Reset search" ]

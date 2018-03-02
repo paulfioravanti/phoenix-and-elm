@@ -1,10 +1,11 @@
 module ContactList.Commands exposing (fetchContactList)
 
 import Json.Encode exposing (int, string)
-import Messages
+import ContactList.Messages
     exposing
-        ( Msg(FetchContactListSuccess, FetchContactListError)
+        ( ContactListMsg(FetchContactListSuccess, FetchContactListError)
         )
+import Messages exposing (Msg(ContactListMsg))
 import Phoenix
 import Phoenix.Push as Push
 
@@ -24,3 +25,4 @@ fetchContactList socketUrl page search =
             |> Push.onOk FetchContactListSuccess
             |> Push.onError FetchContactListError
             |> Phoenix.push socketUrl
+            |> Cmd.map ContactListMsg

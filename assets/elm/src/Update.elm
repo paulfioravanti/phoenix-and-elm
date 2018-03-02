@@ -8,12 +8,8 @@ import Messages
     exposing
         ( Msg
             ( ContactMsg
-            , FetchContactListSuccess
-            , FetchContactListError
+            , ContactListMsg
             , NavigateTo
-            , Paginate
-            , ResetSearch
-            , SearchContacts
             , UpdateSearchQuery
             , UrlChange
             )
@@ -38,38 +34,11 @@ update msg model =
         ContactMsg msg ->
             Contact.Update.update msg model
 
-        FetchContactListSuccess json ->
-            ContactList.Update.success model json
-
-        FetchContactListError json ->
-            ContactList.Update.error model
+        ContactListMsg msg ->
+            ContactList.Update.update msg model
 
         NavigateTo route ->
             ( model, Navigation.newUrl (toPath route) )
-
-        Paginate pageNumber ->
-            ( model
-            , ContactList.Commands.fetchContactList
-                model.flags.socketUrl
-                pageNumber
-                model.search
-            )
-
-        ResetSearch ->
-            ( { model | search = "" }
-            , ContactList.Commands.fetchContactList
-                model.flags.socketUrl
-                firstPage
-                blankSearch
-            )
-
-        SearchContacts ->
-            ( { model | contactList = Requesting }
-            , ContactList.Commands.fetchContactList
-                model.flags.socketUrl
-                firstPage
-                model.search
-            )
 
         UpdateSearchQuery value ->
             ( { model | search = value }, Cmd.none )
@@ -91,8 +60,8 @@ urlUpdate model =
                     ( model
                     , ContactList.Commands.fetchContactList
                         model.flags.socketUrl
-                        firstPage
-                        blankSearch
+                        1
+                        ""
                     )
 
                 _ ->
@@ -105,13 +74,3 @@ urlUpdate model =
 
         _ ->
             ( model, Cmd.none )
-
-
-firstPage : Int
-firstPage =
-    1
-
-
-blankSearch : String
-blankSearch =
-    ""
