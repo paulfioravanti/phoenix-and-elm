@@ -1,6 +1,6 @@
 module ContactList.Commands exposing (fetchContactList)
 
-import Json.Encode exposing (int, string)
+import Json.Encode as Encode exposing (int, string)
 import ContactList.Messages
     exposing
         ( ContactListMsg(FetchContactListSuccess, FetchContactListError)
@@ -14,7 +14,7 @@ fetchContactList : String -> Int -> String -> Cmd Msg
 fetchContactList socketUrl page search =
     let
         payload =
-            Json.Encode.object
+            Encode.object
                 [ ( "page", int page )
                 , ( "search", string search )
                 ]

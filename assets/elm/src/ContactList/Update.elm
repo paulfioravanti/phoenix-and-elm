@@ -1,7 +1,7 @@
 module ContactList.Update exposing (update)
 
 import ContactList.Commands
-import ContactList.Decoder
+import ContactList.Decoder as Decoder
 import ContactList.Messages
     exposing
         ( ContactListMsg
@@ -12,7 +12,7 @@ import ContactList.Messages
             , SearchContacts
             )
         )
-import Json.Decode
+import Json.Decode as Decode
 import Messages exposing (Msg)
 import Model exposing (Model, RemoteData(Failure, Requesting, Success))
 
@@ -51,12 +51,12 @@ update msg model =
             )
 
 
-success : Model -> Json.Decode.Value -> ( Model, Cmd msg )
+success : Model -> Decode.Value -> ( Model, Cmd msg )
 success model json =
     let
         response =
             json
-                |> Json.Decode.decodeValue ContactList.Decoder.decoder
+                |> Decode.decodeValue Decoder.decoder
     in
         case response of
             Ok payload ->

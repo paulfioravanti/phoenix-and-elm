@@ -1,11 +1,11 @@
 module ContactList.Messages exposing (ContactListMsg(..))
 
-import Json.Encode
+import Json.Encode as Encode
 
 
 type ContactListMsg
-    = FetchContactListSuccess Json.Encode.Value
-    | FetchContactListError Json.Encode.Value
+    = FetchContactListSuccess Encode.Value
+    | FetchContactListError Encode.Value
     | Paginate Int
     | ResetSearch
     | SearchContacts

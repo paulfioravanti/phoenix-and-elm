@@ -1,18 +1,18 @@
 module ContactList.Decoder exposing (decoder)
 
-import Contact.Decoder
+import Contact.Decoder as Decoder
 import ContactList.Model exposing (ContactList)
-import Json.Decode exposing (field, int, list)
+import Json.Decode as Decode exposing (field, int, list)
 import Json.Decode.Extra exposing ((|:))
 
 
-decoder : Json.Decode.Decoder ContactList
+decoder : Decode.Decoder ContactList
 decoder =
     let
         contact =
-            Contact.Decoder.decoder
+            Decoder.decoder
     in
-        Json.Decode.succeed
+        Decode.succeed
             ContactList
             |: (field "entries" (list contact))
             |: (field "page_number" int)

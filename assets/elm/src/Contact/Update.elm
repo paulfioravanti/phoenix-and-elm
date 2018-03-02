@@ -1,11 +1,11 @@
 module Contact.Update exposing (update)
 
-import Contact.Decoder
+import Contact.Decoder as Decoder
 import Contact.Messages
     exposing
         ( ContactMsg(FetchContactSuccess, FetchContactError)
         )
-import Json.Decode
+import Json.Decode as Decode
 import Messages exposing (Msg)
 import Model exposing (Model, RemoteData(Failure, Success))
 
@@ -20,12 +20,12 @@ update msg model =
             error model
 
 
-success : Model -> Json.Decode.Value -> ( Model, Cmd msg )
+success : Model -> Decode.Value -> ( Model, Cmd msg )
 success model json =
     let
         response =
             json
-                |> Json.Decode.decodeValue Contact.Decoder.decoder
+                |> Decode.decodeValue Decoder.decoder
     in
         case response of
             Ok payload ->
