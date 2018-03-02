@@ -21,7 +21,6 @@ import Model
     exposing
         ( ContactList
         , Model
-        , PageNumber
         , RemoteData(NotRequested, Requesting, Failure, Success)
         )
 import Shared.View
@@ -131,7 +130,7 @@ paginationList page =
         |> Html.Keyed.ul [ class "pagination" ]
 
 
-paginationLink : PageNumber -> PageNumber -> ( String, Html Msg )
+paginationLink : Int -> Int -> ( String, Html Msg )
 paginationLink currentPage page =
     let
         classes =
