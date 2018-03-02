@@ -1,13 +1,13 @@
 module Messages exposing (Msg(..))
 
+import Contact.Messages exposing (ContactMsg)
 import Json.Encode
 import Navigation
 import Routing exposing (Route)
 
 
 type Msg
-    = FetchContactSuccess Json.Encode.Value
-    | FetchContactError Json.Encode.Value
+    = ContactMsg ContactMsg
     | FetchContactListSuccess Json.Encode.Value
     | FetchContactListError Json.Encode.Value
     | NavigateTo Route

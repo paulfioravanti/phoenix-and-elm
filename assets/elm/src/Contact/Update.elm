@@ -1,8 +1,23 @@
-module Contact.Update exposing (success, error)
+module Contact.Update exposing (update)
 
 import Contact.Decoder
+import Contact.Messages
+    exposing
+        ( ContactMsg(FetchContactSuccess, FetchContactError)
+        )
 import Json.Decode
+import Messages exposing (Msg)
 import Model exposing (Model, RemoteData(Failure, Success))
+
+
+update : ContactMsg -> Model -> ( Model, Cmd Msg )
+update msg model =
+    case msg of
+        FetchContactSuccess json ->
+            success model json
+
+        FetchContactError json ->
+            error model
 
 
 success : Model -> Json.Decode.Value -> ( Model, Cmd msg )

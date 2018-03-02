@@ -7,8 +7,7 @@ import ContactList.Update
 import Messages
     exposing
         ( Msg
-            ( FetchContactSuccess
-            , FetchContactError
+            ( ContactMsg
             , FetchContactListSuccess
             , FetchContactListError
             , NavigateTo
@@ -36,17 +35,14 @@ import Routing
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        ContactMsg msg ->
+            Contact.Update.update msg model
+
         FetchContactListSuccess json ->
             ContactList.Update.success model json
 
         FetchContactListError json ->
             ContactList.Update.error model
-
-        FetchContactSuccess json ->
-            Contact.Update.success model json
-
-        FetchContactError json ->
-            Contact.Update.error model
 
         NavigateTo route ->
             ( model, Navigation.newUrl (toPath route) )

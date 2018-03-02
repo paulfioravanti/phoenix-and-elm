@@ -1,6 +1,10 @@
 module Contact.Commands exposing (fetchContact)
 
-import Messages exposing (Msg(FetchContactSuccess, FetchContactError))
+import Contact.Messages
+    exposing
+        ( ContactMsg(FetchContactSuccess, FetchContactError)
+        )
+import Messages exposing (Msg(ContactMsg))
 import Phoenix
 import Phoenix.Push as Push
 
@@ -13,3 +17,4 @@ fetchContact socketUrl id =
         |> Push.onOk FetchContactSuccess
         |> Push.onError FetchContactError
         |> Phoenix.push socketUrl
+        |> Cmd.map ContactMsg
