@@ -1,6 +1,6 @@
 module ContactList.Update exposing (success, error)
 
-import Decoders exposing (contactListDecoder)
+import ContactList.Decoder
 import Json.Decode
 import Model exposing (Model, RemoteData(Failure, Success))
 
@@ -10,7 +10,7 @@ success model json =
     let
         response =
             json
-                |> Json.Decode.decodeValue contactListDecoder
+                |> Json.Decode.decodeValue ContactList.Decoder.decoder
     in
         case response of
             Ok payload ->
