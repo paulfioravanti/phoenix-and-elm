@@ -1,6 +1,7 @@
 module Update exposing (update, urlUpdate)
 
 import Commands
+import Contact.Commands
 import Messages
     exposing
         ( Msg
@@ -82,7 +83,9 @@ urlUpdate model =
                     ( model, Cmd.none )
 
         ShowContactRoute id ->
-            ( { model | contact = Requesting }, Commands.fetchContact id )
+            ( { model | contact = Requesting }
+            , Contact.Commands.fetchContact id
+            )
 
         _ ->
             ( model, Cmd.none )
