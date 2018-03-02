@@ -21,11 +21,7 @@ main =
 
 init : Navigation.Location -> ( Model, Cmd Msg )
 init location =
-    let
-        currentRoute =
-            Routing.parse location
-
-        model =
-            Model.initialModel currentRoute
-    in
-        Update.urlUpdate model
+    location
+        |> Routing.parse
+        |> Model.initialModel
+        |> Update.urlUpdate
