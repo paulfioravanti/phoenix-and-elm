@@ -6,7 +6,7 @@ import ContactList.Messages
         ( ContactListMsg(Paginate, ResetSearch, SearchContacts)
         )
 import ContactList.Model exposing (ContactList)
-import Html exposing (Html, a, div, h3, input, li, text)
+import Html exposing (Html, a, div, form, h3, input, li, text)
 import Html.Attributes
     exposing
         ( class
@@ -74,7 +74,7 @@ searchSection model =
                 [ text (renderHeader model) ]
             ]
         , div [ class "form-wrapper" ]
-            [ Html.form [ onSubmit (ContactListMsg SearchContacts) ]
+            [ form [ onSubmit (ContactListMsg SearchContacts) ]
                 [ resetButton model "reset"
                 , input
                     [ type_ "search"
