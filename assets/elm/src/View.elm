@@ -29,10 +29,10 @@ page : Model -> Html Msg
 page model =
     case model.route of
         ListContactsRoute ->
-            ContactList.View.render model
+            ContactList.View.view model
 
         ShowContactRoute id ->
-            Contact.View.render model
+            Contact.View.view model
 
         NotFoundRoute ->
             Shared.View.warningMessage

@@ -1,4 +1,4 @@
-module ContactList.View exposing (render)
+module ContactList.View exposing (view)
 
 import Contact.View
 import Html exposing (Html, a, div, h3, input, li, text)
@@ -26,8 +26,8 @@ import Model
 import Shared.View
 
 
-render : Model -> Html Msg
-render model =
+view : Model -> Html Msg
+view model =
     div [ id "home_index" ]
         (renderContacts model)
 
