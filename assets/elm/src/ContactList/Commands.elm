@@ -1,10 +1,10 @@
 module ContactList.Commands exposing (fetchContactList)
 
-import Json.Encode as Encode exposing (int, string)
 import ContactList.Messages
     exposing
         ( ContactListMsg(FetchContactListSuccess, FetchContactListError)
         )
+import Json.Encode as Encode exposing (int, string)
 import Messages exposing (Msg(ContactListMsg))
 import Phoenix
 import Phoenix.Push as Push
