@@ -13,22 +13,14 @@ defmodule PhoenixAndElmWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", PhoenixAndElmWeb do
+  scope "/api" do
     pipe_through :api
-
-    scope "/v1", V1 do
-      resources "/contacts", ContactController, only: [:index, :show]
-    end
-  end
-
-  scope "/" do
-    pipe_through :api
-
-    forward "/graph", Absinthe.Plug, schema: PhoenixAndElmWeb.Schema
 
     forward "/graphiql", Absinthe.Plug.GraphiQL,
       schema: PhoenixAndElmWeb.Schema,
       interface: :simple
+
+    forward "/", Absinthe.Plug, schema: PhoenixAndElmWeb.Schema
   end
 
   scope "/", PhoenixAndElmWeb do

@@ -1,6 +1,6 @@
 module Contact.Commands exposing (fetchContact)
 
-import Commands exposing (graphqlUrl)
+import Commands exposing (apiUrl)
 import Contact.Request as Request
 import Contact.Messages exposing (ContactMsg(FetchContact))
 import GraphQL.Client.Http as Http
@@ -12,6 +12,6 @@ fetchContact : Int -> Cmd Msg
 fetchContact id =
     id
         |> Request.fetchContact
-        |> Http.sendQuery graphqlUrl
+        |> Http.sendQuery apiUrl
         |> Task.attempt FetchContact
         |> Cmd.map ContactMsg

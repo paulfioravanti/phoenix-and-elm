@@ -1,6 +1,6 @@
-module Commands exposing (graphqlUrl)
+module Commands exposing (apiUrl)
 
 
-graphqlUrl : String
-graphqlUrl =
-    "/graph"
+apiUrl : String
+apiUrl =
+    "/api"
