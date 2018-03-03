@@ -14,12 +14,7 @@ defmodule PhoenixAndElmWeb.ContactChannel do
   end
 
   def handle_in("contacts:fetch", params, socket) do
-    contacts =
-      params
-      |> Map.get("search", "")
-      |> AddressBook.search_contacts()
-      |> AddressBook.paginate_contacts_by(params, :first_name)
-
+    contacts = AddressBook.list_contacts(params)
     {:reply, {:ok, contacts}, socket}
   end
 

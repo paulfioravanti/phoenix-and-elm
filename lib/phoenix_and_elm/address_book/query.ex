@@ -1,6 +1,4 @@
 defmodule PhoenixAndElm.AddressBook.Query do
-  @moduledoc false
-
   import Ecto.Query, warn: false
   alias PhoenixAndElm.AddressBook.Contact
 
@@ -18,6 +16,8 @@ defmodule PhoenixAndElm.AddressBook.Query do
     @@ to_tsquery('english', ?)
   )
   """
+
+  def search_contacts(""), do: Contact
 
   def search_contacts(query) do
     query = tsquery_format(query)
