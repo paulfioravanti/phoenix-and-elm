@@ -17,6 +17,8 @@ defmodule PhoenixAndElm.AddressBook.Query do
   )
   """
 
+  def search_contacts(""), do: Contact
+
   def search_contacts(query) do
     query = tsquery_format(query)
 

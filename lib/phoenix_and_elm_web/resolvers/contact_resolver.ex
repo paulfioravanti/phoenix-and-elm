@@ -2,12 +2,7 @@ defmodule PhoenixAndElmWeb.ContactResolver do
   alias PhoenixAndElm.AddressBook
 
   def search_contacts(_, params, _) do
-    contacts =
-      params
-      |> Map.get(:search, "")
-      |> AddressBook.search_contacts()
-      |> AddressBook.paginate_contacts_by(params, :first_name)
-
+    contacts = AddressBook.list_contacts(params)
     {:ok, contacts}
   end
 
