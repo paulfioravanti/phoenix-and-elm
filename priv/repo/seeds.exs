@@ -31,32 +31,37 @@ IO.puts("---- Deleteing existing contacts")
 
 Repo.delete_all(Contact)
 
-IO.puts("---- Creating people")
+IO.puts("---- Creating contacts")
 
 for index <- 1..100 do
-  first_name = Faker.Name.first_name()
-  {gender_id, gender_name} = Enum.random(Contact.genders())
-  gender_name = to_string(gender_name)
+  {gender_id, gender_name} =
+    Contact.genders()
+    |> Enum.random()
 
   picture_gender =
     case gender_name do
-      "male" -> "men"
+      :male -> "men"
       _ -> "women"
     end
 
+  picture =
+    "https://api.randomuser.me/portraits/#{picture_gender}/#{index}.jpg"
+
+  birth_date = """
+  #{Seeds.random_number(1970, 1990)}-\
+  #{Seeds.random_number(1, 12)}-\
+  #{Seeds.random_number(1, 28)}\
+  """
+
   params = %{
-    first_name: first_name,
+    first_name: Faker.Name.first_name(),
     last_name: Faker.Name.last_name(),
     gender: gender_id,
-    birth_date:
-      "#{Seeds.random_number(1970, 1990)}-#{Seeds.random_number(1, 12)}-#{
-        Seeds.random_number(1, 28)
-      }",
+    birth_date: birth_date,
     location: Faker.Address.country(),
     phone_number: Faker.Phone.EnUs.phone(),
     email: Faker.Internet.email(),
-    picture:
-      "https://api.randomuser.me/portraits/#{picture_gender}/#{index}.jpg",
+    picture: picture,
     headline: Faker.Lorem.sentence(3)
   }
 
