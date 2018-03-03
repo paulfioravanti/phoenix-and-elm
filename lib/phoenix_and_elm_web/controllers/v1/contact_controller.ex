@@ -3,16 +3,12 @@ defmodule PhoenixAndElmWeb.V1.ContactController do
   alias PhoenixAndElm.AddressBook
 
   def index(conn, params) do
-    contacts =
-      params
-      |> Map.get("search", "")
-      |> AddressBook.search_contacts()
-      |> AddressBook.paginate_contacts_by(params, :first_name)
-
+    contacts = AddressBook.list_contacts(params)
     json(conn, contacts)
   end
 
   def show(conn, %{"id" => id}) do
-    json(conn, AddressBook.get_contact!(id))
+    contact = AddressBook.get_contact!(id)
+    json(conn, contact)
   end
 end
