@@ -3,7 +3,7 @@ module ContactList.View exposing (view)
 import Contact.View
 import ContactList.Messages
     exposing
-        ( ContactListMsg(Paginate, SearchContacts, ResetSearch)
+        ( ContactListMsg(Paginate, ResetSearch, SearchContacts)
         )
 import ContactList.Model exposing (ContactList)
 import Html exposing (Html, a, div, form, h3, input, li, text)
