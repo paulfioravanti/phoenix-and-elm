@@ -5,8 +5,7 @@ defmodule PhoenixAndElm.AddressBook do
 
   import Ecto.Query, warn: false
   alias PhoenixAndElm.Repo
-  alias PhoenixAndElm.AddressBook.Contact
-  alias PhoenixAndElm.AddressBook.Query
+  alias PhoenixAndElm.AddressBook.{Contact, Query}
 
   def list_contacts(%{"search" => query} = params) do
     query
