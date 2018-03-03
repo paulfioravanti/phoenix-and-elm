@@ -1,13 +1,13 @@
 module Contact.Decoder exposing (decoder)
 
 import Contact.Model exposing (Contact)
-import Json.Decode exposing (field, int, string)
+import Json.Decode as Decode exposing (field, int, string)
 import Json.Decode.Extra exposing ((|:))
 
 
-decoder : Json.Decode.Decoder Contact
+decoder : Decode.Decoder Contact
 decoder =
-    Json.Decode.succeed
+    Decode.succeed
         Contact
         |: (field "id" int)
         |: (field "first_name" string)

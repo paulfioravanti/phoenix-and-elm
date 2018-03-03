@@ -1,8 +1,8 @@
 module ContactList.Commands exposing (fetchContactList)
 
-import ContactList.Messages exposing (ContactListMsg(FetchContactList))
 import Commands exposing (contactsApiUrl)
-import ContactList.Decoder
+import ContactList.Messages exposing (ContactListMsg(FetchContactList))
+import ContactList.Decoder as Decoder
 import Http
 import Messages exposing (Msg(ContactListMsg))
 
@@ -17,7 +17,7 @@ fetchContactList page search =
                 ++ "&search="
                 ++ search
     in
-        ContactList.Decoder.decoder
+        Decoder.decoder
             |> Http.get apiUrl
             |> Http.send FetchContactList
             |> Cmd.map ContactListMsg
