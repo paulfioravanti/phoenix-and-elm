@@ -37,7 +37,7 @@ defmodule PhoenixAndElm.Mixfile do
       {:scrivener_ecto, "~> 1.0"},
       {:mix_test_watch, "~> 0.3", only: :dev, runtime: false},
       {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
-      {:phoenix, "~> 1.3.0"},
+      {:phoenix, "~> 1.3.1"},
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_ecto, "~> 3.2"},
       {:postgrex, ">= 0.0.0"},
