@@ -1,4 +1,6 @@
 defmodule PhoenixAndElm.AddressBook.Query do
+  @moduledoc false
+
   import Ecto.Query, warn: false
   alias PhoenixAndElm.AddressBook.Contact
 

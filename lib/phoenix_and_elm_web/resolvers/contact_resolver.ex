@@ -1,4 +1,6 @@
 defmodule PhoenixAndElmWeb.ContactResolver do
+  @moduledoc false
+
   alias PhoenixAndElm.AddressBook
 
   def search_contacts(_, params, _) do

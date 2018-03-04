@@ -1,4 +1,6 @@
 defmodule PhoenixAndElmWeb.Schema.Types do
+  @moduledoc false
+
   use Absinthe.Schema.Notation
   alias PhoenixAndElm.AddressBook.Contact
   import_types(Absinthe.Type.Custom)

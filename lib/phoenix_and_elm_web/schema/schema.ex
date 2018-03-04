@@ -1,4 +1,6 @@
 defmodule PhoenixAndElmWeb.Schema do
+  @moduledoc false
+
   use Absinthe.Schema
   alias PhoenixAndElmWeb.ContactResolver
   import_types(PhoenixAndElmWeb.Schema.Types)
