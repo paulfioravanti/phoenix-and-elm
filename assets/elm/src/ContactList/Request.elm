@@ -26,18 +26,16 @@ import GraphQL.Request.Builder.Variable as Var
 query($searchQuery: String, $pageNumber: Int) {
   contacts(search: $searchQuery, page: $pageNumber) {
     entries {
-      ... on Contact {
-        id
-        firstName
-        lastName
-        gender
-        birthDate
-        location
-        phoneNumber
-        email
-        headline
-        picture
-      }
+      id
+      firstName
+      lastName
+      gender
+      birthDate
+      location
+      phoneNumber
+      email
+      headline
+      picture
     },
     pageNumber,
     pageSize,
@@ -76,14 +74,7 @@ contactListSpec : ValueSpec NonNull ObjectType ContactList vars
 contactListSpec =
     let
         contact =
-            (Builder.extract
-                (Builder.assume
-                    (Builder.inlineFragment
-                        (Just (onType "Contact"))
-                        Contact.Request.contactSpec
-                    )
-                )
-            )
+            Contact.Request.contactSpec
     in
         ContactList
             |> object

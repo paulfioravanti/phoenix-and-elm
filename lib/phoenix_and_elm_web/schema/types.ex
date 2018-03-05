@@ -2,18 +2,10 @@ defmodule PhoenixAndElmWeb.Schema.Types do
   @moduledoc false
 
   use Absinthe.Schema.Notation
-  alias PhoenixAndElm.AddressBook.Contact
   import_types(Absinthe.Type.Custom)
 
-  @desc "A paginated set of entries from a database"
-  union :entries do
-    @desc "Union object for all paginated things."
-    types([:contact])
-    resolve_type(fn %Contact{}, _ -> :contact end)
-  end
-
-  @desc "A set of paginated items, including pagination metadata"
-  object :paginated do
+  @desc "A set of paginated contacts, including pagination metadata"
+  object :contact_list do
     @desc "The total number of entries"
     field(:total_entries, :integer)
     @desc "The total number of paginated pages"
@@ -23,7 +15,7 @@ defmodule PhoenixAndElmWeb.Schema.Types do
     @desc "The number of paginated items per page"
     field(:page_size, :integer)
     @desc "The list of paginated items"
-    field(:entries, list_of(:entries))
+    field(:entries, list_of(:contact))
   end
 
   @desc "An address book contact"
