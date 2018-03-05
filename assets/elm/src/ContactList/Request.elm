@@ -47,11 +47,11 @@ query($searchQuery: String, $pageNumber: Int) {
 fetchContactList : Int -> String -> Request Query ContactList
 fetchContactList page search =
     let
-        pageNumber =
-            Arg.variable (Var.required "pageNumber" .pageNumber Var.int)
-
         searchQuery =
             Arg.variable (Var.required "searchQuery" .searchQuery Var.string)
+
+        pageNumber =
+            Arg.variable (Var.required "pageNumber" .pageNumber Var.int)
 
         contactsField =
             field
