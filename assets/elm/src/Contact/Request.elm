@@ -20,19 +20,19 @@ import GraphQL.Request.Builder.Variable as Var
 
 
 {-|
-   query($contactID: ID) {
-     contact(id: $contactID) {
-       firstName
-       lastName
-       gender
-       birthDate
-       location
-       phoneNumber
-       email
-       headline
-       picture
-     }
-   }
+query($contactID: ID) {
+  contact(id: $contactID) {
+    firstName
+    lastName
+    gender
+    birthDate
+    location
+    phoneNumber
+    email
+    headline
+    picture
+  }
+}
 -}
 fetchContact : Int -> Request Query Contact
 fetchContact id =
