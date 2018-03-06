@@ -42,16 +42,17 @@ fetchContact id =
             Arg.variable (Var.required "contactID" .contactID Var.int)
 
         contactField =
-            field
-                "contact"
-                [ ( "id", contactID ) ]
-                contactSpec
+            Builder.extract
+                (field
+                    "contact"
+                    [ ( "id", contactID ) ]
+                    contactSpec
+                )
 
         params =
             { contactID = id }
     in
         contactField
-            |> Builder.extract
             |> Builder.queryDocument
             |> Builder.request params
 

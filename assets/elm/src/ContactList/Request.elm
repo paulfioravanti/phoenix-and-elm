@@ -50,10 +50,12 @@ fetchContactList page search =
             Arg.variable (Var.required "pageNumber" .pageNumber Var.int)
 
         contactsField =
-            field
-                "contacts"
-                [ ( "search", searchQuery ), ( "page", pageNumber ) ]
-                contactListSpec
+            Builder.extract
+                (field
+                    "contacts"
+                    [ ( "search", searchQuery ), ( "page", pageNumber ) ]
+                    contactListSpec
+                )
 
         params =
             { pageNumber = page
@@ -61,7 +63,6 @@ fetchContactList page search =
             }
     in
         contactsField
-            |> Builder.extract
             |> Builder.queryDocument
             |> Builder.request params
 
