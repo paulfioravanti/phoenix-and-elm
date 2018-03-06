@@ -4,18 +4,15 @@ import Contact.Request
 import ContactList.Model exposing (ContactList)
 import GraphQL.Request.Builder as Builder
     exposing
-        ( Document
-        , NonNull
+        ( NonNull
         , ObjectType
-        , Request
         , Query
+        , Request
         , ValueSpec
         , field
         , int
         , list
         , object
-        , onType
-        , string
         , with
         )
 import GraphQL.Request.Builder.Arg as Arg

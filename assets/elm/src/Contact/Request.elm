@@ -6,8 +6,8 @@ import GraphQL.Request.Builder as Builder
         ( Document
         , NonNull
         , ObjectType
-        , Request
         , Query
+        , Request
         , ValueSpec
         , field
         , int
