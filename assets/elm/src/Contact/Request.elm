@@ -22,6 +22,7 @@ import GraphQL.Request.Builder.Variable as Var
 {-|
 query($contactID: ID) {
   contact(id: $contactID) {
+    id
     firstName
     lastName
     gender
