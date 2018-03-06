@@ -35,9 +35,8 @@ query($searchQuery: String, $pageNumber: Int) {
       picture
     },
     pageNumber,
-    pageSize,
-    totalPages,
     totalEntries
+    totalPages,
   }
 }
 -}
