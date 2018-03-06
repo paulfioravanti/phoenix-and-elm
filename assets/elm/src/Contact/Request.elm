@@ -51,6 +51,7 @@ fetchContact id =
             { contactID = id }
     in
         contactField
+            |> Builder.extract
             |> Builder.queryDocument
             |> Builder.request params
 

@@ -61,6 +61,7 @@ fetchContactList page search =
             }
     in
         contactsField
+            |> Builder.extract
             |> Builder.queryDocument
             |> Builder.request params
 
