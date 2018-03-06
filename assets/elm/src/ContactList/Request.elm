@@ -58,8 +58,8 @@ fetchContactList page search =
                 )
 
         params =
-            { pageNumber = page
-            , searchQuery = search
+            { searchQuery = search
+            , pageNumber = page
             }
     in
         contactsField
