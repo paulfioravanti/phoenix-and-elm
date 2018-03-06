@@ -12,10 +12,10 @@ fetchContactList page search =
     let
         apiUrl =
             contactsApiUrl
-                ++ "?page="
-                ++ (toString page)
-                ++ "&search="
+                ++ "?search="
                 ++ search
+                ++ "&page="
+                ++ (toString page)
     in
         Decoder.decoder
             |> Http.get apiUrl
