@@ -20,7 +20,7 @@ import GraphQL.Request.Builder.Variable as Var
 
 
 {-|
-query($contactID: ID) {
+query($contactID: ID!) {
   contact(id: $contactID) {
     id
     firstName

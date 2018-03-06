@@ -20,7 +20,7 @@ import GraphQL.Request.Builder.Variable as Var
 
 
 {-|
-query($searchQuery: String, $pageNumber: Int) {
+query($searchQuery: String!, $pageNumber: Int!) {
   contacts(search: $searchQuery, page: $pageNumber) {
     entries {
       id
