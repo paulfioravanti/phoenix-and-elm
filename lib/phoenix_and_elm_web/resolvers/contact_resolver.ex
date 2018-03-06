@@ -3,12 +3,12 @@ defmodule PhoenixAndElmWeb.ContactResolver do
 
   alias PhoenixAndElm.AddressBook
 
-  def search_contacts(_, params, _) do
-    contacts = AddressBook.list_contacts(params)
+  def list_contacts(_parent, args, _resolution) do
+    contacts = AddressBook.list_contacts(args)
     {:ok, contacts}
   end
 
-  def get_contact(_, %{id: id}, _) do
+  def get_contact(_parent, %{id: id}, _resolution) do
     contact = AddressBook.get_contact!(id)
     {:ok, contact}
   end
