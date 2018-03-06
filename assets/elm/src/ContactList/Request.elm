@@ -56,7 +56,7 @@ fetchContactList page search =
         contactsField =
             field
                 "contacts"
-                [ ( "page", pageNumber ), ( "search", searchQuery ) ]
+                [ ( "search", searchQuery ), ( "page", pageNumber ) ]
                 contactListSpec
 
         params =
