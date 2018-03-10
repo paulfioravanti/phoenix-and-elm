@@ -131,6 +131,13 @@ git push heroku-websockets websockets:master
 git push heroku-graphql graphql:master
 ```
 
+## Blog Post
+
+I did a blog post about [Migrating a Phoenix and Elm app from REST to GraphQL][]
+using the application in this repository. It covers the steps needed to get the
+application from the code base in the `rest` branch, to the codebase in the
+`graphql` branch.
+
 ## Social
 
 [![Contact][twitter-badge]][twitter-url]
@@ -144,6 +151,7 @@ git push heroku-graphql graphql:master
 [`graphql` branch]: https://github.com/paulfioravanti/phoenix-and-elm/tree/graphql
 [Heroku]: https://www.heroku.com/
 [Implementing Elm routing]: http://codeloveandboards.com/blog/2017/03/07/phoenix-and-elm-a-real-use-case-pt-5/
+[Migrating a Phoenix and Elm app from REST to GraphQL]: https://paulfioravanti.com/blog/2018/03/06/migrating-a-phoenix-and-elm-app-from-rest-to-graphql/
 [`original` branch]: https://github.com/paulfioravanti/phoenix-and-elm/tree/original
 [original app codebase]: https://github.com/bigardone/phoenix-and-elm
 [Phoenix 1.2/Elm Address Book application]: http://codeloveandboards.com/blog/2017/02/02/phoenix-and-elm-a-real-use-case-pt-1/
