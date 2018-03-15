@@ -49,7 +49,7 @@ update msg model =
             ( model, Navigation.newUrl (Routing.toPath route) )
 
         ResetSearch ->
-            ( { model | search = "" }, fetchContactsBy 1 "" )
+            ( { model | search = "" }, fetchAllContacts )
 
         UpdateSearchQuery value ->
             ( { model | search = value }, Cmd.none )
@@ -68,7 +68,7 @@ urlUpdate model =
         ListContactsRoute ->
             case model.contactList of
                 NotRequested ->
-                    ( model, fetchContactsBy 1 "" )
+                    ( model, fetchAllContacts )
 
                 _ ->
                     ( model, Cmd.none )
@@ -84,8 +84,8 @@ urlUpdate model =
             ( model, Cmd.none )
 
 
-fetchContactsBy : Int -> String -> Cmd Msg
-fetchContactsBy page search =
-    page
-        |> ContactList.Commands.fetchContactList search
+fetchAllContacts : Cmd Msg
+fetchAllContacts =
+    1
+        |> ContactList.Commands.fetchContactList ""
         |> Cmd.map ContactListMsg
