@@ -1,7 +1,7 @@
 module ContactList.View exposing (view)
 
 import Contact.View
-import ContactList.Messages exposing (Msg(SearchContacts))
+import ContactList.Messages exposing (Msg(Paginate, SearchContacts))
 import ContactList.Model exposing (ContactList)
 import Html exposing (Html, a, div, form, h3, input, li, text)
 import Html.Attributes
@@ -17,7 +17,7 @@ import Html.Events exposing (onClick, onInput, onSubmit)
 import Html.Keyed as Keyed
 import Messages
     exposing
-        ( Msg(ContactListMsg, Paginate, ResetSearch, UpdateSearchQuery)
+        ( Msg(ContactListMsg, ResetSearch, UpdateSearchQuery)
         )
 import Model exposing (Model)
 import RemoteData
@@ -56,10 +56,10 @@ renderContacts model =
 
         Success page ->
             [ searchSection model
-            , paginationList page
+            , Html.map ContactListMsg (paginationList page)
             , div []
                 [ contactsList model page ]
-            , paginationList page
+            , Html.map ContactListMsg (paginationList page)
             ]
 
 
@@ -113,8 +113,7 @@ headerText totalEntries =
 contactsList : Model -> ContactList -> Html Messages.Msg
 contactsList model page =
     if page.totalEntries > 0 then
-        page
-            |> .entries
+        page.entries
             |> List.map Contact.View.showView
             |> Keyed.node "div" [ class "cards-wrapper" ]
     else
@@ -124,16 +123,15 @@ contactsList model page =
             (resetButton model "btn")
 
 
-paginationList : ContactList -> Html Messages.Msg
+paginationList : ContactList -> Html ContactList.Messages.Msg
 paginationList page =
-    page
-        |> .totalPages
+    page.totalPages
         |> List.range 1
         |> List.map (paginationLink page.pageNumber)
         |> Keyed.ul [ class "pagination" ]
 
 
-paginationLink : Int -> Int -> ( String, Html Messages.Msg )
+paginationLink : Int -> Int -> ( String, Html ContactList.Messages.Msg )
 paginationLink currentPage page =
     let
         classes =

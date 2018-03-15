@@ -7,3 +7,4 @@ import Http
 type Msg
     = FetchContactList (Result Http.Error ContactList)
     | SearchContacts
+    | Paginate Int

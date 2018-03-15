@@ -10,7 +10,6 @@ import Messages
             ( ContactMsg
             , ContactListMsg
             , NavigateTo
-            , Paginate
             , ResetSearch
             , UpdateSearchQuery
             , UrlChange
@@ -47,17 +46,8 @@ update msg model =
         NavigateTo route ->
             ( model, Navigation.newUrl (Routing.toPath route) )
 
-        Paginate pageNumber ->
-            ( model
-            , ContactList.Commands.fetchContactList pageNumber model.search
-                |> Cmd.map ContactListMsg
-            )
-
         ResetSearch ->
-            ( { model | search = "" }
-            , ContactList.Commands.fetchContactList 1 ""
-                |> Cmd.map ContactListMsg
-            )
+            ( { model | search = "" }, fetchContactsBy "" 1 )
 
         UpdateSearchQuery value ->
             ( { model | search = value }, Cmd.none )
@@ -76,10 +66,7 @@ urlUpdate model =
         ListContactsRoute ->
             case model.contactList of
                 NotRequested ->
-                    ( model
-                    , ContactList.Commands.fetchContactList 1 ""
-                        |> Cmd.map ContactListMsg
-                    )
+                    ( model, fetchContactsBy "" 1 )
 
                 _ ->
                     ( model, Cmd.none )
@@ -93,3 +80,10 @@ urlUpdate model =
 
         _ ->
             ( model, Cmd.none )
+
+
+fetchContactsBy : String -> Int -> Cmd Msg
+fetchContactsBy search page =
+    search
+        |> ContactList.Commands.fetchContactList page
+        |> Cmd.map ContactListMsg

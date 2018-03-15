@@ -1,7 +1,14 @@
 module ContactList.Update exposing (update)
 
 import ContactList.Commands
-import ContactList.Messages exposing (Msg(FetchContactList, SearchContacts))
+import ContactList.Messages
+    exposing
+        ( Msg
+            ( FetchContactList
+            , Paginate
+            , SearchContacts
+            )
+        )
 import ContactList.Model exposing (ContactList)
 import RemoteData exposing (RemoteData(Failure, Requesting, Success))
 
@@ -18,6 +25,12 @@ update msg contactList search =
 
         FetchContactList (Err error) ->
             ( Failure "Something went wrong...", Cmd.none )
+
+        Paginate pageNumber ->
+            ( contactList
+            , search
+                |> ContactList.Commands.fetchContactList pageNumber
+            )
 
         SearchContacts ->
             ( Requesting, ContactList.Commands.fetchContactList 1 search )

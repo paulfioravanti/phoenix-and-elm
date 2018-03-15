@@ -1,8 +1,8 @@
 module ContactList.Commands exposing (fetchContactList)
 
 import Commands exposing (contactsApiUrl)
-import ContactList.Messages exposing (Msg(FetchContactList))
 import ContactList.Decoder as Decoder
+import ContactList.Messages exposing (Msg(FetchContactList))
 import Http
 
 
