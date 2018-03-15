@@ -6,8 +6,8 @@ import ContactList.Messages exposing (Msg(FetchContactList))
 import Http
 
 
-fetchContactList : Int -> String -> Cmd Msg
-fetchContactList page search =
+fetchContactList : String -> Int -> Cmd Msg
+fetchContactList search page =
     let
         apiUrl =
             contactsApiUrl

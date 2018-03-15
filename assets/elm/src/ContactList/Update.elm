@@ -15,10 +15,10 @@ import RemoteData exposing (RemoteData(Failure, Requesting, Success))
 
 update :
     Msg
-    -> RemoteData String ContactList
     -> String
+    -> RemoteData String ContactList
     -> ( RemoteData String ContactList, Cmd Msg )
-update msg contactList search =
+update msg search contactList =
     case msg of
         FetchContactList (Ok response) ->
             ( Success response, Cmd.none )
@@ -28,9 +28,12 @@ update msg contactList search =
 
         Paginate pageNumber ->
             ( contactList
-            , search
-                |> ContactList.Commands.fetchContactList pageNumber
+            , pageNumber
+                |> ContactList.Commands.fetchContactList search
             )
 
         SearchContacts ->
-            ( Requesting, ContactList.Commands.fetchContactList 1 search )
+            ( Requesting
+            , 1
+                |> ContactList.Commands.fetchContactList search
+            )
