@@ -36,7 +36,13 @@ update msg model =
                 ( { model | contact = contact }, Cmd.map ContactMsg cmd )
 
         ContactListMsg msg ->
-            ContactList.Update.update msg model
+            let
+                ( contactList, cmd ) =
+                    ContactList.Update.update msg model.contactList model.search
+            in
+                ( { model | contactList = contactList }
+                , Cmd.map ContactListMsg cmd
+                )
 
         NavigateTo route ->
             ( model, Navigation.newUrl (Routing.toPath route) )
@@ -44,11 +50,13 @@ update msg model =
         Paginate pageNumber ->
             ( model
             , ContactList.Commands.fetchContactList pageNumber model.search
+                |> Cmd.map ContactListMsg
             )
 
         ResetSearch ->
             ( { model | search = "" }
             , ContactList.Commands.fetchContactList 1 ""
+                |> Cmd.map ContactListMsg
             )
 
         UpdateSearchQuery value ->
@@ -68,7 +76,10 @@ urlUpdate model =
         ListContactsRoute ->
             case model.contactList of
                 NotRequested ->
-                    ( model, ContactList.Commands.fetchContactList 1 "" )
+                    ( model
+                    , ContactList.Commands.fetchContactList 1 ""
+                        |> Cmd.map ContactListMsg
+                    )
 
                 _ ->
                     ( model, Cmd.none )

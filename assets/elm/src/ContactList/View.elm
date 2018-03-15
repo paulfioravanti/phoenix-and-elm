@@ -1,7 +1,7 @@
 module ContactList.View exposing (view)
 
 import Contact.View
-import ContactList.Messages exposing (ContactListMsg(SearchContacts))
+import ContactList.Messages exposing (Msg(SearchContacts))
 import ContactList.Model exposing (ContactList)
 import Html exposing (Html, a, div, form, h3, input, li, text)
 import Html.Attributes
@@ -27,13 +27,13 @@ import RemoteData
 import Shared.View
 
 
-view : Model -> Html Msg
+view : Model -> Html Messages.Msg
 view model =
     div [ id "home_index" ]
         (renderContacts model)
 
 
-renderContacts : Model -> List (Html Msg)
+renderContacts : Model -> List (Html Messages.Msg)
 renderContacts model =
     case model.contactList of
         NotRequested ->
@@ -63,7 +63,7 @@ renderContacts model =
             ]
 
 
-searchSection : Model -> Html Msg
+searchSection : Model -> Html Messages.Msg
 searchSection model =
     div [ class "filter-wrapper" ]
         [ div [ class "overview-wrapper" ]
@@ -110,7 +110,7 @@ headerText totalEntries =
             (toString totalEntries) ++ " " ++ contactWord ++ " found"
 
 
-contactsList : Model -> ContactList -> Html Msg
+contactsList : Model -> ContactList -> Html Messages.Msg
 contactsList model page =
     if page.totalEntries > 0 then
         page
@@ -124,7 +124,7 @@ contactsList model page =
             (resetButton model "btn")
 
 
-paginationList : ContactList -> Html Msg
+paginationList : ContactList -> Html Messages.Msg
 paginationList page =
     page
         |> .totalPages
@@ -133,7 +133,7 @@ paginationList page =
         |> Keyed.ul [ class "pagination" ]
 
 
-paginationLink : Int -> Int -> ( String, Html Msg )
+paginationLink : Int -> Int -> ( String, Html Messages.Msg )
 paginationLink currentPage page =
     let
         classes =
@@ -145,7 +145,7 @@ paginationLink currentPage page =
         )
 
 
-resetButton : Model -> String -> Html Msg
+resetButton : Model -> String -> Html Messages.Msg
 resetButton model className =
     let
         hidden =
