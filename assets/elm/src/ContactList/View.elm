@@ -22,10 +22,10 @@ import Messages
     exposing
         ( Msg(ContactListMsg, UpdateSearchQuery)
         )
-import Model
+import Model exposing (Model)
+import RemoteData
     exposing
-        ( Model
-        , RemoteData(NotRequested, Requesting, Failure, Success)
+        ( RemoteData(NotRequested, Requesting, Failure, Success)
         )
 import Shared.View
 

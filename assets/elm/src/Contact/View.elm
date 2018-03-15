@@ -5,10 +5,10 @@ import Html exposing (Html, div, h3, h4, header, i, img, li, p, text, ul)
 import Html.Attributes exposing (class, classList, id, src)
 import Html.Events exposing (onClick)
 import Messages exposing (Msg(NavigateTo))
-import Model
+import Model exposing (Model)
+import RemoteData
     exposing
-        ( Model
-        , RemoteData(NotRequested, Requesting, Failure, Success)
+        ( RemoteData(NotRequested, Requesting, Failure, Success)
         )
 import Routing exposing (Route(ShowContactRoute))
 import Shared.View

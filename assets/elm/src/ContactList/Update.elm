@@ -11,7 +11,8 @@ import ContactList.Messages
             )
         )
 import Messages exposing (Msg)
-import Model exposing (Model, RemoteData(Failure, Requesting, Success))
+import Model exposing (Model)
+import RemoteData exposing (RemoteData(Failure, Requesting, Success))
 
 
 update : ContactListMsg -> Model -> ( Model, Cmd Msg )

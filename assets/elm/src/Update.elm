@@ -14,8 +14,9 @@ import Messages
             , UrlChange
             )
         )
-import Model exposing (Model, RemoteData(NotRequested, Requesting))
+import Model exposing (Model)
 import Navigation
+import RemoteData exposing (RemoteData(NotRequested, Requesting))
 import Routing
     exposing
         ( Route(ListContactsRoute, NotFoundRoute, ShowContactRoute)
@@ -26,7 +27,11 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         ContactMsg msg ->
-            Contact.Update.update msg model
+            let
+                ( contact, cmd ) =
+                    Contact.Update.update msg model.contact
+            in
+                ( { model | contact = contact }, Cmd.map ContactMsg cmd )
 
         ContactListMsg msg ->
             ContactList.Update.update msg model
@@ -58,7 +63,9 @@ urlUpdate model =
 
         ShowContactRoute id ->
             ( { model | contact = Requesting }
-            , Contact.Commands.fetchContact id
+            , id
+                |> Contact.Commands.fetchContact
+                |> Cmd.map ContactMsg
             )
 
         _ ->

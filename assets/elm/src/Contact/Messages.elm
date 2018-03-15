@@ -1,8 +1,8 @@
-module Contact.Messages exposing (ContactMsg(..))
+module Contact.Messages exposing (Msg(..))
 
 import Contact.Model exposing (Contact)
 import Http
 
 
-type ContactMsg
+type Msg
     = FetchContact (Result Http.Error Contact)

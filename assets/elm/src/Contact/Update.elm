@@ -1,15 +1,18 @@
 module Contact.Update exposing (update)
 
-import Contact.Messages exposing (ContactMsg(FetchContact))
-import Messages exposing (Msg)
-import Model exposing (Model, RemoteData(Failure, Success))
+import Contact.Messages exposing (Msg(FetchContact))
+import Contact.Model exposing (Contact)
+import RemoteData exposing (RemoteData, RemoteData(Failure, Success))
 
 
-update : ContactMsg -> Model -> ( Model, Cmd Msg )
+update :
+    Msg
+    -> RemoteData String Contact
+    -> ( RemoteData String Contact, Cmd Msg )
 update msg model =
     case msg of
         FetchContact (Ok response) ->
-            ( { model | contact = Success response }, Cmd.none )
+            ( Success response, Cmd.none )
 
         FetchContact (Err error) ->
-            ( { model | contact = Failure "Contact not found" }, Cmd.none )
+            ( Failure "Contact not found", Cmd.none )

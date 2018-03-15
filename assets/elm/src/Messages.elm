@@ -1,13 +1,13 @@
 module Messages exposing (Msg(..))
 
-import Contact.Messages exposing (ContactMsg)
+import Contact.Messages
 import ContactList.Messages exposing (ContactListMsg)
 import Navigation
 import Routing exposing (Route)
 
 
 type Msg
-    = ContactMsg ContactMsg
+    = ContactMsg Contact.Messages.Msg
     | ContactListMsg ContactListMsg
     | NavigateTo Route
     | UpdateSearchQuery String

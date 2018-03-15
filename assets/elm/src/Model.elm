@@ -1,15 +1,12 @@
-module Model exposing (Model, RemoteData(..), initialModel)
+-- module Model exposing (Model, RemoteData(..), initialModel)
+
+
+module Model exposing (Model, initialModel)
 
 import Contact.Model exposing (Contact)
 import ContactList.Model exposing (ContactList)
+import RemoteData exposing (RemoteData(NotRequested))
 import Routing exposing (Route)
-
-
-type RemoteData e a
-    = Failure e
-    | NotRequested
-    | Requesting
-    | Success a
 
 
 type alias Model =
