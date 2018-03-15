@@ -6,6 +6,4 @@ import Http
 
 type ContactListMsg
     = FetchContactList (Result Http.Error ContactList)
-    | Paginate Int
-    | ResetSearch
     | SearchContacts

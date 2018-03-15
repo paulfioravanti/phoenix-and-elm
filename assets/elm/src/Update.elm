@@ -10,6 +10,8 @@ import Messages
             ( ContactMsg
             , ContactListMsg
             , NavigateTo
+            , Paginate
+            , ResetSearch
             , UpdateSearchQuery
             , UrlChange
             )
@@ -38,6 +40,16 @@ update msg model =
 
         NavigateTo route ->
             ( model, Navigation.newUrl (Routing.toPath route) )
+
+        Paginate pageNumber ->
+            ( model
+            , ContactList.Commands.fetchContactList pageNumber model.search
+            )
+
+        ResetSearch ->
+            ( { model | search = "" }
+            , ContactList.Commands.fetchContactList 1 ""
+            )
 
         UpdateSearchQuery value ->
             ( { model | search = value }, Cmd.none )

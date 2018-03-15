@@ -3,12 +3,7 @@ module ContactList.Update exposing (update)
 import ContactList.Commands
 import ContactList.Messages
     exposing
-        ( ContactListMsg
-            ( FetchContactList
-            , Paginate
-            , ResetSearch
-            , SearchContacts
-            )
+        ( ContactListMsg(FetchContactList, SearchContacts)
         )
 import Messages exposing (Msg)
 import Model exposing (Model)
@@ -24,16 +19,6 @@ update msg model =
         FetchContactList (Err error) ->
             ( { model | contactList = Failure "Something went wrong..." }
             , Cmd.none
-            )
-
-        Paginate pageNumber ->
-            ( model
-            , ContactList.Commands.fetchContactList pageNumber model.search
-            )
-
-        ResetSearch ->
-            ( { model | search = "" }
-            , ContactList.Commands.fetchContactList 1 ""
             )
 
         SearchContacts ->
