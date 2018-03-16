@@ -1,16 +1,16 @@
-module Contact.View exposing (view, showView)
+module Contact.View exposing (view, backToHomeLink, showView)
 
 import Contact.Model exposing (Contact)
-import Html exposing (Html, div, h3, h4, header, i, img, li, p, text, ul)
+import Html exposing (Html, a, div, h3, h4, header, i, img, li, p, text, ul)
 import Html.Attributes exposing (class, classList, id, src)
 import Html.Events exposing (onClick)
-import Messages exposing (Msg(NavigateTo))
 import Model exposing (Model)
 import RemoteData
     exposing
         ( RemoteData(NotRequested, Requesting, Failure, Success)
         )
-import Routing exposing (Route(ShowContactRoute))
+import Routing exposing (Route(ListContactsRoute, ShowContactRoute))
+import Routing.Messages exposing (Msg(NavigateTo))
 import Shared.View
 
 
@@ -30,7 +30,7 @@ view model =
             Shared.View.warningMessage
                 "fa fa-meh-o fa-stack-2x"
                 error
-                Shared.View.backToHomeLink
+                backToHomeLink
 
         Success contact ->
             showDetailView contact
@@ -74,7 +74,7 @@ showDetailView contact =
                 [ h3 []
                     [ text "Person detail" ]
                 ]
-            , Shared.View.backToHomeLink
+            , backToHomeLink
             , div [ classes ]
                 [ content ]
             ]
@@ -124,3 +124,9 @@ cardBody contact =
                 ]
             ]
         ]
+
+
+backToHomeLink : Html Msg
+backToHomeLink =
+    a [ onClick (NavigateTo ListContactsRoute) ]
+        [ text "←  Back to contact list" ]

@@ -1,6 +1,3 @@
--- module Model exposing (Model, RemoteData(..), initialModel)
-
-
 module Model exposing (Model, initialModel)
 
 import Contact.Model exposing (Contact)

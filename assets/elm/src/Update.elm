@@ -9,19 +9,19 @@ import Messages
         ( Msg
             ( ContactMsg
             , ContactListMsg
-            , NavigateTo
             , ResetSearch
+            , RoutingMsg
             , UpdateSearchQuery
             , UrlChange
             )
         )
 import Model exposing (Model)
-import Navigation
 import RemoteData exposing (RemoteData(NotRequested, Requesting))
 import Routing
     exposing
         ( Route(ListContactsRoute, NotFoundRoute, ShowContactRoute)
         )
+import Routing.Update
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -44,8 +44,8 @@ update msg model =
                 , Cmd.map ContactListMsg cmd
                 )
 
-        NavigateTo route ->
-            ( model, Navigation.newUrl (Routing.toPath route) )
+        RoutingMsg msg ->
+            ( model, Routing.Update.update msg )
 
         ResetSearch ->
             ( { model | search = "" }, fetchAllContacts )

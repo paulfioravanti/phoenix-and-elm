@@ -17,7 +17,7 @@ import Html.Events exposing (onClick, onInput, onSubmit)
 import Html.Keyed as Keyed
 import Messages
     exposing
-        ( Msg(ContactListMsg, ResetSearch, UpdateSearchQuery)
+        ( Msg(ContactListMsg, ResetSearch, RoutingMsg, UpdateSearchQuery)
         )
 import Model exposing (Model)
 import RemoteData
@@ -116,6 +116,7 @@ contactsList model page =
         page.entries
             |> List.map Contact.View.showView
             |> Keyed.node "div" [ class "cards-wrapper" ]
+            |> Html.map RoutingMsg
     else
         Shared.View.warningMessage
             "fa fa-meh-o fa-stack-2x"

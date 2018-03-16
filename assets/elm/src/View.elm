@@ -4,7 +4,7 @@ import Contact.View
 import ContactList.View
 import Html exposing (Html, div, h1, header, section, text)
 import Html.Attributes exposing (class)
-import Messages exposing (Msg)
+import Messages exposing (Msg(RoutingMsg))
 import Model exposing (Model)
 import Routing
     exposing
@@ -32,10 +32,12 @@ page model =
             ContactList.View.view model
 
         ShowContactRoute id ->
-            Contact.View.view model
+            model
+                |> Contact.View.view
+                |> Html.map RoutingMsg
 
         NotFoundRoute ->
             Shared.View.warningMessage
                 "fa fa-meh-o fa-stack-2x"
                 "Page not found"
-                Shared.View.backToHomeLink
+                (Html.map RoutingMsg Contact.View.backToHomeLink)
