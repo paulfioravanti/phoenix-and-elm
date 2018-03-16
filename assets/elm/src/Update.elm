@@ -30,8 +30,7 @@ update msg model =
         ContactMsg msg ->
             let
                 ( contact, cmd ) =
-                    model.contact
-                        |> Contact.Update.update msg
+                    Contact.Update.update msg
             in
                 ( { model | contact = contact }, Cmd.map ContactMsg cmd )
 

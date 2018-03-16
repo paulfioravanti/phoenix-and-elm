@@ -5,11 +5,8 @@ import Contact.Model exposing (Contact)
 import RemoteData exposing (RemoteData, RemoteData(Failure, Success))
 
 
-update :
-    Msg
-    -> RemoteData String Contact
-    -> ( RemoteData String Contact, Cmd Msg )
-update msg model =
+update : Msg -> ( RemoteData String Contact, Cmd Msg )
+update msg =
     case msg of
         FetchContact (Ok response) ->
             ( Success response, Cmd.none )
