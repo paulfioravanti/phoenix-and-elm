@@ -76,7 +76,9 @@ cd assets
 create-elm-app elm
 ```
 
-## REST version
+## Code Branches
+
+### REST version
 
 The [`rest` branch][] of this repository (which also the base branch) contains
 code covering the first five sections of the tutorial. In other words, up to and
@@ -86,7 +88,7 @@ and front ends is done with REST requests via controllers.
 Code from the `rest` branch is deployed at
 <https://phoenix-and-elm-rest.herokuapp.com/>.
 
-## Websockets version
+### Websockets version
 
 The [`websockets` branch][] of this repository contains code covering all
 sections of the tutorial. In other words, up to and including
@@ -96,7 +98,7 @@ front ends is done with Websockets requests via channels.
 Code from the `websockets` branch is deployed at
 <https://phoenix-and-elm-websockets.herokuapp.com/>.
 
-## GraphQL version
+### GraphQL version
 
 The [`graphql` branch][] of this repository used the REST version of the app as
 a base, but added [GraphQL][]. So the communication between back and front ends
@@ -104,6 +106,15 @@ is done with GraphQL requests via resolvers.
 
 Code from the `graphql` branch is deployed at
 <https://phoenix-and-elm-graphql.herokuapp.com/>.
+
+### REST version (refactored)
+
+The [`rest-refactor` branch][] of this repository contains the same contents
+as the `rest` branch, but was refactored to reduce coupling between parent and
+child modules based on information gleaned about the project using
+[elm-module-graph][].
+
+Code from the `rest-refactor` branch is not currently deployed.
 
 ## Deployment Notes
 
@@ -131,12 +142,19 @@ git push heroku-websockets websockets:master
 git push heroku-graphql graphql:master
 ```
 
-## Blog Post
+## Blog Posts
 
-I did a blog post about [Migrating a Phoenix and Elm app from REST to GraphQL][]
-using the application in this repository. It covers the steps needed to get the
-application from the code base in the `rest` branch, to the codebase in the
-`graphql` branch.
+I wrote a couple of blog posts that use this application as an illustrative
+example:
+
+- [Migrating a Phoenix and Elm app from REST to GraphQL][]: This blog post
+  covers migrating the application API from using REST, to using GraphQL, and
+  shows the steps needed to get the application from the code base in the `rest`
+  branch, to the codebase in the `graphql` branch.
+- [Graph-driven Refactoring in Elm][]: This blog post covers decoupling parent
+  and child modules and refactoring Elm applications, and shows the steps needed
+  to get the application from the code base in the `rest` branch, to the
+  codebase in the `rest-refactor` branch.
 
 ## Social
 
@@ -147,10 +165,13 @@ application from the code base in the `rest` branch, to the codebase in the
 [codeloveandboards]: http://codeloveandboards.com/
 [Contexts]: https://hexdocs.pm/phoenix/contexts.html
 [Create Elm App]: https://github.com/halfzebra/create-elm-app
+[elm-module-graph]: https://github.com/justinmimbs/elm-module-graph
+[Graph-driven Refactoring in Elm]: https://paulfioravanti.com/blog/2018/03/17/graph-driven-refactoring-in-elm/
 [GraphQL]: http://graphql.org/
 [`graphql` branch]: https://github.com/paulfioravanti/phoenix-and-elm/tree/graphql
 [Heroku]: https://www.heroku.com/
 [Implementing Elm routing]: http://codeloveandboards.com/blog/2017/03/07/phoenix-and-elm-a-real-use-case-pt-5/
+[Migrating a Phoenix and Elm app from REST to GraphQL]: https://paulfioravanti.com/blog/2018/03/06/migrating-a-phoenix-and-elm-app-from-rest-to-graphql/
 [`original` branch]: https://github.com/paulfioravanti/phoenix-and-elm/tree/original
 [original app codebase]: https://github.com/bigardone/phoenix-and-elm
 [Phoenix 1.2/Elm Address Book application]: http://codeloveandboards.com/blog/2017/02/02/phoenix-and-elm-a-real-use-case-pt-1/
@@ -158,6 +179,7 @@ application from the code base in the `rest` branch, to the codebase in the
 [Phoenix and Elm WebSockets support]: http://codeloveandboards.com/blog/2017/03/19/phoenix-and-elm-a-real-use-case-pt-6/
 [Ricardo García Vega]: https://twitter.com/bigardone
 [`rest` branch]: https://github.com/paulfioravanti/phoenix-and-elm/tree/rest
+[`rest-refactor` branch]: https://github.com/paulfioravanti/phoenix-and-elm/tree/rest-refactor
 [stackoverflow-badge]: http://stackoverflow.com/users/flair/567863.png
 [stackoverflow-url]: http://stackoverflow.com/users/567863/paul-fioravanti
 [twitter-badge]: https://img.shields.io/badge/contact-%40paulfioravanti-blue.svg
