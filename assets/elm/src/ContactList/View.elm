@@ -110,7 +110,7 @@ headerText totalEntries =
         if totalEntries == 0 then
             ""
         else
-            (toString totalEntries) ++ " " ++ contactWord ++ " found"
+            toString totalEntries ++ " " ++ contactWord ++ " found"
 
 
 contactsList : Model -> ContactList -> Html Msg

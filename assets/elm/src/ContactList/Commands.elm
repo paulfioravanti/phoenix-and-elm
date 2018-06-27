@@ -15,7 +15,7 @@ fetchContactList page search =
                 ++ "?search="
                 ++ search
                 ++ "&page="
-                ++ (toString page)
+                ++ toString page
     in
         Decoder.decoder
             |> Http.get apiUrl

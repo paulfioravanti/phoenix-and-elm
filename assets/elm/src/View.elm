@@ -31,7 +31,8 @@ page model =
         ListContactsRoute ->
             ContactList.View.view model
 
-        ShowContactRoute id ->
+        -- unused variable is `id`
+        ShowContactRoute _ ->
             Contact.View.view model
 
         NotFoundRoute ->
