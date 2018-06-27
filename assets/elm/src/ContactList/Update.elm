@@ -23,7 +23,7 @@ update msg model =
         FetchContactListSuccess json ->
             success model json
 
-        FetchContactListError json ->
+        FetchContactListError _ ->
             error model
 
         Paginate pageNumber ->
@@ -64,7 +64,8 @@ success model json =
 
             Err err ->
                 ( { model
-                    | contactList = Failure "Error while decoding contact list"
+                    | contactList =
+                        Failure ("Error while decoding contact list: " ++ err)
                   }
                 , Cmd.none
                 )

@@ -22,7 +22,7 @@ import Model
 import Navigation
 import Routing
     exposing
-        ( Route(ListContactsRoute, NotFoundRoute, ShowContactRoute)
+        ( Route(ListContactsRoute, ShowContactRoute)
         , parse
         , toPath
         )
@@ -31,11 +31,11 @@ import Routing
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        ContactMsg msg ->
-            Contact.Update.update msg model
+        ContactMsg contactMsg ->
+            Contact.Update.update contactMsg model
 
-        ContactListMsg msg ->
-            ContactList.Update.update msg model
+        ContactListMsg contactListMsg ->
+            ContactList.Update.update contactListMsg model
 
         NavigateTo route ->
             ( model, Navigation.newUrl (toPath route) )

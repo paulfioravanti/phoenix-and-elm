@@ -14,7 +14,7 @@ decoder =
     in
         Decode.succeed
             ContactList
-            |: (field "entries" (list contact))
-            |: (field "page_number" int)
-            |: (field "total_entries" int)
-            |: (field "total_pages" int)
+            |: field "entries" (list contact)
+            |: field "page_number" int
+            |: field "total_entries" int
+            |: field "total_pages" int

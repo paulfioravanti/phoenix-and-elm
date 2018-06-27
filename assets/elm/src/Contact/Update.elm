@@ -16,7 +16,7 @@ update msg model =
         FetchContactSuccess json ->
             success model json
 
-        FetchContactError json ->
+        FetchContactError _ ->
             error model
 
 
@@ -31,7 +31,7 @@ success model json =
             Ok payload ->
                 ( { model | contact = Success payload }, Cmd.none )
 
-            Err err ->
+            Err _ ->
                 ( { model | contact = Failure "Error while decoding contact" }
                 , Cmd.none
                 )

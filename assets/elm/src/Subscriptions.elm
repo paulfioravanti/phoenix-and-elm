@@ -3,7 +3,7 @@ module Subscriptions exposing (subscriptions)
 import Messages exposing (Msg)
 import Model exposing (Model)
 import Phoenix
-import Phoenix.Channel as Channel exposing (Channel)
+import Phoenix.Channel as Channel
 import Phoenix.Socket as Socket
 
 

@@ -9,13 +9,13 @@ decoder : Decode.Decoder Contact
 decoder =
     Decode.succeed
         Contact
-        |: (field "id" int)
-        |: (field "first_name" string)
-        |: (field "last_name" string)
-        |: (field "gender" int)
-        |: (field "birth_date" string)
-        |: (field "location" string)
-        |: (field "phone_number" string)
-        |: (field "email" string)
-        |: (field "headline" string)
-        |: (field "picture" string)
+        |: field "id" int
+        |: field "first_name" string
+        |: field "last_name" string
+        |: field "gender" int
+        |: field "birth_date" string
+        |: field "location" string
+        |: field "phone_number" string
+        |: field "email" string
+        |: field "headline" string
+        |: field "picture" string
