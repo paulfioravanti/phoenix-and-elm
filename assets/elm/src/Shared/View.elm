@@ -1,6 +1,6 @@
 module Shared.View exposing (warningMessage)
 
-import Html exposing (Html, a, div, h4, i, span, text)
+import Html exposing (Html, div, h4, i, span, text)
 import Html.Attributes exposing (class)
 
 

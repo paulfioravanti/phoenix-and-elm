@@ -17,35 +17,32 @@ import Messages
         )
 import Model exposing (Model)
 import RemoteData exposing (RemoteData(NotRequested, Requesting))
-import Routing
-    exposing
-        ( Route(ListContactsRoute, NotFoundRoute, ShowContactRoute)
-        )
+import Routing exposing (Route(ListContactsRoute, ShowContactRoute))
 import Routing.Update
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        ContactMsg msg ->
+        ContactMsg contactMsg ->
             let
                 ( contact, cmd ) =
-                    Contact.Update.update msg
+                    Contact.Update.update contactMsg
             in
                 ( { model | contact = contact }, Cmd.map ContactMsg cmd )
 
-        ContactListMsg msg ->
+        ContactListMsg contactListMsg ->
             let
                 ( contactList, cmd ) =
                     model.contactList
-                        |> ContactList.Update.update msg model.search
+                        |> ContactList.Update.update contactListMsg model.search
             in
                 ( { model | contactList = contactList }
                 , Cmd.map ContactListMsg cmd
                 )
 
-        RoutingMsg msg ->
-            ( model, Routing.Update.update msg )
+        RoutingMsg routingMsg ->
+            ( model, Routing.Update.update routingMsg )
 
         ResetSearch ->
             ( { model | search = "" }, fetchAllContacts )

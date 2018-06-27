@@ -23,7 +23,7 @@ update msg search contactList =
         FetchContactList (Ok response) ->
             ( Success response, Cmd.none )
 
-        FetchContactList (Err error) ->
+        FetchContactList (Err _) ->
             ( Failure "Something went wrong...", Cmd.none )
 
         Paginate pageNumber ->
