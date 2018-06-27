@@ -20,7 +20,7 @@ update msg model =
         FetchContactList (Ok response) ->
             ( { model | contactList = Success response }, Cmd.none )
 
-        FetchContactList (Err error) ->
+        FetchContactList (Err _) ->
             ( { model | contactList = Failure "Something went wrong..." }
             , Cmd.none
             )

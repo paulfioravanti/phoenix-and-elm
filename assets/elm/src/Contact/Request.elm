@@ -3,8 +3,7 @@ module Contact.Request exposing (fetchContact, contactSpec)
 import Contact.Model exposing (Contact)
 import GraphQL.Request.Builder as Builder
     exposing
-        ( Document
-        , NonNull
+        ( NonNull
         , ObjectType
         , Query
         , Request

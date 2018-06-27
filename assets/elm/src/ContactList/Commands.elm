@@ -5,7 +5,7 @@ import ContactList.Messages exposing (ContactListMsg(FetchContactList))
 import ContactList.Request as Request
 import GraphQL.Client.Http as Http
 import Messages exposing (Msg(ContactListMsg))
-import Task exposing (Task)
+import Task
 
 
 fetchContactList : Int -> String -> Cmd Msg

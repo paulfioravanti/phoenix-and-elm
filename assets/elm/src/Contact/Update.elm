@@ -11,5 +11,5 @@ update msg model =
         FetchContact (Ok response) ->
             ( { model | contact = Success response }, Cmd.none )
 
-        FetchContact (Err error) ->
+        FetchContact (Err _) ->
             ( { model | contact = Failure "Contact not found" }, Cmd.none )
