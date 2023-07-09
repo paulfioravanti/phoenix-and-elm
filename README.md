@@ -82,17 +82,11 @@ The `master` branch of this repository contains code covering the first five
 sections of the tutorial. In other words, up to and including
 [Implementing Elm routing][].
 
-Code from the `master` branch is deployed at
-<https://phoenix-and-elm-http.herokuapp.com/>.
-
 ## Websockets version
 
 The `websockets` branch of this repository contains code covering all sections
 of the tutorial. In other words, up to and including
 [Phoenix and Elm WebSockets support][].
-
-Code from the `websockets` branch is deployed at
-<https://phoenix-and-elm-websockets.herokuapp.com/>.
 
 ## Social
 
