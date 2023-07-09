@@ -85,9 +85,6 @@ code covering the first five sections of the tutorial. In other words, up to and
 including [Implementing Elm routing][], so the communication between back
 and front ends is done with REST requests via controllers.
 
-Code from the `rest` branch is deployed at
-<https://phoenix-and-elm-rest.herokuapp.com/>.
-
 ### Websockets version
 
 The [`websockets` branch][] of this repository contains code covering all
@@ -95,17 +92,11 @@ sections of the tutorial. In other words, up to and including
 [Phoenix and Elm WebSockets support][], so the communication between back and
 front ends is done with Websockets requests via channels.
 
-Code from the `websockets` branch is deployed at
-<https://phoenix-and-elm-websockets.herokuapp.com/>.
-
 ### GraphQL version
 
 The [`graphql` branch][] of this repository used the REST version of the app as
 a base, but added [GraphQL][]. So the communication between back and front ends
 is done with GraphQL requests via resolvers.
-
-Code from the `graphql` branch is deployed at
-<https://phoenix-and-elm-graphql.herokuapp.com/>.
 
 ### REST version (refactored)
 
@@ -118,8 +109,8 @@ Code from the `rest-refactor` branch is not currently deployed.
 
 ## Deployment Notes
 
-[Heroku][] is used to deploy each branch to it's own app. The git remotes look
-like this:
+[Heroku][] was originally used to deploy each branch to it's own app. The git
+remotes look like this:
 
 ```sh
 $ git remote -v
